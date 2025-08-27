@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.concertoconmammaepapa.it)",
+      "Bash(npm run build:*)",
+      "Bash(grep:*)",
+      "Bash(sed:*)",
+      "Bash(npm run lint)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(next dev:*)",
+      "Bash(npx next:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(convert:*)",
+      "Bash(python3:*)",
+      "Bash(sips:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

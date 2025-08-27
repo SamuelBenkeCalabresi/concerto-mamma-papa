@@ -1,0 +1,82 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "concerts": "Concerti",
+    "about": "Chi Siamo",
+    "booking": "Prenotazioni",
+    "contact": "Contatti"
+  },
+  "Hero": {
+    "title": "Concerti con Mamma e Papà",
+    "subtitle": "Musica classica per tutta la famiglia",
+    "description": "Scopri la bellezza della musica classica insieme ai tuoi bambini. Concerti pensati appositamente per famiglie con bambini dai 0 ai 6 anni.",
+    "cta": "Prenota ora"
+  },
+  "Events": {
+    "title": "Prossimi Concerti",
+    "subtitle": "I nostri eventi dedicati alle famiglie",
+    "bookNow": "Prenota",
+    "soldOut": "Sold Out",
+    "freeEntry": "Ingresso gratuito",
+    "duration": "Durata: {duration} minuti",
+    "ageRange": "Età: {min}-{max} anni"
+  },
+  "Booking": {
+    "title": "Prenota il tuo posto",
+    "form": {
+      "parentName": "Nome del genitore",
+      "parentNamePlaceholder": "Inserisci il nome del genitore",
+      "email": "Email",
+      "emailPlaceholder": "esempio@email.com",
+      "phone": "Telefono",
+      "phonePlaceholder": "Inserisci il numero di telefono",
+      "childrenCount": "Numero di bambini",
+      "childrenCountPlaceholder": "Seleziona il numero",
+      "childrenAges": "Età dei bambini",
+      "childrenAgesPlaceholder": "es. 2, 4, 6",
+      "eventId": "Concerto",
+      "eventPlaceholder": "Seleziona un concerto",
+      "specialNeeds": "Esigenze speciali",
+      "specialNeedsPlaceholder": "Eventuali necessità particolari...",
+      "submit": "Invia Prenotazione",
+      "submitting": "Invio in corso..."
+    },
+    "validation": {
+      "required": "Campo obbligatorio",
+      "emailInvalid": "Email non valida",
+      "phoneInvalid": "Numero di telefono non valido",
+      "minChildren": "Almeno un bambino è richiesto",
+      "maxChildren": "Massimo 6 bambini per prenotazione"
+    }
+  },
+  "Footer": {
+    "quickLinks": "Link Rapidi",
+    "contact": "Contatti",
+    "followUs": "Seguici",
+    "address": "Via della Musica, 123\n00100 Roma, Italia",
+    "email": "info@concertoconmammaepapa.it",
+    "phone": "+39 3423711750",
+    "phone2": "+39 3470960533",
+    "copyright": "© 2025 di Concerto con Mamma e Papà. Tutti i diritti riservati."
+  },
+  "About": {
+    "title": "Chi Siamo",
+    "mission": "La nostra missione è avvicinare i bambini alla musica classica attraverso esperienze coinvolgenti e adatte alla loro età.",
+    "description": "di Concerto con Mamma e Papà nasce dalla passione di musicisti professionisti che credono nell'importanza dell'educazione musicale fin dalla prima infanzia."
+  },
+  "Contact": {
+    "title": "Contatti",
+    "getInTouch": "Mettiti in contatto con noi",
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Il tuo nome",
+      "email": "Email",
+      "emailPlaceholder": "tua.email@esempio.com",
+      "subject": "Oggetto",
+      "subjectPlaceholder": "Oggetto del messaggio",
+      "message": "Messaggio",
+      "messagePlaceholder": "Il tuo messaggio...",
+      "send": "Invia Messaggio"
+    }
+  }
+}

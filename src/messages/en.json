@@ -1,0 +1,82 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "concerts": "Concerts",
+    "about": "About Us",
+    "booking": "Booking",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "title": "Concerts with Mom and Dad",
+    "subtitle": "Classical music for the whole family",
+    "description": "Discover the beauty of classical music together with your children. Concerts designed specifically for families with children aged 0 to 6.",
+    "cta": "Book now"
+  },
+  "Events": {
+    "title": "Upcoming Concerts",
+    "subtitle": "Our events dedicated to families",
+    "bookNow": "Book Now",
+    "soldOut": "Sold Out",
+    "freeEntry": "Free Entry",
+    "duration": "Duration: {duration} minutes",
+    "ageRange": "Age: {min}-{max} years"
+  },
+  "Booking": {
+    "title": "Book your seat",
+    "form": {
+      "parentName": "Parent's name",
+      "parentNamePlaceholder": "Enter parent's name",
+      "email": "Email",
+      "emailPlaceholder": "example@email.com",
+      "phone": "Phone",
+      "phonePlaceholder": "Enter phone number",
+      "childrenCount": "Number of children",
+      "childrenCountPlaceholder": "Select number",
+      "childrenAges": "Children's ages",
+      "childrenAgesPlaceholder": "e.g. 2, 4, 6",
+      "eventId": "Concert",
+      "eventPlaceholder": "Select a concert",
+      "specialNeeds": "Special needs",
+      "specialNeedsPlaceholder": "Any special requirements...",
+      "submit": "Submit Booking",
+      "submitting": "Submitting..."
+    },
+    "validation": {
+      "required": "Required field",
+      "emailInvalid": "Invalid email",
+      "phoneInvalid": "Invalid phone number",
+      "minChildren": "At least one child is required",
+      "maxChildren": "Maximum 6 children per booking"
+    }
+  },
+  "Footer": {
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "address": "Via della Musica, 123\n00100 Rome, Italy",
+    "email": "info@concertoconmammaepapa.it",
+    "phone": "+39 3423711750",
+    "phone2": "+39 3470960533",
+    "copyright": "© 2024 Concerts with Mom and Dad. All rights reserved."
+  },
+  "About": {
+    "title": "About Us",
+    "mission": "Our mission is to introduce children to classical music through engaging and age-appropriate experiences.",
+    "description": "Concerts with Mom and Dad was born from the passion of professional musicians who believe in the importance of music education from early childhood."
+  },
+  "Contact": {
+    "title": "Contact",
+    "getInTouch": "Get in touch with us",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Message subject",
+      "message": "Message",
+      "messagePlaceholder": "Your message...",
+      "send": "Send Message"
+    }
+  }
+}

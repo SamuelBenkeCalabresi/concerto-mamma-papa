@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Team Placeholders</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="500" style="border:1px solid #ccc;"></canvas>
+    
+    <script>
+        function createPlaceholder(name, role, bgColor, filename) {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, bgColor);
+            gradient.addColorStop(1, '#4c1d95');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Text
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 32px Arial';
+            ctx.fillText(name, canvas.width/2, canvas.height/2 - 20);
+            ctx.font = '20px Arial';
+            ctx.fillText(role, canvas.width/2, canvas.height/2 + 20);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/jpeg', 0.8);
+            link.click();
+        }
+        
+        // Create all three images
+        setTimeout(() => createPlaceholder('Annamaria Diroma', 'Flautista', '#2293cc', 'annamaria.jpg'), 500);
+        setTimeout(() => createPlaceholder('Francesca Scaglione', 'Pianista', '#7c3aed', 'francesca.jpg'), 1500);
+        setTimeout(() => createPlaceholder('Monserrat Olavarria', 'Educatrice Interculturale', '#ec4899', 'monserrat.jpg'), 2500);
+    </script>
+</body>
+</html>
