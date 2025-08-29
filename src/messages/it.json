@@ -1,16 +1,51 @@
 {
   "Navigation": {
-    "home": "Home",
-    "concerts": "Concerti",
-    "about": "Chi Siamo",
-    "booking": "Prenotazioni",
-    "contact": "Contatti"
+    "home": "HOME",
+    "calendar": "CALENDARIO",
+    "news": "NEWS", 
+    "about": "CHI SIAMO",
+    "gallery": "GALLERIA",
+    "contact": "CONTATTI",
+    "friends": "AMICI",
+    "booking": "PRENOTA",
+    "courses": "CORSI",
+    "archive": "ARCHIVIO",
+    "conferences": "CONVEGNI E SEMINARI",
+    "events": "EVENTI"
   },
   "Hero": {
-    "title": "Concerti con Mamma e Papà",
-    "subtitle": "Musica classica per tutta la famiglia",
-    "description": "Scopri la bellezza della musica classica insieme ai tuoi bambini. Concerti pensati appositamente per famiglie con bambini dai 0 ai 6 anni.",
-    "cta": "Prenota ora"
+    "tag": "Attività Musicale Interattiva per Bambini",
+    "title": "di Concerto con Mamma e Papà",
+    "subtitle": "Attività musicale interattiva per bambini da 0 a 5 anni",
+    "description": "Si basa sull'esperienza di insegnamento che le componenti del gruppo hanno svolto in oltre 15 anni presso gli asili nido e le scuole d'infanzia di Roma e provincia. Annamaria Diroma, Francesca Scaglione e Monserrat Olavarria Balmaceda conducono l'attività attraverso la voce e gli strumenti proponendo ritmi e melodie tratti dal repertorio musicale più svariato. La modalità di intervento è ideata e pensata sulle reali capacità di ascolto dei bambini e si ispira ai principi dell'apprendimento musicale di E.E. Gordon. Durante l'attività i bambini sono liberi di interagire con la musica attraverso la voce e il movimento.",
+    "features": {
+      "interactive": {
+        "title": "Musica Interattiva",
+        "subtitle": "Voce e strumenti"
+      },
+      "family": {
+        "title": "Per Famiglie",
+        "subtitle": "Tutti insieme"
+      },
+      "age": {
+        "title": "0-5 Anni",
+        "subtitle": "Età ideale"
+      }
+    },
+    "nextConcert": {
+      "title": "Prossimo Concerto",
+      "event": "Primavera Musicale",
+      "date": "Sabato 15 Marzo 2024",
+      "location": "Teatro Comunale - ore 16:00",
+      "bookNow": "Prenota Subito"
+    },
+    "video": {
+      "watchTitle": "Guarda il Video",
+      "watchDescription": "Scopri la magia dei nostri concerti attraverso momenti reali delle nostre performance",
+      "liveExamples": "Esempi di concerti dal vivo",
+      "notAvailable": "Video non disponibile",
+      "browserNotSupported": "Il tuo browser non supporta i video HTML5."
+    }
   },
   "Events": {
     "title": "Prossimi Concerti",
@@ -22,41 +57,79 @@
     "ageRange": "Età: {min}-{max} anni"
   },
   "Booking": {
-    "title": "Prenota il tuo posto",
+    "title": "Prenotazione Concerti",
+    "subtitle": "Prenota il Tuo Posto al Concerto",
+    "description": "Compila tutti i campi richiesti per garantire la tua partecipazione",
+    "warning": "In caso di raggiungimento del limite massimo di prenotazioni non è possibile garantire la partecipazione per tutti e sarete tempestivamente avvisati della non disponibilità dei posti prenotati.",
+    "requiredNote": "I campi contrassegnati con * sono obbligatori.",
+    "features": {
+      "chooseDate": "Scegli Data",
+      "addFamily": "Aggiungi Famiglia", 
+      "enjoyConcert": "Goditi il Concerto"
+    },
     "form": {
-      "parentName": "Nome del genitore",
-      "parentNamePlaceholder": "Inserisci il nome del genitore",
-      "email": "Email",
-      "emailPlaceholder": "esempio@email.com",
-      "phone": "Telefono",
-      "phonePlaceholder": "Inserisci il numero di telefono",
-      "childrenCount": "Numero di bambini",
-      "childrenCountPlaceholder": "Seleziona il numero",
-      "childrenAges": "Età dei bambini",
-      "childrenAgesPlaceholder": "es. 2, 4, 6",
-      "eventId": "Concerto",
-      "eventPlaceholder": "Seleziona un concerto",
-      "specialNeeds": "Esigenze speciali",
-      "specialNeedsPlaceholder": "Eventuali necessità particolari...",
+      "bookingForm": "Modulo di Prenotazione",
+      "date": "Scegli una data *",
+      "parentName": "Nome e Cognome *",
+      "parentNamePlaceholder": "Il tuo nome e cognome",
+      "email": "Email *",
+      "emailPlaceholder": "tua@email.com",
+      "phone": "Telefono *",
+      "phonePlaceholder": "+39 123 456 7890",
+      "numberOfKids": "Quanti bambini partecipano *",
+      "numberOfAdults": "Adulti accompagnatori *",
+      "kidsData": "Dati dei Bambini",
+      "kidsCount": "{count} di {total} bambini",
+      "childNumber": "Bambino {number}",
+      "childName": "Nome del bambino *",
+      "childNamePlaceholder": "Nome bambino",
+      "birthDate": "Data di nascita *",
+      "age": "Età",
+      "howDidYouHear": "Come hai saputo dell'iniziativa?",
+      "howDidYouHearOptions": {
+        "select": "Seleziona un'opzione",
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "friends": "Amici/Conoscenti",
+        "school": "Scuola/Asilo",
+        "website": "Sito web",
+        "flyer": "Volantino",
+        "other": "Altro"
+      },
       "submit": "Invia Prenotazione",
-      "submitting": "Invio in corso..."
+      "submitting": "Invio in corso...",
+      "confirmation": "Riceverai una conferma via email entro 24 ore"
     },
     "validation": {
-      "required": "Campo obbligatorio",
+      "nameMin": "Nome deve essere di almeno 2 caratteri",
+      "birthDateRequired": "Data di nascita è obbligatoria",
+      "agePositive": "Età deve essere positiva",
+      "ageMax": "Età massima 18 anni",
+      "dateRequired": "Scegliere una data è obbligatorio",
+      "nameRequired": "Nome e cognome sono obbligatori",
+      "kidsMin": "Deve partecipare almeno un bambino",
+      "kidsMax": "Massimo 3 bambini",
+      "kidsDataRequired": "Aggiungere i dati dei bambini",
+      "kidsCountMismatch": "Il numero di bambini deve corrispondere ai dati inseriti",
+      "adultsMin": "Deve esserci almeno un adulto accompagnatore",
       "emailInvalid": "Email non valida",
-      "phoneInvalid": "Numero di telefono non valido",
-      "minChildren": "Almeno un bambino è richiesto",
-      "maxChildren": "Massimo 6 bambini per prenotazione"
+      "phoneInvalid": "Numero di telefono non valido"
+    },
+    "messages": {
+      "success": "Prenotazione inviata con successo! Ti contatteremo presto.",
+      "error": "Errore nell'invio della prenotazione. Riprova più tardi."
     }
   },
   "Footer": {
+    "brandTitle": "Concerti con Mamma e Papà",
+    "brandDescription": "Attività musicale interattiva per tutta la famiglia. Concerti pensati appositamente per famiglie con bambini dai 0 ai 5 anni.",
     "quickLinks": "Link Rapidi",
     "contact": "Contatti",
     "followUs": "Seguici",
     "address": "Via della Musica, 123\n00100 Roma, Italia",
     "email": "info@concertoconmammaepapa.it",
-    "phone": "+39 3423711750",
-    "phone2": "+39 3470960533",
+    "phone": "+39 342 3711750",
+    "phone2": "+39 347 0960533",
     "copyright": "© 2025 di Concerto con Mamma e Papà. Tutti i diritti riservati."
   },
   "About": {
@@ -77,6 +150,231 @@
       "message": "Messaggio",
       "messagePlaceholder": "Il tuo messaggio...",
       "send": "Invia Messaggio"
+    }
+  },
+  "ConferencesPage": {
+    "tag": "Formazione e Ricerca",
+    "title": "Convegni e",
+    "titleHighlight": "Seminari",
+    "description": "Un percorso di formazione continua e ricerca nell'ambito dell'educazione musicale per la prima infanzia",
+    "seminars": [
+      {
+        "title": "Seminario Educare con la musica nello \"zerosei\"",
+        "location": "Conservatorio di Latina",
+        "year": "a.s. 2022/2023 I e II livello",
+        "description": "Un seminario dedicato all'educazione musicale per la prima infanzia, con focus sui metodi pedagogici innovativi per bambini da 0 a 6 anni."
+      },
+      {
+        "title": "Webinar Medicina nell'Arte",
+        "subtitle": "Sabato 28 gennaio 2023",
+        "location": "Conservatorio Ottorino Respighi – Latina",
+        "year": "2023",
+        "description": "Un webinar interdisciplinare che esplora il rapporto tra medicina e arte musicale nella formazione dei giovani."
+      },
+      {
+        "title": "Seminario Educare con la musica nello \"zerosei\"",
+        "location": "Conservatorio di Latina",
+        "year": "a.a. 2021/2022",
+        "description": "Edizione precedente del seminario sull'educazione musicale precoce, con approfondimenti sui nuovi approcci metodologici."
+      },
+      {
+        "title": "Conference Meryc 2019",
+        "subtitle": "Counterpoints of the sense",
+        "location": "Gent University",
+        "year": "2019",
+        "description": "Partecipazione alla conferenza internazionale MERYC con presentazione di ricerca. Abstract pubblicato alle pagine 76-77."
+      },
+      {
+        "title": "Convegno Musica…Presto!",
+        "subtitle": "Tavolo permanente Musica 0-6",
+        "location": "Bologna",
+        "year": "ottobre 2018",
+        "description": "Partecipazione al convegno nazionale dedicato alla musica per la prima infanzia, con focus sui progetti educativi innovativi."
+      }
+    ]
+  },
+  "CoursesPage": {
+    "tag": "Formazione Musicale",
+    "title": "I Corsi",
+    "titleHighlight": "di Musica",
+    "description": "I Corsi di Musica che vi consigliamo sono dedicati ai bambini e alle bambine a partire da zero anni, accompagnati dai genitori o da un adulto di riferimento.",
+    "description2": "Sono condotti da insegnanti professionisti con esperienza specifica nell'apprendimento musicale per la prima infanzia, garantendo un approccio didattico adeguato alle esigenze dei più piccoli.",
+    "locationsTitle": "Sedi dei Corsi",
+    "locationsDescription": "Scopri le location dove si svolgono i nostri corsi musicali per bambini",
+    "instructor": "docente:",
+    "info": "info:",
+    "days": {
+      "Lunedì": "Lunedì",
+      "Martedì": "Martedì", 
+      "Mercoledì": "Mercoledì",
+      "Giovedì": "Giovedì",
+      "Venerdì": "Venerdì",
+      "Sabato": "Sabato",
+      "Domenica": "Domenica"
+    },
+    "benefits": [
+      {
+        "title": "Sviluppo Cognitivo",
+        "description": "La musica stimola le connessioni neurali e favorisce l'apprendimento"
+      },
+      {
+        "title": "Benessere Emotivo",
+        "description": "Espressione delle emozioni e sviluppo dell'equilibrio interiore"
+      },
+      {
+        "title": "Socializzazione",
+        "description": "Interazione con altri bambini in un ambiente stimolante e sicuro"
+      },
+      {
+        "title": "Creatività",
+        "description": "Sviluppo della fantasia e della capacità espressiva personale"
+      }
+    ],
+    "methodology": [
+      {
+        "title": "Apprendimento Ludico",
+        "description": "Ogni attività è proposta come gioco per mantenere alta l'attenzione e il divertimento"
+      },
+      {
+        "title": "Approccio Multisensoriale",
+        "description": "Coinvolgiamo tutti i sensi per un'esperienza di apprendimento completa e duratura"
+      },
+      {
+        "title": "Rispetto dei Tempi",
+        "description": "Ogni bambino ha i suoi ritmi di apprendimento che vengono rispettati e valorizzati"
+      },
+      {
+        "title": "Partecipazione Attiva",
+        "description": "I bambini sono sempre protagonisti delle attività, mai spettatori passivi"
+      }
+    ]
+  },
+  "VoucherSection": {
+    "tag": "Regalo Perfetto",
+    "title": "Regala un",
+    "titleHighlight": "Coupon",
+    "subtitle": "Come partecipare a \"di Concerto con Mamma e Papà\"",
+    "features": [
+      "Concerti per famiglie con bambini 0-5 anni",
+      "Esperienze musicali interattive uniche",
+      "Momenti speciali da condividere insieme"
+    ],
+    "buttons": {
+      "discover": "Scopri Come Partecipare",
+      "contact": "Contattaci per Info"
+    }
+  },
+  "ChiSiamoSection": {
+    "title": "Chi Siamo",
+    "description": "Il nostro team è composto da professioniste esperte nell'educazione musicale per l'infanzia, unite dalla passione per la musica e l'amore per i bambini.",
+    "learnMore": "Scopri di più",
+    "collaboratorsTitle": "I Nostri Collaboratori",
+    "ensembleTitle": "Musiche a cura dell'Ensemble 0/3:",
+    "teamMembers": [
+      {
+        "name": "Annamaria Diroma",
+        "role": "Flautista e Cantante",
+        "description": "Diplomata in Flauto traverso presso il Conservatorio \"Nino Rota\" di Monopoli, con esperienza pluriennale nell'insegnamento musicale per bambini dai 0 ai 5 anni."
+      },
+      {
+        "name": "Francesca Scaglione",
+        "role": "Musicologa e Pedagogista", 
+        "description": "Oltre 35 anni di esperienza nell'educazione musicale, specializzata in didattica per l'infanzia e formazione pedagogica avanzata."
+      },
+      {
+        "name": "Monserrat Olavarria Balmaceda",
+        "role": "Educatrice e Artista Multidisciplinare",
+        "description": "Formazione conservatoriale in Cile, specializzata in educazione della voce e discipline artistiche integrate per lo sviluppo dell'infanzia."
+      }
+    ],
+    "collaborators": {
+      "ensemble": [
+        { "name": "Annamaria Diroma", "role": "flauto e voce" },
+        { "name": "Francesca Scaglione", "role": "pianoforte e voce" },
+        { "name": "Monserrat Olavarria Balmaceda", "role": "voce e movimento" }
+      ],
+      "musicians": [
+        { "name": "Adalgisa Turrisi", "role": "arpa" },
+        { "name": "Livia Di Girolamo", "role": "violoncello" },
+        { "name": "Francesca Meli", "role": "chitarra" },
+        { "name": "Ermanno Dodaro", "role": "contrabbasso" }
+      ],
+      "musiciansTitle": "Musicisti Collaboratori:"
+    }
+  },
+  "GallerySection": {
+    "tag": "I Nostri Momenti",
+    "title": "Galleria",
+    "titleHighlight": "Fotografica",
+    "description": "Scopri i momenti magici dei nostri concerti attraverso le immagini che catturano la gioia e la meraviglia di bambini e famiglie",
+    "viewModes": {
+      "carousel": "Carousel",
+      "grid": "Griglia"
+    },
+    "pagination": "Pagina {current} di {total} • {count} foto totali"
+  },
+  "ContattiSection": {
+    "title": "Contatta",
+    "titleHighlight": "ci",
+    "description": "Mettiti in contatto con noi per informazioni sui concerti, corsi o per prenotare la tua partecipazione",
+    "formTitle": "Inviaci un Messaggio",
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Il tuo nome",
+      "email": "Email",
+      "emailPlaceholder": "tua.email@esempio.com",
+      "subject": "Oggetto",
+      "subjectPlaceholder": "Oggetto del messaggio",
+      "message": "Messaggio",
+      "messagePlaceholder": "Scrivi qui il tuo messaggio...",
+      "submit": "Invia Messaggio",
+      "submitting": "Invio in corso..."
+    },
+    "contact": {
+      "title": "Informazioni di Contatto",
+      "phone1": "Telefono 1",
+      "phone2": "Telefono 2",
+      "email": "Email",
+      "followUs": "Seguici"
+    },
+    "validation": {
+      "nameRequired": "Il nome è obbligatorio",
+      "emailRequired": "L'email è obbligatoria",
+      "emailInvalid": "Inserisci un'email valida",
+      "subjectRequired": "L'oggetto è obbligatorio",
+      "messageRequired": "Il messaggio è obbligatorio"
+    },
+    "messages": {
+      "success": "Messaggio inviato con successo! Ti contatteremo presto.",
+      "error": "Errore nell'invio del messaggio. Riprova più tardi."
+    }
+  },
+  "NewsSection": {
+    "tag": "News & Aggiornamenti",
+    "title": "Ultime",
+    "titleHighlight": "Novità",
+    "description": "Scopri le nostre storie musicali e gli articoli sui benefici della musica per i bambini",
+    "tiritinlalla": {
+      "title": "L'isola di Tiritinlallà",
+      "description": "La storia ci accompagnerà in un'esperienza unica ed emozionante per i bambini con i genitori, un vero momento di musica d'insieme da vivere attraverso la voce, il movimento, l'uso dello strumentario didattico, l'ascolto e l'esperienza concreta degli strumenti d'arte.",
+      "tagline": "Una fiaba musicale per tutta la famiglia"
+    },
+    "article": {
+      "title": "La musica all'asilo nido sviluppa il linguaggio",
+      "description": "La stimolazione musicale nei bambini dagli zero ai tre anni favorisce l'accrescimento delle capacità innate che altrimenti andrebbero perse nel giro di qualche anno. La neuroscienziata: \"È tra le attività per la psicomotricità più efficaci per la memoria verbale e a breve termine e l'abilità spazio-temporale\"",
+      "readArticle": "Leggi l'articolo"
+    }
+  },
+  "EventsPage": {
+    "tag": "Archivio Musicale",
+    "title": "Eventi",
+    "titleHighlight": "Passati",
+    "description": "Scopri i meravigliosi eventi musicali che abbiamo realizzato con le famiglie nel corso degli anni",
+    "sectionTitle": "La Nostra Storia Musicale",
+    "sectionDescription": "{count} eventi realizzati dal 2021 ad oggi - Un viaggio attraverso i momenti più belli della nostra famiglia musicale",
+    "noEvents": {
+      "title": "Nessun evento trovato",
+      "description": "Non siamo riusciti a caricare gli eventi. Riprova più tardi."
     }
   }
 }

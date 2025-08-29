@@ -14,7 +14,8 @@
       "mcp__ide__getDiagnostics",
       "Bash(convert:*)",
       "Bash(python3:*)",
-      "Bash(sips:*)"
+      "Bash(sips:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []

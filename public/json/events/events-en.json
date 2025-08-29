@@ -1,0 +1,498 @@
+[
+    {
+      "title": "Saturday October 21, 2023 - Centro Ottava (Rome)",
+      "date": "2023-10-21",
+      "time": "4:00 PM; 5:00 PM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents. Special Guest: Fabio Mancano – saxophones and flutes",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular",
+      "specialGuests": ["Fabio Mancano – saxophones and flutes"]
+    },
+    {
+      "title": "Sunday October 29, 2023 - Bioparco (Rome)",
+      "date": "2023-10-29",
+      "time": "10:30 AM; 11:30 AM",
+      "location": {
+        "name": "Bioparco – Elephant Hall",
+        "street": "Viale del Giardino Zoologico, 20 – Rome"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents. Discount on Bioparco entrance for participants (€10.00)",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "specialOffer": "Bioparco entrance discount!",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "phone": "3470960533"
+    },
+    {
+      "title": "Saturday November 11, 2023 - Centro Ottava (Rome)",
+      "date": "2023-11-11",
+      "time": "4:00 PM; 5:00 PM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday November 18, 2023 - Eschilo Musical Association - EUR (Rome)",
+      "date": "2023-11-18",
+      "time": "4:00 PM; 5:00 PM",
+      "location": {
+        "name": "Eschilo Musical Association – EUR",
+        "street": "Via dei Carpazi, 35 – Rome (EUR)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday November 25, 2023 - Eschilo Association - AXA (Rome)",
+      "date": "2023-11-25",
+      "time": "4:00 PM; 5:00 PM",
+      "location": {
+        "name": "Eschilo Musical Association – AXA",
+        "street": "Via Eschilo 10 – Rome (EUR)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday December 16, 2023 - Bianconiglio Eco-pedagogical Nursery (Rome)",
+      "date": "2023-12-16",
+      "time": "10:30 AM",
+      "location": {
+        "name": "Bianconiglio Eco-pedagogical Nursery",
+        "street": "Via Anterivo, 31 (cross street via Torcegno – Infernetto)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "Private event",
+      "link": null,
+      "eventType": "private"
+    },
+    {
+      "title": "Sunday January 28, 2024 - Bioparco (Rome)",
+      "date": "2024-01-28",
+      "time": "10:30 AM; 11:30 AM",
+      "location": {
+        "name": "Bioparco – Elephant Hall",
+        "street": "Viale del Giardino Zoologico, 20 – Rome"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents. Discount on Bioparco entrance for participants (€10.00)",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "specialOffer": "Bioparco entrance discount!",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "phone": "3470960533"
+    },
+    {
+      "title": "Sunday March 10, 2024 - Bioparco (Rome)",
+      "date": "2024-03-10",
+      "time": "10:30 AM; 11:30 AM",
+      "location": {
+        "name": "Bioparco – Elephant Hall",
+        "street": "Viale del Giardino Zoologico, 20 – Rome"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents. Discount on Bioparco entrance for participants (€10.00)",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "specialOffer": "Bioparco entrance discount!",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "phone": "3470960533"
+    },
+    {
+      "title": "Saturday March 23, 2024 - Centro Ottava (Rome)",
+      "date": "2024-03-23",
+      "time": "4:00 PM; 5:00 PM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday April 6, 2024 - Eschilo Musical Association - EUR (Rome)",
+      "date": "2024-04-06",
+      "time": "4:00 PM; 5:00 PM",
+      "location": {
+        "name": "Eschilo Musical Association – EUR",
+        "street": "Via dei Carpazi, 35 – Rome (EUR)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "online booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday September 24, 2022 - Centro Ottava (Rome)",
+      "date": "2022-09-24",
+      "time": "10:00 AM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "OPEN DAY - First steps singing and Musical games. Music education workshops inspired by Prof. E. Gordon's Music Learning Theory. Teacher: Monserrat Olavarria",
+      "ageGroups": ["0-3 years", "3-6 years"],
+      "prenotazione": "mandatory booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "openday",
+      "specialTitle": "OPEN DAY - First steps singing and Musical games",
+      "phone": "3423711750",
+      "teachers": ["Monserrat Olavarria"]
+    },
+    {
+      "title": "Saturday October 1, 2022 - Centro Ottava (Rome)",
+      "date": "2022-10-01",
+      "time": "10:15 AM; 11:15 AM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday October 1, 2022 - La M.U.sica (Rome - Eur)",
+      "date": "2022-10-01",
+      "time": "4:30 PM; 5:45 PM",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Rome (Eur)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday October 15, 2022 - Centro Ottava (Rome)",
+      "date": "2022-10-15",
+      "time": "4:30 PM; 5:30 PM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday November 12, 2022 - Centro Ottava (Rome)",
+      "date": "2022-11-12",
+      "time": "4:30 PM; 5:30 PM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "THE ISLAND OF TIRITINLALLA' - Musical fairy tale for children from 0 to 5 years accompanied by parents. Annamaria Diroma, Francesca Scaglione, Monserrat Olavarria. Special guest Ermanno Dodaro – double bass, guitar and ukulele",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "mandatory booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "specialTitle": "THE ISLAND OF TIRITINLALLA' - Musical fairy tale",
+      "specialGuests": ["Ermanno Dodaro – double bass, guitar and ukulele"],
+      "performers": ["Annamaria Diroma", "Francesca Scaglione", "Monserrat Olavarria"]
+    },
+    {
+      "title": "Saturday November 19, 2022 - La M.U.sica (Rome - Eur)",
+      "date": "2022-11-19",
+      "time": "4:30 PM; 5:45 PM",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Rome (Eur)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sunday November 20, 2022 - Centro Ottava (Rome)",
+      "date": "2022-11-20",
+      "time": "10:15 AM; 11:15 AM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "YOGAMUSIC - Let's practice happiness through music! Yoga for families with live music interventions",
+      "ageGroups": ["3-4 years", "5-7 years"],
+      "prenotazione": "mandatory booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "yoga",
+      "specialTitle": "YOGAMUSIC - Let's practice happiness through music!"
+    },
+    {
+      "title": "Saturday December 10, 2022 - Centro Ottava (Rome)",
+      "date": "2022-12-10",
+      "time": "4:30 PM; 5:30 PM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "CHRISTMAS CONCERT - Concerts with Mom and Dad and a special surprise...!",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "christmas",
+      "specialTitle": "CHRISTMAS CONCERT"
+    },
+    {
+      "title": "December 2022 / January 2023 - Haifa (Israel)",
+      "date": "2022-12-15",
+      "time": "to be defined",
+      "location": {
+        "name": "Haifa",
+        "street": "Israel"
+      },
+      "description": "International tour of Concerts with Mom and Dad",
+      "ageGroups": ["0-5 years"],
+      "prenotazione": "international event",
+      "link": null,
+      "eventType": "international"
+    },
+    {
+      "title": "Saturday January 28, 2023 - Webinar Ottorino Respighi Conservatory - Latina",
+      "date": "2023-01-28",
+      "time": "3:00 PM - 6:30 PM",
+      "location": {
+        "name": "Ottorino Respighi Conservatory",
+        "street": "Latina"
+      },
+      "description": "MEDICINE IN ART – VII EDITION - Neuroscience and Music in early childhood - FREE WEBINAR",
+      "ageGroups": ["adults"],
+      "prenotazione": "free webinar",
+      "link": null,
+      "eventType": "webinar",
+      "price": "FREE WEBINAR"
+    },
+    {
+      "title": "Saturday February 4, 2023 - La M.U.sica (Rome - Eur)",
+      "date": "2023-02-04",
+      "time": "4:30 PM; 5:45 PM",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Rome (Eur)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday February 25, 2023 - State Music Conservatory \"O. Respighi\" (Latina)",
+      "date": "2023-02-25",
+      "time": "11:00 AM",
+      "location": {
+        "name": "State Music Conservatory \"O. Respighi\" - Main Hall",
+        "street": "Via Ezio 32 – Latina"
+      },
+      "description": "Musical Saturday Zerosei - Concert with participation of students from the \"Educating with music in the zero-six\" Course of Music Didactics",
+      "ageGroups": ["0-6 years"],
+      "prenotazione": "email booking required",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "FREE EVENT!"
+    },
+    {
+      "title": "Saturday March 4, 2023 - La M.U.sica (Rome - Eur)",
+      "date": "2023-03-04",
+      "time": "4:30 PM; 5:30 PM",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Rome (Eur)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday March 18, 2023 - State Music Conservatory \"O. Respighi\" (Latina)",
+      "date": "2023-03-18",
+      "time": "11:00 AM",
+      "location": {
+        "name": "State Music Conservatory \"O. Respighi\" - Main Hall",
+        "street": "Via Ezio 32 – Latina"
+      },
+      "description": "Musical Saturday Zerosei - Concert with participation of students from the \"Educating with music in the zero-six\" Course of Music Didactics",
+      "ageGroups": ["0-6 years"],
+      "prenotazione": "email booking required",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "FREE EVENT!"
+    },
+    {
+      "title": "Saturday April 29, 2023 - State Music Conservatory \"O. Respighi\" (Latina)",
+      "date": "2023-04-29",
+      "time": "11:00 AM",
+      "location": {
+        "name": "State Music Conservatory \"O. Respighi\" - Main Hall",
+        "street": "Via Ezio 32 – Latina"
+      },
+      "description": "Musical Saturday Zerosei - Concert with participation of students from the \"Educating with music in the zero-six\" Course of Music Didactics",
+      "ageGroups": ["0-6 years"],
+      "prenotazione": "email booking required",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "FREE EVENT!"
+    },
+    {
+      "title": "Saturday May 6, 2023 - Literary Café (Rome)",
+      "date": "2023-05-06",
+      "time": "4:00 PM; 5:00 PM",
+      "location": {
+        "name": "Literary Café - StudioPed.Lab charity event",
+        "street": "Via Ostiense, 95 – Rome"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "email booking required",
+      "email": "studioped.lab@gmail.com",
+      "phone": "348 173 7323",
+      "link": null,
+      "eventType": "charity",
+      "price": "CHARITY EVENT!"
+    },
+    {
+      "title": "Saturday May 13, 2023 - State Music Conservatory \"O. Respighi\" (Latina)",
+      "date": "2023-05-13",
+      "time": "11:00 AM",
+      "location": {
+        "name": "State Music Conservatory \"O. Respighi\" - Main Hall",
+        "street": "Via Ezio 32 – Latina"
+      },
+      "description": "Musical Saturday Zerosei - Concert with participation of students from the \"Educating with music in the zero-six\" Course of Music Didactics",
+      "ageGroups": ["0-6 years"],
+      "prenotazione": "online booking required",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "FREE EVENT!"
+    },
+    {
+      "title": "Saturday May 20, 2023 - Centro Ottava (Rome)",
+      "date": "2023-05-20",
+      "time": "4:30 PM; 5:30 PM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Rome (Metro Valle Aurelia)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-6 years"],
+      "prenotazione": "online booking required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Saturday September 18, 2021 - \"Ottorino Respighi\" Conservatory (Latina)",
+      "date": "2021-09-18",
+      "time": "11:00 AM",
+      "location": {
+        "name": "Ottorino Respighi Conservatory",
+        "street": "Via Ezio, 32 – 04100 Latina"
+      },
+      "description": "Within the \"Growing in listening\" training seminar. Free participation. Limited seats",
+      "ageGroups": ["0-3 years"],
+      "prenotazione": "booking and Green Pass for adults required",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "Free participation"
+    },
+    {
+      "title": "Saturday September 25, 2021 - Centro Ottava (Rome - Valle Aurelia)",
+      "date": "2021-09-25",
+      "time": "4:30 PM; 5:45 PM",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26, 00136 (Rome – Valle Aurelia)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking and Green Pass for adults required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular",
+      "covidRequirements": "Green Pass for adults required"
+    },
+    {
+      "title": "Saturday October 9, 2021 - La M.U.sica (Rome - Eur)",
+      "date": "2021-10-09",
+      "time": "4:30 PM; 5:45 PM",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Rome (Eur)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking and Green Pass for adults required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular",
+      "covidRequirements": "Green Pass for adults required"
+    },
+    {
+      "title": "Saturday November 13, 2021 - La M.U.sica (Rome - Eur)",
+      "date": "2021-11-13",
+      "time": "4:30 PM; 5:30 PM",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Rome (Eur)"
+      },
+      "description": "Tiritinlallà, Interactive musical fairy tale for children from 3 to 5 years with an adult",
+      "ageGroups": ["3-5 years with an adult"],
+      "prenotazione": "online booking and Green Pass for adults required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "specialTitle": "Tiritinlallà - Interactive musical fairy tale",
+      "covidRequirements": "Green Pass for adults required"
+    },
+    {
+      "title": "Saturday November 27, 2021 - La M.U.sica (Rome - Eur)",
+      "date": "2021-11-27",
+      "time": "4:30 PM; 5:30 PM",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Rome (Eur)"
+      },
+      "description": "Concerts with Mom and Dad ® Interactive musical activity for children from 0 to 5 years with parents",
+      "ageGroups": ["0-3 years", "3-5 years"],
+      "prenotazione": "online booking and Green Pass for adults required",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular",
+      "covidRequirements": "Green Pass for adults required"
+    }
+]

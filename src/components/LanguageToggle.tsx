@@ -33,8 +33,8 @@ export default function LanguageToggle() {
         onClick={() => setIsModalOpen(true)}
         className="btn btn-ghost btn-sm gap-1 hover:bg-primary/5 transition-colors"
       >
-        <GlobeAltIcon className="h-4 w-4 text-primary" />
-        <span className="text-xs font-medium">{currentLang.flag} {currentLang.code}</span>
+{/*         <GlobeAltIcon className="h-4 w-4 text-primary" />
+ */}        <span className="text-xs font-medium">{currentLang.flag} {currentLang.code}</span>
       </button>
 
       {/* Language Selection Modal */}
@@ -64,10 +64,10 @@ export default function LanguageToggle() {
               >
                 <span className="text-xl">🇮🇹</span>
                 <div className="text-left flex-1">
-                  <div className={`font-medium ${locale === 'it' ? 'text-white' : 'text-gray-900'}`}>
+                  <div className={`font-medium text-gray-900`}>
                     Italiano
                   </div>
-                  <div className={`text-sm ${locale === 'it' ? 'text-white/70' : 'text-gray-600'}`}>
+                  <div className={`text-sm text-gray-600`}>
                     Italian
                   </div>
                 </div>
@@ -90,10 +90,10 @@ export default function LanguageToggle() {
               >
                 <span className="text-xl">🇬🇧</span>
                 <div className="text-left flex-1">
-                  <div className={`font-medium ${locale === 'en' ? 'text-white' : 'text-gray-900'}`}>
+                  <div className={`font-medium text-gray-900`}>
                     English
                   </div>
-                  <div className={`text-sm ${locale === 'en' ? 'text-white/70' : 'text-gray-600'}`}>
+                  <div className={`text-sm text-gray-600`}>
                     Inglese
                   </div>
                 </div>

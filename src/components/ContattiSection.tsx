@@ -1,8 +1,10 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export default function ContattiSection() {
+  const t = useTranslations('ContattiSection');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,11 +29,11 @@ export default function ContattiSection() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-neutral mb-4">
-          Contatti
+          <span>{t('title')}</span>
+          <span className="text-primary">{t('titleHighlight')}</span>
         </h2>
         <p className="text-lg text-neutral/70 max-w-3xl mx-auto">
-          Hai domande sui nostri concerti? Vuoi organizzare un evento speciale? 
-          Contattaci, saremo felici di rispondere a tutte le tue domande.
+          {t('description')}
         </p>
       </div>
 
@@ -40,7 +42,7 @@ export default function ContattiSection() {
         <div>
           <div className="bg-gradient-to-br from-white to-primary/5 rounded-2xl shadow-lg border border-primary/10 p-8">
             <h3 className="text-2xl font-bold text-neutral mb-6">
-              Informazioni di Contatto
+              {t('contact.title')}
             </h3>
             
             <div className="space-y-6">
@@ -52,7 +54,19 @@ export default function ContattiSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-neutral">Telefono</h4>
-                  <p className="text-neutral/70">+39 123 456 7890</p>
+                  <a 
+                  href="tel:+393423711750" 
+                  className="text-gray-600 hover:text-primary transition-colors text-sm"
+                >
+                  +39 342 3711750
+                </a>
+                <br />
+                <a 
+                  href="tel:+393470960533" 
+                  className="text-gray-600 hover:text-primary transition-colors text-sm"
+                >
+                  +39 347 0960533
+                </a>
                 </div>
               </div>
 
@@ -63,8 +77,13 @@ export default function ContattiSection() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-neutral">Email</h4>
-                  <p className="text-neutral/70">info@concertoconmammaepapa.it</p>
+                  <h4 className="font-semibold text-neutral">{t('contact.email')}</h4>
+                  <a 
+                    href="mailto:info@concertoconmammaepapa.it" 
+                    className="link link-primary"
+                  >
+                  info@concertoconmammaepapa.it
+                  </a>
                 </div>
               </div>
 
@@ -100,14 +119,14 @@ export default function ContattiSection() {
         <div>
           <div className="bg-gradient-to-br from-white to-primary/5 rounded-2xl shadow-lg border border-primary/10 p-8">
             <h3 className="text-2xl font-bold text-neutral mb-6">
-              Inviaci un Messaggio
+              {t('formTitle')}
             </h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="label">
-                    <span className="label-text font-medium">Nome *</span>
+                    <span className="label-text font-medium">{t('form.name')}</span>
                   </label>
                   <input
                     type="text"
@@ -120,7 +139,7 @@ export default function ContattiSection() {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text font-medium">Email *</span>
+                    <span className="label-text font-medium">{t('form.email')}</span>
                   </label>
                   <input
                     type="email"
@@ -148,7 +167,7 @@ export default function ContattiSection() {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text font-medium">Oggetto</span>
+                    <span className="label-text font-medium">{t('form.subject')}</span>
                   </label>
                   <select
                     name="subject"
@@ -167,7 +186,7 @@ export default function ContattiSection() {
 
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Messaggio *</span>
+                  <span className="label-text font-medium">{t('form.message')}</span>
                 </label>
                 <textarea
                   name="message"
@@ -175,7 +194,7 @@ export default function ContattiSection() {
                   onChange={handleChange}
                   rows={5}
                   className="textarea textarea-bordered textarea-primary w-full resize-none"
-                  placeholder="Scrivi qui il tuo messaggio..."
+                  placeholder={t('form.messagePlaceholder')}
                   required
                 ></textarea>
               </div>
@@ -184,7 +203,7 @@ export default function ContattiSection() {
                 type="submit"
                 className="btn btn-primary w-full bg-primary hover:bg-primary/80 border-primary"
               >
-                Invia Messaggio
+                {t('form.submit')}
               </button>
             </form>
           </div>

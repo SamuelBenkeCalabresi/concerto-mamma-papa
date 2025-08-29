@@ -1,8 +1,7 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useLocale } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import { MusicalNoteIcon, HeartIcon, UsersIcon, PlayIcon, CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
 export default function Hero() {
@@ -34,34 +33,20 @@ export default function Hero() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[60vh]">
             {/* Text Content */}
             <div className="text-center lg:text-left">
               <div className="inline-block bg-primary/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
                 <span className="text-white text-sm font-medium flex items-center gap-2">
                   <MusicalNoteIcon className="h-4 w-4" />
-                  Attività Musicale Interattiva per Bambini
+                  {t('tag')}
                 </span>
               </div>
               
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
-                <span className="block">di Concerto</span>
-                <span className="block text-blue-300">con Mamma</span>
-                <span className="block text-purple-300">e Papà</span>
-              </h1>
-              
-              <h2 className="text-xl sm:text-2xl text-white/90 font-light mb-6 max-w-3xl">
-                Attività musicale interattiva per bambini da 0 a 5 anni
-              </h2>
               
               <p className="text-base text-white/80 mb-10 max-w-3xl leading-relaxed">
-                Si basa sull&apos;esperienza di insegnamento che le componenti del gruppo hanno svolto in oltre 15 anni presso 
-                gli asili nido e le scuole d&apos;infanzia di Roma e provincia. <Link href={`/${locale}/team/annamaria-diroma`} className="text-blue-300 hover:text-blue-200 underline transition-colors">Annamaria Diroma</Link>, <Link href={`/${locale}/team/francesca-scaglione`} className="text-blue-300 hover:text-blue-200 underline transition-colors">Francesca Scaglione</Link> e 
-                {" "}<Link href={`/${locale}/team/monserrat-olavarria-balmaceda`} className="text-blue-300 hover:text-blue-200 underline transition-colors">Monserrat Olavarria Balmaceda</Link> conducono l&apos;attività attraverso la voce e gli strumenti proponendo ritmi e 
-                melodie tratti dal repertorio musicale più svariato. La modalità di intervento è ideata e pensata sulle 
-                reali capacità di ascolto dei bambini e si ispira ai principi dell&apos;apprendimento musicale di E.E. Gordon. 
-                Durante l&apos;attività i bambini sono liberi di interagire con la musica attraverso la voce e il movimento.
+                {t('description')}
               </p>
               
               {/* Features */}
@@ -70,22 +55,22 @@ export default function Hero() {
                   <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl mb-3">
                     <MusicalNoteIcon className="h-8 w-8 text-white" />
                   </div>
-                  <span className="text-sm font-medium text-white">Musica Interattiva</span>
-                  <span className="text-xs text-white/70">Voce e strumenti</span>
+                  <span className="text-sm font-medium text-white">{t('features.interactive.title')}</span>
+                  <span className="text-xs text-white/70">{t('features.interactive.subtitle')}</span>
                 </div>
                 <div className="flex flex-col items-center lg:items-start">
                   <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl mb-3">
                     <HeartIcon className="h-8 w-8 text-white" />
                   </div>
-                  <span className="text-sm font-medium text-white">Per Famiglie</span>
-                  <span className="text-xs text-white/70">Tutti insieme</span>
+                  <span className="text-sm font-medium text-white">{t('features.family.title')}</span>
+                  <span className="text-xs text-white/70">{t('features.family.subtitle')}</span>
                 </div>
                 <div className="flex flex-col items-center lg:items-start">
                   <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl mb-3">
                     <UsersIcon className="h-8 w-8 text-white" />
                   </div>
-                  <span className="text-sm font-medium text-white">0-5 Anni</span>
-                  <span className="text-xs text-white/70">Età ideale</span>
+                  <span className="text-sm font-medium text-white">{t('features.age.title')}</span>
+                  <span className="text-xs text-white/70">{t('features.age.subtitle')}</span>
                 </div>
               </div>
             </div>
@@ -129,8 +114,8 @@ export default function Hero() {
                         <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 mb-4 mx-auto w-24 h-24 flex items-center justify-center">
                           <PlayIcon className="h-12 w-12 text-white" />
                         </div>
-                        <p className="font-semibold text-lg mb-2">Video non disponibile</p>
-                        <p className="text-sm opacity-80">Il tuo browser non supporta i video HTML5.</p>
+                        <p className="font-semibold text-lg mb-2">{t('video.notAvailable')}</p>
+                        <p className="text-sm opacity-80">{t('video.browserNotSupported')}</p>
                       </div>
                     </div>
                   </video>
@@ -149,13 +134,13 @@ export default function Hero() {
                       <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 mb-6 mx-auto w-24 h-24 flex items-center justify-center hover:scale-110 transition-transform duration-300">
                         <PlayIcon className="h-12 w-12 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold mb-3">Guarda il Video</h3>
+                      <h3 className="text-xl font-bold mb-3">{t('video.watchTitle')}</h3>
                       <p className="text-white/90 text-sm mb-4 leading-relaxed max-w-xs mx-auto">
-                        Scopri la magia dei nostri concerti attraverso momenti reali delle nostre performance
+                        {t('video.watchDescription')}
                       </p>
                       <div className="flex items-center justify-center gap-2 text-white/80 text-xs">
                         <div className="w-2 h-2 bg-white/60 rounded-full"></div>
-                        <span>Esempi di concerti dal vivo</span>
+                        <span>{t('video.liveExamples')}</span>
                         <div className="w-2 h-2 bg-white/60 rounded-full"></div>
                       </div>
                     </div>
@@ -172,16 +157,16 @@ export default function Hero() {
                   <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-4">
                     <h3 className="font-semibold text-white mb-3 flex items-center justify-center gap-2">
                       <CalendarDaysIcon className="h-5 w-5" />
-                      Prossimo Concerto
+                      {t('nextConcert.title')}
                     </h3>
-                    <p className="text-blue-200 font-bold text-xl mb-1">Primavera Musicale</p>
-                    <p className="text-white/90 font-medium mb-1">Sabato 15 Marzo 2024</p>
+                    <p className="text-blue-200 font-bold text-xl mb-1">{t('nextConcert.event')}</p>
+                    <p className="text-white/90 font-medium mb-1">{t('nextConcert.date')}</p>
                     <p className="text-white/70 text-sm flex items-center justify-center gap-1 mb-3">
                       <MapPinIcon className="h-4 w-4" />
-                      Teatro Comunale - ore 16:00
+                      {t('nextConcert.location')}
                     </p>
-                    <Link href={`/${locale}/calendario`} className="btn btn-primary btn-sm w-full">
-                      Prenota Subito
+                    <Link href="/calendario" className="btn btn-primary btn-sm w-full">
+                      {t('nextConcert.bookNow')}
                     </Link>
                   </div>
                 </div>
@@ -193,6 +178,13 @@ export default function Hero() {
               <div className="absolute top-1/2 -right-8 w-24 h-24 bg-pink-400/30 rounded-full blur-lg animate-bounce" style={{animationDuration: '4s'}}></div>
             </div>
           </div>
+        </div>
+
+        {/* Top Wave - connecting from slider */}
+        <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
+          <svg className="relative block w-full h-20 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-blue-900"></path>
+          </svg>
         </div>
 
         {/* Bottom Wave */}

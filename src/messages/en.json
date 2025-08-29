@@ -1,16 +1,51 @@
 {
   "Navigation": {
-    "home": "Home",
-    "concerts": "Concerts",
-    "about": "About Us",
-    "booking": "Booking",
-    "contact": "Contact"
+    "home": "HOME",
+    "calendar": "CALENDAR", 
+    "news": "NEWS",
+    "about": "ABOUT US",
+    "gallery": "GALLERY",
+    "contact": "CONTACT",
+    "friends": "FRIENDS",
+    "booking": "BOOK NOW",
+    "courses": "COURSES",
+    "archive": "ARCHIVE",
+    "conferences": "CONFERENCES & SEMINARS",
+    "events": "EVENTS"
   },
   "Hero": {
+    "tag": "Interactive Musical Activity for Children",
     "title": "Concerts with Mom and Dad",
-    "subtitle": "Classical music for the whole family",
-    "description": "Discover the beauty of classical music together with your children. Concerts designed specifically for families with children aged 0 to 6.",
-    "cta": "Book now"
+    "subtitle": "Interactive musical activity for children aged 0 to 5 years",
+    "description": "Based on the teaching experience that the group members have carried out for over 15 years at nurseries and kindergartens in Rome and its province. Annamaria Diroma, Francesca Scaglione and Monserrat Olavarria Balmaceda lead the activity through voice and instruments, proposing rhythms and melodies drawn from the most varied musical repertoire. The intervention method is designed and thought out based on the real listening abilities of children and is inspired by the principles of musical learning by E.E. Gordon. During the activity children are free to interact with music through voice and movement.",
+    "features": {
+      "interactive": {
+        "title": "Interactive Music",
+        "subtitle": "Voice and instruments"
+      },
+      "family": {
+        "title": "For Families", 
+        "subtitle": "All together"
+      },
+      "age": {
+        "title": "0-5 Years",
+        "subtitle": "Ideal age"
+      }
+    },
+    "nextConcert": {
+      "title": "Next Concert",
+      "event": "Spring Musical",
+      "date": "Saturday March 15, 2024",
+      "location": "Municipal Theater - 4:00 PM",
+      "bookNow": "Book Now"
+    },
+    "video": {
+      "watchTitle": "Watch the Video",
+      "watchDescription": "Discover the magic of our concerts through real moments from our performances",
+      "liveExamples": "Live concert examples",
+      "notAvailable": "Video not available",
+      "browserNotSupported": "Your browser does not support HTML5 videos."
+    }
   },
   "Events": {
     "title": "Upcoming Concerts",
@@ -22,42 +57,80 @@
     "ageRange": "Age: {min}-{max} years"
   },
   "Booking": {
-    "title": "Book your seat",
+    "title": "Concert Booking",
+    "subtitle": "Book Your Spot at the Concert",
+    "description": "Fill out all required fields to secure your participation",
+    "warning": "In case the maximum booking limit is reached, we cannot guarantee participation for everyone and you will be promptly notified of the unavailability of the booked seats.",
+    "requiredNote": "Fields marked with * are required.",
+    "features": {
+      "chooseDate": "Choose Date",
+      "addFamily": "Add Family", 
+      "enjoyConcert": "Enjoy Concert"
+    },
     "form": {
-      "parentName": "Parent's name",
-      "parentNamePlaceholder": "Enter parent's name",
-      "email": "Email",
-      "emailPlaceholder": "example@email.com",
-      "phone": "Phone",
-      "phonePlaceholder": "Enter phone number",
-      "childrenCount": "Number of children",
-      "childrenCountPlaceholder": "Select number",
-      "childrenAges": "Children's ages",
-      "childrenAgesPlaceholder": "e.g. 2, 4, 6",
-      "eventId": "Concert",
-      "eventPlaceholder": "Select a concert",
-      "specialNeeds": "Special needs",
-      "specialNeedsPlaceholder": "Any special requirements...",
+      "bookingForm": "Booking Form",
+      "date": "Choose a date *",
+      "parentName": "Name and Surname *",
+      "parentNamePlaceholder": "Your name and surname",
+      "email": "Email *",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone *",
+      "phonePlaceholder": "+39 123 456 7890",
+      "numberOfKids": "How many children are participating *",
+      "numberOfAdults": "Adults accompanying *",
+      "kidsData": "Children's Data",
+      "kidsCount": "{count} of {total} children",
+      "childNumber": "Child {number}",
+      "childName": "Child's name *",
+      "childNamePlaceholder": "Child's name",
+      "birthDate": "Birth date *",
+      "age": "Age",
+      "howDidYouHear": "How did you hear about the initiative?",
+      "howDidYouHearOptions": {
+        "select": "Select an option",
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "friends": "Friends/Acquaintances",
+        "school": "School/Nursery",
+        "website": "Website",
+        "flyer": "Flyer",
+        "other": "Other"
+      },
       "submit": "Submit Booking",
-      "submitting": "Submitting..."
+      "submitting": "Submitting...",
+      "confirmation": "You will receive an email confirmation within 24 hours"
     },
     "validation": {
-      "required": "Required field",
+      "nameMin": "Name must be at least 2 characters",
+      "birthDateRequired": "Birth date is required",
+      "agePositive": "Age must be positive",
+      "ageMax": "Maximum age 18 years",
+      "dateRequired": "Choosing a date is required",
+      "nameRequired": "Name and surname are required",
+      "kidsMin": "At least one child must participate",
+      "kidsMax": "Maximum 3 children",
+      "kidsDataRequired": "Add children's data",
+      "kidsCountMismatch": "The number of children must match the data entered",
+      "adultsMin": "There must be at least one accompanying adult",
       "emailInvalid": "Invalid email",
-      "phoneInvalid": "Invalid phone number",
-      "minChildren": "At least one child is required",
-      "maxChildren": "Maximum 6 children per booking"
+      "phoneInvalid": "Invalid phone number"
+    },
+    "messages": {
+      "success": "Booking submitted successfully! We will contact you soon.",
+      "error": "Error submitting booking. Please try again later."
     }
   },
   "Footer": {
+    "brandTitle": "Concerts with Mom and Dad",
+    "brandDescription": "Interactive musical activity for the whole family. Concerts designed specifically for families with children aged 0 to 5 years.",
     "quickLinks": "Quick Links",
     "contact": "Contact",
     "followUs": "Follow Us",
     "address": "Via della Musica, 123\n00100 Rome, Italy",
     "email": "info@concertoconmammaepapa.it",
-    "phone": "+39 3423711750",
-    "phone2": "+39 3470960533",
-    "copyright": "© 2024 Concerts with Mom and Dad. All rights reserved."
+    "phone": "+39 342 3711750",
+    "phone2": "+39 347 0960533",
+    "copyright": "© 2025 Concerts with Mom and Dad. All rights reserved."
   },
   "About": {
     "title": "About Us",
@@ -77,6 +150,231 @@
       "message": "Message",
       "messagePlaceholder": "Your message...",
       "send": "Send Message"
+    }
+  },
+  "ConferencesPage": {
+    "tag": "Training and Research",
+    "title": "Conferences and",
+    "titleHighlight": "Seminars", 
+    "description": "A path of continuous training and research in the field of musical education for early childhood",
+    "seminars": [
+      {
+        "title": "Seminar 'Educating with music in the \"zero to six\"'",
+        "location": "Conservatory of Latina",
+        "year": "academic year 2022/2023 Level I and II",
+        "description": "A seminar dedicated to musical education for early childhood, focusing on innovative pedagogical methods for children aged 0 to 6 years."
+      },
+      {
+        "title": "Webinar Medicine in Art",
+        "subtitle": "Saturday, January 28, 2023",
+        "location": "Ottorino Respighi Conservatory – Latina",
+        "year": "2023",
+        "description": "An interdisciplinary webinar exploring the relationship between medicine and musical art in youth education."
+      },
+      {
+        "title": "Seminar 'Educating with music in the \"zero to six\"'",
+        "location": "Conservatory of Latina",
+        "year": "academic year 2021/2022",
+        "description": "Previous edition of the seminar on early musical education, with in-depth study of new methodological approaches."
+      },
+      {
+        "title": "Conference Meryc 2019",
+        "subtitle": "Counterpoints of the sense",
+        "location": "Gent University",
+        "year": "2019",
+        "description": "Participation in the international MERYC conference with research presentation. Abstract published on pages 76-77."
+      },
+      {
+        "title": "Conference Music...Soon!",
+        "subtitle": "Permanent Table Music 0-6",
+        "location": "Bologna",
+        "year": "October 2018",
+        "description": "Participation in the national conference dedicated to music for early childhood, focusing on innovative educational projects."
+      }
+    ]
+  },
+  "CoursesPage": {
+    "tag": "Musical Training",
+    "title": "Music",
+    "titleHighlight": "Courses",
+    "description": "The Music Courses we recommend are dedicated to children from zero years old, accompanied by parents or a reference adult.",
+    "description2": "They are led by professional teachers with specific experience in musical learning for early childhood, ensuring an educational approach appropriate to the needs of the little ones.",
+    "locationsTitle": "Course Locations",
+    "locationsDescription": "Discover the locations where our music courses for children take place",
+    "instructor": "instructor:",
+    "info": "info:",
+    "days": {
+      "Lunedì": "Monday",
+      "Martedì": "Tuesday", 
+      "Mercoledì": "Wednesday",
+      "Giovedì": "Thursday",
+      "Venerdì": "Friday",
+      "Sabato": "Saturday",
+      "Domenica": "Sunday"
+    },
+    "benefits": [
+      {
+        "title": "Cognitive Development",
+        "description": "Music stimulates neural connections and promotes learning"
+      },
+      {
+        "title": "Emotional Well-being",
+        "description": "Expression of emotions and development of inner balance"
+      },
+      {
+        "title": "Socialization", 
+        "description": "Interaction with other children in a stimulating and safe environment"
+      },
+      {
+        "title": "Creativity",
+        "description": "Development of imagination and personal expressive ability"
+      }
+    ],
+    "methodology": [
+      {
+        "title": "Playful Learning",
+        "description": "Every activity is proposed as a game to keep attention and fun high"
+      },
+      {
+        "title": "Multisensory Approach",
+        "description": "We involve all the senses for a complete and lasting learning experience"
+      },
+      {
+        "title": "Respect for Timing",
+        "description": "Each child has their own learning rhythms that are respected and valued"
+      },
+      {
+        "title": "Active Participation",
+        "description": "Children are always protagonists of activities, never passive spectators"
+      }
+    ]
+  },
+  "VoucherSection": {
+    "tag": "Perfect Gift",
+    "title": "Give a",
+    "titleHighlight": "Coupon",
+    "subtitle": "How to participate in \"Concerts with Mom and Dad\"",
+    "features": [
+      "Concerts for families with children 0-5 years old",
+      "Unique interactive musical experiences", 
+      "Special moments to share together"
+    ],
+    "buttons": {
+      "discover": "Discover How to Participate",
+      "contact": "Contact Us for Info"
+    }
+  },
+  "ChiSiamoSection": {
+    "title": "Who We Are",
+    "description": "Our team is composed of professionals experienced in musical education for childhood, united by passion for music and love for children.",
+    "learnMore": "Learn more",
+    "collaboratorsTitle": "Our Collaborators",
+    "ensembleTitle": "Music by Ensemble 0/3:",
+    "teamMembers": [
+      {
+        "name": "Annamaria Diroma",
+        "role": "Flutist and Singer",
+        "description": "Graduate in Transverse Flute from the \"Nino Rota\" Conservatory in Monopoli, with years of experience in musical teaching for children from 0 to 5 years old."
+      },
+      {
+        "name": "Francesca Scaglione", 
+        "role": "Musicologist and Pedagogue",
+        "description": "Over 35 years of experience in musical education, specialized in childhood didactics and advanced pedagogical training."
+      },
+      {
+        "name": "Monserrat Olavarria Balmaceda",
+        "role": "Educator and Multidisciplinary Artist", 
+        "description": "Conservatory training in Chile, specialized in voice education and integrated artistic disciplines for childhood development."
+      }
+    ],
+    "collaborators": {
+      "ensemble": [
+        { "name": "Annamaria Diroma", "role": "flute and voice" },
+        { "name": "Francesca Scaglione", "role": "piano and voice" },
+        { "name": "Monserrat Olavarria Balmaceda", "role": "voice and movement" }
+      ],
+      "musicians": [
+        { "name": "Adalgisa Turrisi", "role": "harp" },
+        { "name": "Livia Di Girolamo", "role": "cello" },
+        { "name": "Francesca Meli", "role": "guitar" },
+        { "name": "Ermanno Dodaro", "role": "double bass" }
+      ],
+      "musiciansTitle": "Collaborating Musicians:"
+    }
+  },
+  "GallerySection": {
+    "tag": "Our Moments",
+    "title": "Photo",
+    "titleHighlight": "Gallery", 
+    "description": "Discover the magical moments of our concerts through the images that capture the joy and wonder of children and families",
+    "viewModes": {
+      "carousel": "Carousel",
+      "grid": "Grid"
+    },
+    "pagination": "Page {current} of {total} • {count} total photos"
+  },
+  "ContattiSection": {
+    "title": "Contact",
+    "titleHighlight": "Us",
+    "description": "Get in touch with us for information about concerts, courses, or to book your participation",
+    "formTitle": "Send us a Message",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email", 
+      "emailPlaceholder": "your.email@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Message subject",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "submit": "Send Message",
+      "submitting": "Sending..."
+    },
+    "contact": {
+      "title": "Contact Information",
+      "phone1": "Phone 1",
+      "phone2": "Phone 2", 
+      "email": "Email",
+      "followUs": "Follow Us"
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "subjectRequired": "Subject is required", 
+      "messageRequired": "Message is required"
+    },
+    "messages": {
+      "success": "Message sent successfully! We will contact you soon.",
+      "error": "Error sending message. Please try again."
+    }
+  },
+  "NewsSection": {
+    "tag": "News & Updates",
+    "title": "Latest",
+    "titleHighlight": "News",
+    "description": "Discover our musical stories and articles on the benefits of music for children",
+    "tiritinlalla": {
+      "title": "The Island of Tiritinlallà",
+      "description": "The story will take us on a unique and exciting experience for children with parents, a true moment of music together to be lived through voice, movement, the use of educational instruments, listening and the concrete experience of art instruments.",
+      "tagline": "A musical fairy tale for the whole family"
+    },
+    "article": {
+      "title": "Music at nursery school develops language",
+      "description": "Musical stimulation in children from zero to three years promotes the growth of innate abilities that would otherwise be lost within a few years. The neuroscientist: \"It is among the most effective psychomotor activities for verbal and short-term memory and spatial-temporal ability\"",
+      "readArticle": "Read the article"
+    }
+  },
+  "EventsPage": {
+    "tag": "Musical Archive",
+    "title": "Past",
+    "titleHighlight": "Events",
+    "description": "Discover the wonderful musical events we have created with families over the years",
+    "sectionTitle": "Our Musical Story",
+    "sectionDescription": "{count} events held from 2021 to today - A journey through the most beautiful moments of our musical family",
+    "noEvents": {
+      "title": "No events found",
+      "description": "We could not load the events. Please try again later."
     }
   }
 }

@@ -26,7 +26,7 @@ export default async function FrancescaPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
             <Link 
-              href={`/${locale}/chi-siamo`}
+              href={`/${locale}#chi-siamo`}
               className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
             >
               <ArrowLeftIcon className="h-4 w-4" />
@@ -133,7 +133,7 @@ export default async function FrancescaPage() {
               </p>
               
               <p>
-                Nel 2009, muovendo dall'idea che l'evento musicale sia esso evento didattico, performance o di natura altra, è un evento di musica insieme, fonda il gruppo Musicullando con A. Turrisi e P. Anselmi. Più che un gruppo spettacolo, l'idea che muove questa officina musicale è creare un evento di musica in parte performance, in parte evento didattico, in parte interazione creativa e improvvisativa tra musicisti e spettatori-bambini. Tutto questo fondendo elementi espressivi del linguaggio musicale, teatrale e figurativo, dove la musica fa da elemento di coesione, unica nel suo essere espressione originalissima, irripetibile, un'avventura che, come dice D.Levitin, non si ripete mai uguale due volte.
+                Nel 2009, muovendo dall&apos;idea che l'evento musicale sia esso evento didattico, performance o di natura altra, è un evento di musica insieme, fonda il gruppo Musicullando con A. Turrisi e P. Anselmi. Più che un gruppo spettacolo, l'idea che muove questa officina musicale è creare un evento di musica in parte performance, in parte evento didattico, in parte interazione creativa e improvvisativa tra musicisti e spettatori-bambini. Tutto questo fondendo elementi espressivi del linguaggio musicale, teatrale e figurativo, dove la musica fa da elemento di coesione, unica nel suo essere espressione originalissima, irripetibile, un'avventura che, come dice D.Levitin, non si ripete mai uguale due volte.
               </p>
               
               <p>

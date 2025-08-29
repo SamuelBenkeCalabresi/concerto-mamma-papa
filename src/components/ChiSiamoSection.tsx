@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 interface TeamMember {
@@ -15,30 +16,31 @@ interface TeamMember {
 export default function ChiSiamoSection() {
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations('ChiSiamoSection');
   const currentLocale = pathname.startsWith('/en') ? 'en' : 'it';
 
   const teamMembers: TeamMember[] = [
     {
       id: 'annamaria-diroma',
-      name: 'Annamaria Diroma',
-      role: 'Flautista e Cantante',
-      description: 'Diplomata in Flauto traverso presso il Conservatorio "Nino Rota" di Monopoli, con esperienza pluriennale nell\'insegnamento musicale per bambini dai 0 ai 5 anni.',
+      name: t('teamMembers.0.name'),
+      role: t('teamMembers.0.role'),
+      description: t('teamMembers.0.description'),
       imageSrc: '/images/annamaria_curr2.jpg',
       href: `/team/annamaria-diroma`
     },
     {
       id: 'francesca-scaglione',
-      name: 'Francesca Scaglione',
-      role: 'Musicologa e Pedagogista',
-      description: 'Oltre 35 anni di esperienza nell\'educazione musicale, specializzata in didattica per l\'infanzia e formazione pedagogica avanzata.',
+      name: t('teamMembers.1.name'),
+      role: t('teamMembers.1.role'),
+      description: t('teamMembers.1.description'),
       imageSrc: '/images/francesca_curr.jpg',
       href: `/team/francesca-scaglione`
     },
     {
       id: 'monserrat-olavarria-balmaceda',
-      name: 'Monserrat Olavarria Balmaceda',
-      role: 'Educatrice e Artista Multidisciplinare',
-      description: 'Formazione conservatoriale in Cile, specializzata in educazione della voce e discipline artistiche integrate per lo sviluppo dell\'infanzia.',
+      name: t('teamMembers.2.name'),
+      role: t('teamMembers.2.role'),
+      description: t('teamMembers.2.description'),
       imageSrc: '/images/monserrat_curr.jpg',
       href: `/team/monserrat-olavarria-balmaceda`
     }
@@ -52,11 +54,10 @@ export default function ChiSiamoSection() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-neutral mb-4">
-          Chi Siamo
+          {t('title')}
         </h2>
         <p className="text-lg text-neutral/70 max-w-3xl mx-auto">
-          Il nostro team è composto da professioniste esperte nell'educazione musicale per l'infanzia, 
-          unite dalla passione per la musica e l'amore per i bambini.
+          {t('description')}
         </p>
       </div>
 
@@ -95,7 +96,7 @@ export default function ChiSiamoSection() {
                 </p>
 
                 <div className="flex items-center text-primary text-sm font-medium group-hover:text-primary/80 transition-colors duration-300">
-                  Scopri di più
+                  {t('learnMore')}
                   <svg 
                     className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" 
                     fill="none" 
@@ -109,6 +110,64 @@ export default function ChiSiamoSection() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Collaborators Section */}
+      <div className="mt-20">
+        <div className="bg-gradient-to-br from-white to-primary/5 rounded-3xl shadow-lg border border-primary/10 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* Image Section */}
+            <div className="order-2 lg:order-1 p-8">
+              <div className="relative h-80 rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/tre.jpg"
+                  alt="Ensemble 0/3 e Musicisti Collaboratori"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Content Section */}
+            <div className="order-1 lg:order-2 p-8">
+              <div className="mb-8">
+                <h3 className="text-3xl font-bold text-neutral mb-6">
+                  {t('collaboratorsTitle')}
+                </h3>
+              </div>
+
+              {/* Ensemble 0/3 */}
+              <div className="mb-8">
+                <h4 className="text-xl font-semibold text-primary mb-4 flex items-center">
+                  {t('ensembleTitle')}
+                </h4>
+                <div className="space-y-2 text-neutral/70 ml-8">
+                  {[0, 1, 2].map((index) => (
+                    <div key={index} className="flex items-start">
+                      <span className="font-medium text-neutral">{t(`collaborators.ensemble.${index}.name`)}</span>
+                      <span className="text-sm ml-2">{t(`collaborators.ensemble.${index}.role`)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Collaborating Musicians */}
+              <div>
+                <h4 className="text-xl font-semibold text-primary mb-4 flex items-center">
+                  {t('collaborators.musiciansTitle')}
+                </h4>
+                <div className="space-y-2 text-neutral/70 ml-8">
+                  {[0, 1, 2, 3].map((index) => (
+                    <div key={index} className="flex items-start">
+                      <span className="font-medium text-neutral">{t(`collaborators.musicians.${index}.name`)}</span>
+                      <span className="text-sm ml-2">{t(`collaborators.musicians.${index}.role`)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Call to Action */}

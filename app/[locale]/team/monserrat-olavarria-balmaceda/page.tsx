@@ -27,7 +27,7 @@ export default async function MonserratPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
             <Link 
-              href={`/${locale}/chi-siamo`}
+              href={`/${locale}#chi-siamo`}
               className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
             >
               <ArrowLeftIcon className="h-4 w-4" />

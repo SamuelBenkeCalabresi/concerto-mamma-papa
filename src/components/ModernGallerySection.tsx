@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 interface GalleryImage {
   id: string;
@@ -11,6 +12,7 @@ interface GalleryImage {
 }
 
 export default function ModernGallerySection() {
+  const t = useTranslations('GallerySection');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
@@ -114,16 +116,16 @@ export default function ModernGallerySection() {
                 <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span className="text-sm font-medium">I Nostri Momenti</span>
+                <span className="text-sm font-medium">{t('tag')}</span>
               </div>
               
               <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                <span className="block">Galleria</span>
-                <span className="block text-blue-300">dei Ricordi</span>
+                <span className="block">{t('title')}</span>
+                <span className="block text-blue-300">{t('titleHighlight')}</span>
               </h2>
               
               <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
-                Scopri i momenti più belli dei nostri concerti. Ogni immagine racconta la gioia della musica condivisa.
+                {t('description')}
               </p>
 
               {/* View Mode Toggle */}
@@ -137,7 +139,7 @@ export default function ModernGallerySection() {
                         : 'text-white hover:bg-white/10'
                     }`}
                   >
-                    Carousel
+                    {t('viewModes.carousel')}
                   </button>
                   <button
                     onClick={() => setViewMode('grid')}
@@ -147,7 +149,7 @@ export default function ModernGallerySection() {
                         : 'text-white hover:bg-white/10'
                     }`}
                   >
-                    Griglia
+                    {t('viewModes.grid')}
                   </button>
                 </div>
               </div>
@@ -276,7 +278,7 @@ export default function ModernGallerySection() {
                 {/* Page info */}
                 <div className="text-center mt-4">
                   <span className="text-white/70 text-sm">
-                    Pagina {currentPage + 1} di {totalPages} • {galleryImages.length} foto totali
+                    {t('pagination', { current: currentPage + 1, total: totalPages, count: galleryImages.length })}
                   </span>
                 </div>
               </div>
