@@ -4,12 +4,11 @@ import Footer from '@/components/Footer';
 import BookingForm from '@/components/BookingForm';
 
 interface BookingPageProps {
-  searchParams: Promise<{ eventId?: string }>;
+  searchParams: { eventId?: string };
 }
 
 export default async function BookingPage({ searchParams }: BookingPageProps) {
   const t = await getTranslations();
-  const params = await searchParams;
   
   return (
     <main className="min-h-screen bg-base-200">
@@ -26,7 +25,7 @@ export default async function BookingPage({ searchParams }: BookingPageProps) {
             </p>
           </div>
 
-          <BookingForm preselectedEventId={params.eventId} />
+          <BookingForm preselectedEventId={searchParams.eventId} />
         </div>
       </div>
       
