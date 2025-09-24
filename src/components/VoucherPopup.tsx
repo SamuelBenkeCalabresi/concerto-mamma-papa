@@ -26,7 +26,7 @@ export default function VoucherPopup({ onClose }: VoucherPopupProps) {
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
       }`}
     >
-      <div className="bg-white rounded-2xl shadow-2xl border-2 border-blue-200/50 overflow-hidden max-w-sm">
+      <div className="bg-white rounded-2xl shadow-2xl border-2 border-emerald-200/50 overflow-hidden max-w-sm">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -38,7 +38,7 @@ export default function VoucherPopup({ onClose }: VoucherPopupProps) {
         </button>
 
         {/* Header with hero gradient */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4">
+        <div className="bg-gradient-to-r from-emerald-600 to-blue-600 p-4">
           <div className="flex items-center text-white">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-3">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,7 +60,7 @@ export default function VoucherPopup({ onClose }: VoucherPopupProps) {
           <div className="space-y-3">
             <button
               onClick={handleViewFullscreen}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+              className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:from-emerald-700 hover:to-blue-700 transition-all duration-300"
             >
               Scopri come partecipare
             </button>

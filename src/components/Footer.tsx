@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden">
       {/* Hero-style Background */}
-      <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900">
+      <div className="relative bg-gradient-to-br from-emerald-900 via-teal-800 to-blue-900">
         {/* Background Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         
@@ -73,7 +73,7 @@ export default function Footer() {
             {/* Quick Links */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <h4 className="text-lg font-semibold mb-4 text-white flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-300 rounded-full"></div>
+                <div className="w-2 h-2 bg-emerald-300 rounded-full"></div>
                 {t('quickLinks')}
               </h4>
               <ul className="space-y-3">
@@ -113,7 +113,7 @@ export default function Footer() {
             {/* Contact Info */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <h4 className="text-lg font-semibold mb-4 text-white flex items-center gap-2">
-                <div className="w-2 h-2 bg-purple-300 rounded-full"></div>
+                <div className="w-2 h-2 bg-teal-300 rounded-full"></div>
                 {t('contact')}
               </h4>
               <div className="space-y-4">
@@ -189,9 +189,9 @@ export default function Footer() {
         </div>
 
         {/* Floating decorative elements */}
-        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-400/20 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute -top-6 -left-6 w-40 h-40 bg-purple-400/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 -right-8 w-24 h-24 bg-pink-400/30 rounded-full blur-lg animate-bounce" style={{animationDuration: '4s'}}></div>
+        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-emerald-400/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute -top-6 -left-6 w-40 h-40 bg-teal-400/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 -right-8 w-24 h-24 bg-blue-400/30 rounded-full blur-lg animate-bounce" style={{animationDuration: '4s'}}></div>
       </div>
 
       {/* Custom animations */}

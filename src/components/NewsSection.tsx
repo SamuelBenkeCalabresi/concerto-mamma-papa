@@ -16,7 +16,7 @@ export default function NewsSection() {
   return (
     <section className="relative overflow-hidden">
       {/* Hero-style Background */}
-      <div className="relative min-h-[70vh] bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-900">
+      <div className="relative min-h-[70vh] bg-gradient-to-br from-emerald-900 via-teal-800 to-blue-900">
         {/* Background Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/50"></div>
         
@@ -55,7 +55,7 @@ export default function NewsSection() {
             
             <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
               <span className="block">{t('title')}</span>
-              <span className="block text-pink-300">{t('titleHighlight')}</span>
+              <span className="block text-emerald-300">{t('titleHighlight')}</span>
             </h2>
             
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
@@ -101,7 +101,7 @@ export default function NewsSection() {
               </div>
 
               <div className="text-center">
-                <div className="inline-flex items-center gap-2 text-pink-200 font-medium">
+                <div className="inline-flex items-center gap-2 text-emerald-200 font-medium">
                   <HeartIcon className="h-4 w-4" />
                   <span className="text-sm">{t('tiritinlalla.tagline')}</span>
                 </div>
@@ -164,9 +164,9 @@ export default function NewsSection() {
         </div>
 
         {/* Floating decorative elements */}
-        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-indigo-400/20 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute -top-6 -left-6 w-40 h-40 bg-purple-400/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 -right-8 w-24 h-24 bg-pink-400/30 rounded-full blur-lg animate-bounce" style={{animationDuration: '4s'}}></div>
+        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-emerald-400/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute -top-6 -left-6 w-40 h-40 bg-teal-400/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 -right-8 w-24 h-24 bg-blue-400/30 rounded-full blur-lg animate-bounce" style={{animationDuration: '4s'}}></div>
       </div>
 
       {/* Custom animations */}

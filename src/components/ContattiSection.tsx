@@ -2,15 +2,17 @@
 
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import {
+  PhoneIcon,
+  EnvelopeIcon,
+  UserIcon
+} from '@heroicons/react/24/outline';
 
 export default function ContattiSection() {
   const t = useTranslations('ContattiSection');
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    email: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -40,171 +42,147 @@ export default function ContattiSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Contact Information */}
         <div>
-          <div className="bg-gradient-to-br from-white to-primary/5 rounded-2xl shadow-lg border border-primary/10 p-8">
-            <h3 className="text-2xl font-bold text-neutral mb-6">
-              {t('contact.title')}
-            </h3>
-            
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+            <div className="mb-8 text-center">
+              <div className="inline-flex items-center bg-emerald-100 text-emerald-800 rounded-full px-4 py-2 mb-4">
+                <PhoneIcon className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">Contatti</span>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                Come Contattarci
+              </h3>
+              <p className="text-gray-600">
+                Siamo qui per rispondere a tutte le tue domande
+              </p>
+            </div>
+
             <div className="space-y-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-neutral">Telefono</h4>
-                  <a 
-                  href="tel:+393423711750" 
-                  className="text-gray-600 hover:text-primary transition-colors text-sm"
-                >
-                  +39 342 3711750
-                </a>
-                <br />
-                <a 
-                  href="tel:+393470960533" 
-                  className="text-gray-600 hover:text-primary transition-colors text-sm"
-                >
-                  +39 347 0960533
-                </a>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-neutral">{t('contact.email')}</h4>
-                  <a 
-                    href="mailto:info@concertoconmammaepapa.it" 
-                    className="link link-primary"
-                  >
-                  info@concertoconmammaepapa.it
-                  </a>
+              <div className="bg-gray-50 rounded-lg p-6">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <PhoneIcon className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-2">Telefono</h4>
+                    <div className="space-y-1">
+                      <div>
+                        <a
+                          href="tel:+393423711750"
+                          className="text-emerald-600 hover:text-emerald-700 transition-colors font-medium"
+                        >
+                          +39 342 3711750
+                        </a>
+                      </div>
+                      <div>
+                        <a
+                          href="tel:+393470960533"
+                          className="text-emerald-600 hover:text-emerald-700 transition-colors font-medium"
+                        >
+                          +39 347 0960533
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-neutral">Indirizzo</h4>
-                  <p className="text-neutral/70">Via della Musica, 123<br />70100 Bari, Italia</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-neutral">Orari</h4>
-                  <p className="text-neutral/70">Lun-Ven: 9:00-18:00<br />Sab: 9:00-13:00</p>
+              <div className="bg-gray-50 rounded-lg p-6">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <EnvelopeIcon className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-2">Email</h4>
+                    <a
+                      href="mailto:info@concertoconmammaepapa.it"
+                      className="text-emerald-600 hover:text-emerald-700 transition-colors font-medium"
+                    >
+                      info@concertoconmammaepapa.it
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Contact Form */}
+        {/* Newsletter Form */}
         <div>
-          <div className="bg-gradient-to-br from-white to-primary/5 rounded-2xl shadow-lg border border-primary/10 p-8">
-            <h3 className="text-2xl font-bold text-neutral mb-6">
-              {t('formTitle')}
-            </h3>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="label">
-                    <span className="label-text font-medium">{t('form.name')}</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="input input-bordered input-primary w-full"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="label">
-                    <span className="label-text font-medium">{t('form.email')}</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="input input-bordered input-primary w-full"
-                    required
-                  />
-                </div>
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+            <div className="mb-8 text-center">
+              <div className="inline-flex items-center bg-emerald-100 text-emerald-800 rounded-full px-4 py-2 mb-4">
+                <EnvelopeIcon className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">Newsletter</span>
               </div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                Iscriviti alla Newsletter
+              </h3>
+              <p className="text-gray-600">
+                Rimani aggiornato sui nostri concerti, eventi speciali e novità per le famiglie.
+              </p>
+            </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="label">
-                    <span className="label-text font-medium">Telefono</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="input input-bordered input-primary w-full"
-                  />
-                </div>
-                <div>
-                  <label className="label">
-                    <span className="label-text font-medium">{t('form.subject')}</span>
-                  </label>
-                  <select
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="select select-bordered select-primary w-full"
-                  >
-                    <option value="">Seleziona un oggetto</option>
-                    <option value="info">Informazioni generali</option>
-                    <option value="booking">Prenotazione evento</option>
-                    <option value="collaboration">Collaborazione</option>
-                    <option value="other">Altro</option>
-                  </select>
-                </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <UserIcon className="w-4 h-4 inline mr-1" />
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                  placeholder="Il tuo nome"
+                  required
+                />
               </div>
 
               <div>
-                <label className="label">
-                  <span className="label-text font-medium">{t('form.message')}</span>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <EnvelopeIcon className="w-4 h-4 inline mr-1" />
+                  Email
                 </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
-                  rows={5}
-                  className="textarea textarea-bordered textarea-primary w-full resize-none"
-                  placeholder={t('form.messagePlaceholder')}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                  placeholder="la.tua.email@esempio.com"
                   required
-                ></textarea>
+                />
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary w-full bg-primary hover:bg-primary/80 border-primary"
-              >
-                {t('form.submit')}
-              </button>
+              <div className="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  id="privacy"
+                  className="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 mt-1"
+                  required
+                />
+                <label htmlFor="privacy" className="text-sm text-gray-700">
+                  Accetto di ricevere comunicazioni via email e dichiaro di aver letto e accettato la{' '}
+                  <a href="#" className="text-emerald-600 hover:text-emerald-700 underline">privacy policy</a>.
+                </label>
+              </div>
+
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  className="w-full py-4 px-6 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-600/20 transition-all duration-200 shadow-lg hover:transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center"
+                >
+                  <EnvelopeIcon className="w-5 h-5 mr-2" />
+                  Iscriviti alla Newsletter
+                </button>
+              </div>
+
+              <div className="text-center">
+                <p className="text-xs text-gray-500">
+                  Potrai disiscriverti in qualsiasi momento. Non condivideremo mai i tuoi dati.
+                </p>
+              </div>
             </form>
           </div>
         </div>

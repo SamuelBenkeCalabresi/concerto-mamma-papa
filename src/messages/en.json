@@ -54,7 +54,12 @@
     "soldOut": "Sold Out",
     "freeEntry": "Free Entry",
     "duration": "Duration: {duration} minutes",
-    "ageRange": "Age: {min}-{max} years"
+    "ageRange": "Age: {min}-{max} years",
+    "availableEvents": "Available Events",
+    "selectEvent": "Select an event to register",
+    "noEvents": "No open events at the moment.",
+    "bookEvent": "Book this event",
+    "errorLoading": "Error loading events. Please try again later."
   },
   "Booking": {
     "title": "Concert Booking",
@@ -62,13 +67,27 @@
     "description": "Fill out all required fields to secure your participation",
     "warning": "In case the maximum booking limit is reached, we cannot guarantee participation for everyone and you will be promptly notified of the unavailability of the booked seats.",
     "requiredNote": "Fields marked with * are required.",
+    "registerFor": "Register for:",
+    "success": "Registration successful!",
+    "confirmationEmail": "Check your email for confirmation.",
     "features": {
       "chooseDate": "Choose Date",
       "addFamily": "Add Family", 
       "enjoyConcert": "Enjoy Concert"
     },
+    "eventsSection": {
+      "selectTitle": "Select an Event to Book",
+      "selectDescription": "Choose from our available upcoming events",
+      "loading": "Loading events...",
+      "noEvents": "No events available for booking at the moment.",
+      "bookThisEvent": "Book this Event",
+      "backToEvents": "Back to Events List",
+      "eventSelected": "Selected Event"
+    },
     "form": {
       "bookingForm": "Booking Form",
+      "selectEvent": "Select Event *",
+      "selectEventPlaceholder": "Choose the event to book for",
       "date": "Choose a date *",
       "parentName": "Name and Surname *",
       "parentNamePlaceholder": "Your name and surname",
@@ -98,9 +117,11 @@
       },
       "submit": "Submit Booking",
       "submitting": "Submitting...",
+      "register": "Register",
       "confirmation": "You will receive an email confirmation within 24 hours"
     },
     "validation": {
+      "eventRequired": "Event selection is required",
       "nameMin": "Name must be at least 2 characters",
       "birthDateRequired": "Birth date is required",
       "agePositive": "Age must be positive",

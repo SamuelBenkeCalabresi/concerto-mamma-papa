@@ -6,18 +6,27 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { 
-  CalendarDaysIcon, 
-  UserIcon, 
-  UserGroupIcon, 
-  EnvelopeIcon, 
+import {
+  CalendarDaysIcon,
+  UserIcon,
+  UserGroupIcon,
+  EnvelopeIcon,
   PhoneIcon,
   InformationCircleIcon,
   CheckCircleIcon,
-  ExclamationTriangleIcon
+  ExclamationTriangleIcon,
+  XMarkIcon,
+  ClockIcon,
+  MapPinIcon,
+  TicketIcon,
+  CurrencyEuroIcon
 } from '@heroicons/react/24/outline';
 
-export default function BookingForm() {
+interface BookingFormProps {
+  preSelectedEvent?: any;
+}
+
+export default function BookingForm({ preSelectedEvent }: BookingFormProps = {}) {
   const t = useTranslations('Booking');
   
   // Zod validation schema with translations
@@ -28,6 +37,7 @@ export default function BookingForm() {
   });
 
   const bookingSchema = z.object({
+    event: z.string().min(1, t('validation.eventRequired')),
     date: z.string().min(1, t('validation.dateRequired')),
     name: z.string().min(2, t('validation.nameRequired')),
     numberOfKids: z.number().min(1, t('validation.kidsMin')).max(3, t('validation.kidsMax')),
@@ -35,7 +45,8 @@ export default function BookingForm() {
     numberOfAdults: z.number().min(1, t('validation.adultsMin')),
     email: z.string().email(t('validation.emailInvalid')),
     phone: z.string().min(10, t('validation.phoneInvalid')),
-    howDidYouHear: z.string().optional()
+    howDidYouHear: z.string().optional(),
+    website: z.string().optional() // Honeypot field - should be empty
   }).refine((data) => data.kids.length === data.numberOfKids, {
     message: t('validation.kidsCountMismatch'),
     path: ["numberOfKids"]
@@ -44,6 +55,11 @@ export default function BookingForm() {
   type BookingFormData = z.infer<typeof bookingSchema>;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [events, setEvents] = useState<any[]>([]);
+  const [loadingEvents, setLoadingEvents] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [submittedData, setSubmittedData] = useState<any>(null);
+  const [selectedEventDetails, setSelectedEventDetails] = useState<any>(null);
 
   const { 
     register, 
@@ -56,6 +72,7 @@ export default function BookingForm() {
   } = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
+      event: '',
       numberOfKids: 1,
       numberOfAdults: 2,
       kids: [{ name: '', birthDate: '', age: 0 }]
@@ -68,6 +85,35 @@ export default function BookingForm() {
   });
 
   const numberOfKids = watch('numberOfKids');
+
+  // Load available events or use pre-selected event
+  React.useEffect(() => {
+    if (preSelectedEvent) {
+      // If we have a pre-selected event, use it and set the form values
+      setEvents([preSelectedEvent]);
+      setValue('event', preSelectedEvent.id.toString());
+      // Use createdAt as date since these events don't have a specific date field
+      setValue('date', new Date().toISOString().split('T')[0]); // Default to today's date
+      setLoadingEvents(false);
+      return;
+    }
+
+    const loadEvents = async () => {
+      try {
+        const { getOpenEvents } = await import('@/lib/strapi');
+        const response = await getOpenEvents();
+        
+        setEvents(response.data || []);
+      } catch (error) {
+        console.error('Error loading events:', error);
+        setEvents([]);
+      } finally {
+        setLoadingEvents(false);
+      }
+    };
+
+    loadEvents();
+  }, [preSelectedEvent, setValue]);
 
   // Adjust kids array when numberOfKids changes
   React.useEffect(() => {
@@ -91,22 +137,41 @@ export default function BookingForm() {
     setSubmitStatus('idle');
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Import strapi API functions dynamically to avoid SSR issues
+      const { strapiBookingAPI } = await import('@/lib/strapi');
       
-      console.log('=== BOOKING DATA DETAILS ===');
-      console.log('Date:', data.date);
-      console.log('Name:', data.name);
-      console.log('Number of Kids:', data.numberOfKids);
-      console.log('Number of Adults:', data.numberOfAdults);
-      console.log('Kids Details:', data.kids);
-      console.log('Email:', data.email);
-      console.log('Phone:', data.phone);
-      console.log('How did you hear:', data.howDidYouHear);
-      console.log('=== END BOOKING DATA ===');
+      // Prepare booking data for Strapi
+      const bookingData = {
+        event: parseInt(data.event),
+        date: data.date,
+        parentName: data.name,
+        numberOfKids: data.numberOfKids,
+        kids: data.kids,
+        numberOfAdults: data.numberOfAdults,
+        email: data.email,
+        phone: data.phone,
+        howDidYouHear: data.howDidYouHear || null,
+        website: data.website || null, // Honeypot field
+        status: 'pending'
+      };
       
+      console.log('=== SENDING TO STRAPI ===');
+      console.log('Booking data:', JSON.stringify(bookingData, null, 2));
+      
+      // Create booking via Strapi API
+      const response = await strapiBookingAPI.createBooking(bookingData);
+      
+      console.log('=== STRAPI RESPONSE ===');
+      console.log('Response:', response);
+
+      // Find the selected event details
+      const selectedEvent = events.find(event => event.id === parseInt(data.event));
+
+      // Store submitted data and event details for modal
+      setSubmittedData(data);
+      setSelectedEventDetails(selectedEvent);
       setSubmitStatus('success');
-      reset();
+      setShowModal(true);
     } catch (error) {
       console.error('Booking error:', error);
       setSubmitStatus('error');
@@ -130,6 +195,63 @@ export default function BookingForm() {
   const handleBirthDateChange = (index: number, birthDate: string) => {
     const age = calculateAge(birthDate);
     setValue(`kids.${index}.age`, age);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSubmittedData(null);
+    setSelectedEventDetails(null);
+    reset();
+    // Re-enable body scroll
+    document.body.style.overflow = 'unset';
+  };
+
+  // Disable/enable body scroll when modal opens/closes
+  React.useEffect(() => {
+    if (showModal) {
+      // Disable body scroll
+      document.body.style.overflow = 'hidden';
+      // Trigger confetti after a short delay
+      setTimeout(() => {
+        triggerConfetti();
+      }, 300);
+    }
+    return () => {
+      // Re-enable body scroll when component unmounts
+      document.body.style.overflow = 'unset';
+    };
+  }, [showModal]);
+
+  const triggerConfetti = () => {
+    // Simple confetti effect using CSS animations
+    const confettiContainer = document.createElement('div');
+    confettiContainer.className = 'fixed inset-0 pointer-events-none z-[60]';
+    document.body.appendChild(confettiContainer);
+
+    // Create multiple confetti pieces
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'absolute w-2 h-2 opacity-80';
+      confetti.style.backgroundColor = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'][Math.floor(Math.random() * 5)];
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.animationDelay = Math.random() * 3 + 's';
+      confetti.style.animation = 'confetti-fall 3s linear forwards';
+      confettiContainer.appendChild(confetti);
+    }
+
+    // Remove confetti after animation
+    setTimeout(() => {
+      document.body.removeChild(confettiContainer);
+    }, 3000);
+  };
+
+  const getDescriptionText = (description: any) => {
+    if (Array.isArray(description)) {
+      return description.map(block =>
+        block.children?.map((child: any) => child.text).join('') || ''
+      ).join(' ');
+    }
+    return description || 'Nessuna descrizione disponibile';
   };
 
   return (
@@ -164,6 +286,40 @@ export default function BookingForm() {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Event Selection */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              <CalendarDaysIcon className="w-4 h-4 inline mr-1" />
+              {t('form.selectEvent')}
+            </label>
+            {loadingEvents ? (
+              <div className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50">
+                <div className="flex items-center">
+                  <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin mr-2"></div>
+                  Loading events...
+                </div>
+              </div>
+            ) : (
+              <select
+                {...register('event')}
+                disabled={!!preSelectedEvent}
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                  errors.event ? 'border-red-300' : 'border-gray-300'
+                } ${preSelectedEvent ? 'bg-gray-50 cursor-not-allowed' : ''}`}
+              >
+                <option value="">{t('form.selectEventPlaceholder')}</option>
+                {events.map((event) => (
+                  <option key={event.id} value={event.id}>
+                    {event.Title || 'Untitled Event'} - {new Date(event.createdAt).toLocaleDateString()}
+                  </option>
+                ))}
+              </select>
+            )}
+            {errors.event && (
+              <p className="mt-1 text-sm text-red-600">{errors.event.message}</p>
+            )}
+          </div>
+
           {/* Date Selection */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -174,9 +330,10 @@ export default function BookingForm() {
               <input
                 type="date"
                 {...register('date')}
+                disabled={!!preSelectedEvent}
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
                   errors.date ? 'border-red-300' : 'border-gray-300'
-                }`}
+                } ${preSelectedEvent ? 'bg-gray-50 cursor-not-allowed' : ''}`}
                 min={new Date().toISOString().split('T')[0]}
               />
               {errors.date && (
@@ -387,6 +544,19 @@ export default function BookingForm() {
             </select>
           </div>
 
+          {/* Honeypot field - hidden from users but visible to bots */}
+          <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
+            <label htmlFor="website">Website (do not fill this field)</label>
+            <input
+              {...register('website')}
+              type="text"
+              id="website"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           {/* Submit Button */}
           <div className="pt-6 border-t border-gray-200">
             <button
@@ -414,6 +584,225 @@ export default function BookingForm() {
           </div>
         </form>
       </div>
+
+      {/* Booking Confirmation Modal */}
+      {showModal && submittedData && selectedEventDetails && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50 p-0 md:p-4">
+          <div className="bg-white w-full h-full md:w-auto md:h-auto md:rounded-2xl shadow-2xl md:max-w-4xl md:max-h-[95vh] overflow-y-auto flex flex-col modal-enter">
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-emerald-600 to-blue-600 text-white p-6 md:rounded-t-2xl flex-shrink-0">
+              <div className="flex justify-between items-start">
+                <div className="flex-1 pr-4">
+                  <div className="flex items-center mb-2">
+                    <CheckCircleIcon className="w-8 h-8 mr-3 flex-shrink-0" />
+                    <h2 className="text-xl md:text-2xl font-bold">Prenotazione Confermata!</h2>
+                  </div>
+                  <p className="text-emerald-100 text-sm md:text-base">
+                    La tua prenotazione è stata inviata con successo. Riceverai una conferma via email.
+                  </p>
+                </div>
+                <button
+                  onClick={handleCloseModal}
+                  className="text-white hover:text-gray-200 transition-colors p-2 rounded-full hover:bg-white/10 flex-shrink-0"
+                >
+                  <XMarkIcon className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-4 md:p-6 flex-1 overflow-y-auto">
+              {/* Event Details */}
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                  <CalendarDaysIcon className="w-6 h-6 mr-2 text-emerald-600" />
+                  Dettagli dell'Evento
+                </h3>
+
+                <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl p-6 border border-emerald-200">
+                  <h4 className="text-2xl font-bold text-gray-900 mb-3">
+                    {selectedEventDetails.Title || 'Evento Senza Titolo'}
+                  </h4>
+
+                  <div className="space-y-3 mb-4">
+                    <div className="flex items-center text-gray-700">
+                      <CalendarDaysIcon className="w-5 h-5 mr-3 text-emerald-600" />
+                      <span className="font-medium">Data:</span>
+                      <span className="ml-2">{submittedData.date ? new Date(submittedData.date).toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Data da definire'}</span>
+                    </div>
+
+                    {selectedEventDetails.time && (
+                      <div className="flex items-center text-gray-700">
+                        <ClockIcon className="w-5 h-5 mr-3 text-emerald-600" />
+                        <span className="font-medium">Orario:</span>
+                        <span className="ml-2">{selectedEventDetails.time}</span>
+                      </div>
+                    )}
+
+                    {selectedEventDetails.location && (
+                      <div className="flex items-center text-gray-700">
+                        <MapPinIcon className="w-5 h-5 mr-3 text-emerald-600" />
+                        <span className="font-medium">Luogo:</span>
+                        <span className="ml-2">{selectedEventDetails.location}</span>
+                      </div>
+                    )}
+
+                    {selectedEventDetails.duration && (
+                      <div className="flex items-center text-gray-700">
+                        <ClockIcon className="w-5 h-5 mr-3 text-emerald-600" />
+                        <span className="font-medium">Durata:</span>
+                        <span className="ml-2">{selectedEventDetails.duration} minuti</span>
+                      </div>
+                    )}
+
+                    {(selectedEventDetails.ageMin !== undefined && selectedEventDetails.ageMax !== undefined) && (
+                      <div className="flex items-center text-gray-700">
+                        <UserIcon className="w-5 h-5 mr-3 text-emerald-600" />
+                        <span className="font-medium">Età consigliata:</span>
+                        <span className="ml-2">{selectedEventDetails.ageMin}-{selectedEventDetails.ageMax} anni</span>
+                      </div>
+                    )}
+
+                    {selectedEventDetails.price !== undefined && (
+                      <div className="flex items-center text-gray-700">
+                        <CurrencyEuroIcon className="w-5 h-5 mr-3 text-emerald-600" />
+                        <span className="font-medium">Prezzo:</span>
+                        <span className="ml-2">{selectedEventDetails.isFree ? 'Gratuito' : `€${selectedEventDetails.price}`}</span>
+                      </div>
+                    )}
+
+                    {selectedEventDetails.availableSeats && (
+                      <div className="flex items-center text-gray-700">
+                        <TicketIcon className="w-5 h-5 mr-3 text-emerald-600" />
+                        <span className="font-medium">Posti disponibili:</span>
+                        <span className="ml-2">{selectedEventDetails.availableSeats}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {selectedEventDetails.Description && (
+                    <div className="mt-4">
+                      <h5 className="font-semibold text-gray-900 mb-2">Descrizione:</h5>
+                      <p className="text-gray-700 leading-relaxed">
+                        {getDescriptionText(selectedEventDetails.Description)}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Booking Summary */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                  <UserGroupIcon className="w-6 h-6 mr-2 text-emerald-600" />
+                  Riepilogo Prenotazione
+                </h3>
+
+                <div className="bg-gray-50 rounded-xl p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Genitore:</span>
+                      <p className="text-gray-900 font-semibold">{submittedData.name}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Email:</span>
+                      <p className="text-gray-900">{submittedData.email}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Telefono:</span>
+                      <p className="text-gray-900">{submittedData.phone}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Adulti:</span>
+                      <p className="text-gray-900">{submittedData.numberOfAdults}</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <span className="text-sm font-medium text-gray-600">Bambini ({submittedData.numberOfKids}):</span>
+                    <div className="mt-2 space-y-2">
+                      {submittedData.kids.map((kid: any, index: number) => (
+                        <div key={index} className="bg-white rounded-lg p-3 border">
+                          <p className="font-medium text-gray-900">{kid.name}</p>
+                          <p className="text-sm text-gray-600">
+                            {kid.age} anni - Nato il {new Date(kid.birthDate).toLocaleDateString('it-IT')}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {submittedData.howDidYouHear && (
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Come ci hai conosciuto:</span>
+                      <p className="text-gray-900">{submittedData.howDidYouHear}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Important Information */}
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                <h4 className="font-semibold text-blue-900 mb-3 flex items-center">
+                  <InformationCircleIcon className="w-5 h-5 mr-2" />
+                  Informazioni Importanti
+                </h4>
+                <ul className="text-blue-800 space-y-2 text-sm">
+                  <li>• Riceverai una email di conferma all'indirizzo fornito</li>
+                  <li>• Ti contatteremo per confermare i dettagli dell'evento</li>
+                  <li>• In caso di domande, puoi contattarci al numero fornito nella conferma</li>
+                  <li>• Ti consigliamo di arrivare 15 minuti prima dell'inizio</li>
+                  <li>• Porta con te un documento di identità per il check-in</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="bg-gray-50 px-4 md:px-6 py-4 md:rounded-b-2xl flex-shrink-0">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p className="text-sm text-gray-600 text-center md:text-left">
+                  Grazie per aver scelto i nostri concerti per famiglie!
+                </p>
+                <button
+                  onClick={handleCloseModal}
+                  className="bg-emerald-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-emerald-700 transition-colors font-medium w-full md:w-auto"
+                >
+                  Chiudi
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Confetti Animation Styles */}
+      <style jsx global>{`
+        @keyframes confetti-fall {
+          0% {
+            transform: translateY(-100vh) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes modal-fade-in {
+          0% {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .modal-enter {
+          animation: modal-fade-in 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 }

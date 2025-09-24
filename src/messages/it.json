@@ -54,7 +54,12 @@
     "soldOut": "Sold Out",
     "freeEntry": "Ingresso gratuito",
     "duration": "Durata: {duration} minuti",
-    "ageRange": "Età: {min}-{max} anni"
+    "ageRange": "Età: {min}-{max} anni",
+    "availableEvents": "Eventi Disponibili",
+    "selectEvent": "Seleziona un evento per registrarti",
+    "noEvents": "Nessun evento disponibile al momento",
+    "bookEvent": "Prenota questo evento",
+    "errorLoading": "Errore nel caricamento degli eventi. Riprova più tardi."
   },
   "Booking": {
     "title": "Prenotazione Concerti",
@@ -67,8 +72,19 @@
       "addFamily": "Aggiungi Famiglia", 
       "enjoyConcert": "Goditi il Concerto"
     },
+    "eventsSection": {
+      "selectTitle": "Seleziona un Evento per Prenotare",
+      "selectDescription": "Scegli tra i nostri prossimi eventi disponibili",
+      "loading": "Caricamento eventi...",
+      "noEvents": "Nessun evento disponibile per la prenotazione al momento.",
+      "bookThisEvent": "Prenota questo Evento",
+      "backToEvents": "Torna alla Lista Eventi",
+      "eventSelected": "Evento Selezionato"
+    },
     "form": {
       "bookingForm": "Modulo di Prenotazione",
+      "selectEvent": "Seleziona Evento *",
+      "selectEventPlaceholder": "Scegli l'evento per cui prenotare",
       "date": "Scegli una data *",
       "parentName": "Nome e Cognome *",
       "parentNamePlaceholder": "Il tuo nome e cognome",
@@ -101,6 +117,7 @@
       "confirmation": "Riceverai una conferma via email entro 24 ore"
     },
     "validation": {
+      "eventRequired": "Selezione evento è obbligatoria",
       "nameMin": "Nome deve essere di almeno 2 caratteri",
       "birthDateRequired": "Data di nascita è obbligatoria",
       "agePositive": "Età deve essere positiva",

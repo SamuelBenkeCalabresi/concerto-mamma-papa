@@ -1,18 +1,51 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BookingForm from '@/components/BookingForm';
+import { getOpenEvents } from '@/lib/strapi';
 import { 
   CalendarDaysIcon,
   MusicalNoteIcon,
   UserGroupIcon,
-  ClipboardDocumentListIcon
+  ClipboardDocumentListIcon,
+  ArrowLeftIcon
 } from '@heroicons/react/24/outline';
 
 export default function PrenotaPage() {
   const t = useTranslations('Booking');
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
+  const [events, setEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        setLoading(true);
+        const data = await getOpenEvents();
+        console.log('Events fetched in prenota:', data);
+        setEvents(data.data || []);
+      } catch (err) {
+        console.error('Failed to fetch events:', err);
+        setError('Error loading events. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchEvents();
+  }, []);
+
+  const handleEventSelect = (event: any) => {
+    setSelectedEvent(event);
+  };
+
+  const handleBackToEvents = () => {
+    setSelectedEvent(null);
+  };
   
   return (
     <main className="min-h-screen bg-base-100">
@@ -93,10 +126,112 @@ export default function PrenotaPage() {
         </div>
       </section>
 
-      {/* Booking Form Section */}
+      {/* Events List or Booking Form Section */}
       <section className="py-16 bg-base-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <BookingForm />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {selectedEvent ? (
+            // Show Booking Form for selected event
+            <div className="max-w-4xl mx-auto">
+              <button 
+                onClick={handleBackToEvents}
+                className="flex items-center text-emerald-600 hover:text-emerald-700 mb-6 font-medium transition-colors"
+              >
+                <ArrowLeftIcon className="w-4 h-4 mr-2" />
+                {t('eventsSection.backToEvents')}
+              </button>
+              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6 mb-8">
+                <h2 className="text-2xl font-bold text-emerald-800 mb-2">
+                  {selectedEvent.Title || 'Event'}
+                </h2>
+                <div className="flex items-center text-emerald-700">
+                  <CalendarDaysIcon className="w-5 h-5 mr-2" />
+                  <span>
+                    {new Date(selectedEvent.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+              <BookingForm preSelectedEvent={selectedEvent} />
+            </div>
+          ) : (
+            // Show Events List
+            <>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  {t('eventsSection.selectTitle')}
+                </h2>
+                <p className="text-lg text-gray-600">
+                  {t('eventsSection.selectDescription')}
+                </p>
+              </div>
+
+              {loading && (
+                <div className="text-center py-12">
+                  <div className="flex justify-center mb-4">
+                    <svg className="animate-spin h-8 w-8 text-emerald-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </div>
+                  <p className="text-gray-600">{t('eventsSection.loading')}</p>
+                </div>
+              )}
+
+              {error && (
+                <div className="text-center py-12">
+                  <p className="text-xl text-red-600">{error}</p>
+                </div>
+              )}
+
+              {!loading && !error && events.length === 0 && (
+                <div className="text-center py-12">
+                  <p className="text-xl text-gray-500">
+                    {t('eventsSection.noEvents')}
+                  </p>
+                </div>
+              )}
+
+              {!loading && !error && events.length > 0 && (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {events.map((event: any) => {
+                    const getDescriptionText = (description: any) => {
+                      if (Array.isArray(description)) {
+                        return description.map(block => 
+                          block.children?.map((child: any) => child.text).join('') || ''
+                        ).join(' ');
+                      }
+                      return description || 'No description available';
+                    };
+
+                    return (
+                      <div key={event.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
+                        <div className="p-6">
+                          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                            {event.Title || 'Untitled Event'}
+                          </h3>
+                          <p className="text-gray-600 mb-4 line-clamp-3">
+                            {getDescriptionText(event.Description)}
+                          </p>
+                          <div className="space-y-2 mb-4">
+                            <div className="flex items-center text-sm text-gray-500">
+                              <CalendarDaysIcon className="w-4 h-4 mr-2" />
+                              <span>{new Date(event.createdAt).toLocaleDateString()}</span>
+                            </div>
+                          </div>
+                          <button 
+                            onClick={() => handleEventSelect(event)}
+                            className="inline-block w-full text-center bg-emerald-600 text-white px-4 py-3 rounded-md hover:bg-emerald-700 transition-colors font-medium"
+                          >
+                            {t('eventsSection.bookThisEvent')}
+
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
       

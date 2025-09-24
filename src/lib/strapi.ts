@@ -2,9 +2,11 @@
 // This file prepares the project for Strapi CMS integration
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337";
+
 export const STRAPI_CONFIG = {
   // Update these values when connecting to your Strapi instance
-  API_URL: process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337',
+  API_URL: STRAPI_URL,
   API_TOKEN: process.env.STRAPI_API_TOKEN || '',
 };
 
@@ -34,15 +36,32 @@ export async function fetchFromStrapi(
   };
 
   try {
+    console.log('🔄 Fetching from URL:', url);
+    console.log('📋 Request options:', mergedOptions);
+    console.log('🌐 Current window origin:', typeof window !== 'undefined' ? window.location.origin : 'Server side');
+    
     const response = await fetch(url, mergedOptions);
+    console.log('📡 Response status:', response.status, response.statusText);
+    console.log('📄 Response headers:', Object.fromEntries(response.headers.entries()));
     
     if (!response.ok) {
-      throw new Error(`Strapi API error: ${response.status} ${response.statusText}`);
+      const errorText = await response.text();
+      console.error('❌ API Error Response:', errorText);
+      throw new Error(`Strapi API error: ${response.status} ${response.statusText} - ${errorText}`);
     }
     
-    return await response.json();
+    const data = await response.json();
+    console.log('✅ API Response successful, data length:', Array.isArray(data.data) ? data.data.length : 'not an array');
+    return data;
   } catch (error) {
-    console.error('Error fetching from Strapi:', error);
+    console.error('💥 Error fetching from Strapi:', error);
+    console.error('🔍 Error type:', error instanceof Error ? error.constructor.name : typeof error);
+    console.error('📝 Error message:', error instanceof Error ? error.message : String(error));
+    
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      console.error('🚫 Network error detected - is Strapi running?');
+      throw new Error('Unable to connect to Strapi server. Make sure it is running on ' + STRAPI_CONFIG.API_URL);
+    }
     throw error;
   }
 }
@@ -61,9 +80,17 @@ export const strapiEventAPI = {
     if (params?.populate) searchParams.append('populate', params.populate);
     if (params?.sort) searchParams.append('sort', params.sort);
     if (params?.filters) {
-      Object.entries(params.filters).forEach(([key, value]) => {
-        searchParams.append(`filters[${key}]`, String(value));
-      });
+      const buildFilters = (obj: any, prefix = 'filters') => {
+        Object.entries(obj).forEach(([key, value]) => {
+          if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+            // Handle nested objects like { date: { $gte: "2025-01-01" } }
+            buildFilters(value, `${prefix}[${key}]`);
+          } else {
+            searchParams.append(`${prefix}[${key}]`, String(value));
+          }
+        });
+      };
+      buildFilters(params.filters);
     }
     if (params?.pagination) {
       searchParams.append('pagination[page]', String(params.pagination.page));
@@ -159,6 +186,70 @@ export const strapiContactAPI = {
     });
   },
 };
+
+// Open Events API functions
+export async function getOpenEvents() {
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/events?populate=*`);
+    
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('API Error:', res.status, res.statusText, errorText);
+      throw new Error(`Failed to fetch events: ${res.status} ${res.statusText}`);
+    }
+    
+    const data = await res.json();
+    console.log('API Response:', data);
+    return data;
+  } catch (error) {
+    console.error('Error in getOpenEvents:', error);
+    throw error;
+  }
+}
+
+// Registration API functions
+export async function createRegistration(eventId: string, name: string, email: string) {
+  try {
+    console.log(`Processing registration for event ${eventId}:`);
+    console.log(`- Name: ${name}`);
+    console.log(`- Email: ${email}`);
+    
+    // For now, simulate successful registration since Strapi endpoints aren't configured yet
+    // In a real implementation, you would:
+    // 1. Set up a registrations content type in Strapi admin
+    // 2. Configure proper permissions for public access
+    // 3. Enable POST method on the registrations endpoint
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Store registration in localStorage for demonstration
+    const registration = {
+      id: Date.now().toString(),
+      eventId,
+      name,
+      email,
+      timestamp: new Date().toISOString(),
+      status: 'pending'
+    };
+    
+    // Get existing registrations
+    const existingRegistrations = JSON.parse(localStorage.getItem('event_registrations') || '[]');
+    existingRegistrations.push(registration);
+    localStorage.setItem('event_registrations', JSON.stringify(existingRegistrations));
+    
+    console.log('Registration stored locally:', registration);
+    
+    return {
+      data: registration,
+      message: 'Registration received! You will be contacted soon.'
+    };
+    
+  } catch (error) {
+    console.error('Error in createRegistration:', error);
+    throw error;
+  }
+}
 
 // Type definitions for Strapi responses
 export interface StrapiResponse<T> {

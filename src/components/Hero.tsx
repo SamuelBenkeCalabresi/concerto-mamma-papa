@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden">
       {/* Hero Image Background */}
-      <div className="relative min-h-[95vh] bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900">
+      <div className="relative min-h-[95vh] bg-gradient-to-br from-emerald-900 via-teal-800 to-blue-900">
         {/* Background Image Overlay - Using CSS for a music/family concert scene */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         
@@ -43,8 +43,17 @@ export default function Hero() {
                   {t('tag')}
                 </span>
               </div>
-              
-              
+
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
+                Di Concerto{' '}
+                <span className="bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">
+                  con Mamma
+                </span>{' '}
+                <span className="bg-gradient-to-r from-teal-300 to-blue-300 bg-clip-text text-transparent">
+                  e Papà
+                </span>
+              </h1>
+
               <p className="text-base text-white/80 mb-10 max-w-3xl leading-relaxed">
                 {t('description')}
               </p>
@@ -98,7 +107,7 @@ export default function Hero() {
                         });
                       }
                     }}
-                    className="w-full h-full object-cover rounded-2xl bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400"
+                    className="w-full h-full object-cover rounded-2xl bg-gradient-to-br from-emerald-400 via-teal-400 to-blue-400"
                     preload="metadata"
                     controls
                     playsInline
@@ -109,7 +118,7 @@ export default function Hero() {
                   >
                     <source src="/images/hero-video.mp4" type="video/mp4" />
                     {/* Fallback content */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 via-teal-400 to-blue-400 flex items-center justify-center">
                       <div className="text-center text-white">
                         <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 mb-4 mx-auto w-24 h-24 flex items-center justify-center">
                           <PlayIcon className="h-12 w-12 text-white" />
@@ -122,7 +131,7 @@ export default function Hero() {
                   
                   {/* Video Preview Overlay - Clickable */}
                   <div 
-                    className="video-overlay absolute inset-0 bg-gradient-to-br from-blue-400/90 via-purple-400/85 to-pink-400/90 rounded-2xl flex items-center justify-center cursor-pointer hover:opacity-95 transition-all duration-300"
+                    className="video-overlay absolute inset-0 bg-gradient-to-br from-emerald-400/90 via-teal-400/85 to-blue-400/90 rounded-2xl flex items-center justify-center cursor-pointer hover:opacity-95 transition-all duration-300"
                     onClick={(e) => {
                       const video = e.currentTarget.previousElementSibling as HTMLVideoElement;
                       if (video) {
@@ -173,9 +182,9 @@ export default function Hero() {
               </div>
               
               {/* Floating decorative elements */}
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-400/20 rounded-full blur-xl animate-pulse"></div>
-              <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-purple-400/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
-              <div className="absolute top-1/2 -right-8 w-24 h-24 bg-pink-400/30 rounded-full blur-lg animate-bounce" style={{animationDuration: '4s'}}></div>
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-emerald-400/20 rounded-full blur-xl animate-pulse"></div>
+              <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-teal-400/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute top-1/2 -right-8 w-24 h-24 bg-blue-400/30 rounded-full blur-lg animate-bounce" style={{animationDuration: '4s'}}></div>
             </div>
           </div>
         </div>
@@ -183,7 +192,7 @@ export default function Hero() {
         {/* Top Wave - connecting from slider */}
         <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
           <svg className="relative block w-full h-20 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-blue-900"></path>
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-emerald-900"></path>
           </svg>
         </div>
 

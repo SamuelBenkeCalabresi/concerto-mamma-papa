@@ -123,9 +123,53 @@ html {
   .no-print {
     display: none !important;
   }
-  
+
   body {
     color: black !important;
     background: white !important;
+  }
+}
+
+/* Leaflet Map Fixes for Next.js */
+.leaflet-container {
+  height: 256px;
+  width: 100%;
+  z-index: 1;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+/* Ensure markers show correctly */
+.leaflet-marker-icon {
+  margin-left: -12px !important;
+  margin-top: -41px !important;
+}
+
+/* Fix popup styling */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.leaflet-popup-tip {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+}
+
+/* Responsive map controls */
+@media (max-width: 768px) {
+  .leaflet-control-zoom {
+    margin-left: 4px !important;
+    margin-top: 4px !important;
+  }
+
+  .leaflet-control-attribution {
+    font-size: 8px !important;
+    margin-right: 4px !important;
+    margin-bottom: 4px !important;
   }
 }

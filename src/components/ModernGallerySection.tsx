@@ -79,7 +79,7 @@ export default function ModernGallerySection() {
   return (
     <section className="relative overflow-hidden">
       {/* Hero-style background with gradient */}
-      <div className="relative min-h-[100vh] bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900">
+      <div className="relative min-h-[100vh] bg-gradient-to-br from-emerald-900 via-teal-800 to-blue-900">
         {/* Background overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-black/30"></div>
         
@@ -121,7 +121,7 @@ export default function ModernGallerySection() {
               
               <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight mb-6">
                 <span className="block">{t('title')}</span>
-                <span className="block text-blue-300">{t('titleHighlight')}</span>
+                <span className="block text-emerald-300">{t('titleHighlight')}</span>
               </h2>
               
               <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
@@ -135,7 +135,7 @@ export default function ModernGallerySection() {
                     onClick={() => setViewMode('carousel')}
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       viewMode === 'carousel'
-                        ? 'bg-white text-blue-800 shadow-lg'
+                        ? 'bg-white text-emerald-800 shadow-lg'
                         : 'text-white hover:bg-white/10'
                     }`}
                   >
@@ -145,7 +145,7 @@ export default function ModernGallerySection() {
                     onClick={() => setViewMode('grid')}
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       viewMode === 'grid'
-                        ? 'bg-white text-blue-800 shadow-lg'
+                        ? 'bg-white text-emerald-800 shadow-lg'
                         : 'text-white hover:bg-white/10'
                     }`}
                   >
