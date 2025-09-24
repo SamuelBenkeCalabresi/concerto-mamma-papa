@@ -190,14 +190,21 @@ export const strapiContactAPI = {
 // Open Events API functions
 export async function getOpenEvents() {
   try {
-    const res = await fetch(`${STRAPI_URL}/api/events?populate=*`);
-    
+    const res = await fetch(`${STRAPI_URL}/api/events?populate=*`, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(STRAPI_CONFIG.API_TOKEN && {
+          'Authorization': `Bearer ${STRAPI_CONFIG.API_TOKEN}`,
+        }),
+      },
+    });
+
     if (!res.ok) {
       const errorText = await res.text();
       console.error('API Error:', res.status, res.statusText, errorText);
       throw new Error(`Failed to fetch events: ${res.status} ${res.statusText}`);
     }
-    
+
     const data = await res.json();
     console.log('API Response:', data);
     return data;
