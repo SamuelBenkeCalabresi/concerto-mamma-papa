@@ -1,13 +1,14 @@
 'use client';
 
 import React from 'react';
-import EventMap from './EventMap';
+import { useTranslations } from 'next-intl';
+// import EventMap from './EventMap'; // Temporarily disabled
 import {
   XMarkIcon,
   CalendarDaysIcon,
   ClockIcon,
   MapPinIcon,
-  TicketIcon,
+  // TicketIcon, // Temporarily disabled
   UserGroupIcon,
   DocumentTextIcon,
   LinkIcon
@@ -20,22 +21,7 @@ interface EventDetailModalProps {
 }
 
 const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onClose }) => {
-  if (!isOpen || !event) return null;
-
-  const getDescriptionText = (description: any) => {
-    if (Array.isArray(description)) {
-      return description.map(block =>
-        block.children?.map((child: any) => child.text).join('') || ''
-      ).join(' ');
-    }
-    return description || 'Nessuna descrizione disponibile';
-  };
-
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
+  const t = useTranslations('EventModal');
 
   // Disable/enable body scroll
   React.useEffect(() => {
@@ -46,6 +32,23 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  const getDescriptionText = (description: any) => {
+    if (Array.isArray(description)) {
+      return description.map(block =>
+        block.children?.map((child: any) => child.text).join('') || ''
+      ).join(' ');
+    }
+    return description || t('noDescription');
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  if (!isOpen || !event) return null;
 
   const handleLocandinaView = () => {
     if (event.locandina?.url) {
@@ -122,20 +125,21 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                   {(event.ageMin !== undefined && event.ageMax !== undefined) && (
                     <div className="flex items-center text-gray-700">
                       <UserGroupIcon className="w-5 h-5 mr-3 text-emerald-600 flex-shrink-0" />
-                      <span className="font-medium">Età consigliata:</span>
-                      <span className="ml-2">{event.ageMin}-{event.ageMax} anni</span>
+                      <span className="font-medium">{t('recommendedAge')}</span>
+                      <span className="ml-2">{event.ageMin}-{event.ageMax} {t('years')}</span>
                     </div>
                   )}
 
                   {/* Price preview temporarily disabled */}
 
-                  {event.availableSeats && (
+                  {/* Available seats temporarily disabled */}
+                  {/* {event.availableSeats && (
                     <div className="flex items-center text-gray-700">
                       <TicketIcon className="w-5 h-5 mr-3 text-emerald-600 flex-shrink-0" />
                       <span className="font-medium">Posti disponibili:</span>
                       <span className="ml-2">{event.availableSeats}</span>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
 
@@ -144,7 +148,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                 <div className="bg-gray-50 rounded-xl p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
                     <DocumentTextIcon className="w-5 h-5 mr-2 text-emerald-600" />
-                    Descrizione
+                    {t('description')}
                   </h3>
                   <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                     {getDescriptionText(event.Description)}
@@ -190,17 +194,31 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                 <div className="bg-gray-50 rounded-xl p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
                     <MapPinIcon className="w-5 h-5 mr-2 text-emerald-600" />
-                    Luogo
+                    {t('location')}
                   </h3>
-                  <p className="text-gray-700 mb-4">{event.location}</p>
+                  <div className="mb-4">
+                    <p className="text-gray-700 mb-2 font-medium">{event.location}</p>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-emerald-600 hover:text-emerald-700 transition-colors duration-200 font-medium text-sm"
+                    >
+                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      {t('viewOnGoogleMaps')}
+                    </a>
+                  </div>
 
-                  {/* OpenStreetMap with Leaflet */}
-                  <EventMap
+                  {/* Map component hidden for now */}
+                  {/* <EventMap
                     latitude={event.latitude}
                     longitude={event.longitude}
                     location={event.location}
                     eventTitle={event.Title}
-                  />
+                  /> */}
                 </div>
               )}
             </div>
@@ -211,20 +229,20 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
         <div className="bg-gray-50 px-4 md:px-6 py-4 md:rounded-b-2xl flex-shrink-0">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-600 text-center md:text-left">
-              Prenota ora per non perdere questo evento speciale!
+              {t('bookNowFooter')}
             </p>
             <div className="flex gap-3 w-full md:w-auto">
               <button
                 onClick={onClose}
                 className="bg-gray-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-gray-700 transition-colors font-medium flex-1 md:flex-initial"
               >
-                Chiudi
+                {t('close')}
               </button>
               <a
                 href="/prenota"
                 className="bg-emerald-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-emerald-700 transition-colors font-medium flex-1 md:flex-initial text-center"
               >
-                Prenota Evento
+                {t('bookNow')}
               </a>
             </div>
           </div>

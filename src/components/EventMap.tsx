@@ -3,23 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { MapPinIcon } from '@heroicons/react/24/outline';
 
-// Dynamically import Leaflet only on client side
-const loadLeaflet = async () => {
-  if (typeof window === 'undefined') return null;
-
-  const L = await import('leaflet');
-  await import('leaflet/dist/leaflet.css');
-
-  // Fix for default markers in Next.js/React
-  delete (L.default.Icon.Default.prototype as any)._getIconUrl;
-  L.default.Icon.Default.mergeOptions({
-    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-  });
-
-  return L.default;
-};
+// Import CSS at the top level (this won't cause SSR issues)
+import 'leaflet/dist/leaflet.css';
 
 interface EventMapProps {
   latitude?: number;
@@ -44,9 +29,21 @@ const EventMap: React.FC<EventMapProps> = ({ latitude, longitude, location, even
       }
 
       try {
-        // Load Leaflet dynamically
-        const L = await loadLeaflet();
-        if (!L || !isMounted) return;
+        // Small delay to ensure DOM is fully ready
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // Dynamically import Leaflet
+        const L = (await import('leaflet')).default;
+
+        if (!isMounted) return;
+
+        // Fix for default markers in Next.js/React
+        delete (L.Icon.Default.prototype as any)._getIconUrl;
+        L.Icon.Default.mergeOptions({
+          iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+          iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        });
 
         // Clean up previous map instance
         if (mapInstanceRef.current) {

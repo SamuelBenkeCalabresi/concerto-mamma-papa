@@ -1,12 +1,72 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
+import { useEffect, useState } from 'react';
 import { Link } from '@/i18n/routing';
+import { getOpenEvents } from '@/lib/strapi';
 import { MusicalNoteIcon, HeartIcon, UsersIcon, PlayIcon, CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
 export default function Hero() {
   const t = useTranslations('Hero');
   const locale = useLocale();
+  const [nextEvent, setNextEvent] = useState<any>(null);
+  const [loadingEvent, setLoadingEvent] = useState(true);
+
+  useEffect(() => {
+    async function fetchNextEvent() {
+      try {
+        console.log('🔄 Fetching events for Hero component...');
+        const data = await getOpenEvents();
+        const events = data.data || [];
+
+        console.log('📋 Raw events from API:', events);
+        console.log('📊 Number of events:', events.length);
+
+        if (events.length > 0) {
+          const now = new Date();
+          console.log('📅 Current date:', now.toISOString());
+
+          // Process all events to understand the data structure
+          const processedEvents = events.map((event: any) => {
+            const eventDate = new Date(event.date || event.attributes?.date || event.createdAt || event.attributes?.createdAt);
+            console.log('🎭 Event:', {
+              title: event.title || event.attributes?.title || event.Title,
+              date: event.date || event.attributes?.date,
+              createdAt: event.createdAt || event.attributes?.createdAt,
+              processedDate: eventDate.toISOString()
+            });
+            return {
+              ...event,
+              eventDate
+            };
+          });
+
+          // Sort all events by date (newest first)
+          const sortedEvents = processedEvents.sort((a: any, b: any) => b.eventDate.getTime() - a.eventDate.getTime());
+
+          // First try to find upcoming events
+          const upcomingEvents = sortedEvents.filter((event: any) => event.eventDate >= now);
+
+          if (upcomingEvents.length > 0) {
+            console.log('✅ Found upcoming events:', upcomingEvents.length);
+            setNextEvent(upcomingEvents[0]);
+          } else {
+            console.log('⚠️ No upcoming events, showing most recent event');
+            // If no upcoming events, show the most recent event
+            setNextEvent(sortedEvents[0]);
+          }
+        } else {
+          console.log('❌ No events found in API response');
+        }
+      } catch (error) {
+        console.error('💥 Error fetching next event:', error);
+      } finally {
+        setLoadingEvent(false);
+      }
+    }
+
+    fetchNextEvent();
+  }, []);
 
   return (
     <section className="relative overflow-hidden">
@@ -170,14 +230,57 @@ export default function Hero() {
                       <CalendarDaysIcon className="h-5 w-5" />
                       {t('nextConcert.title')}
                     </h3>
-                    <p className="text-blue-200 font-bold text-xl mb-1">{t('nextConcert.event')}</p>
-                    <p className="text-white/90 font-medium mb-1">{t('nextConcert.date')}</p>
-                    <p className="text-white/70 text-sm flex items-center justify-center gap-1 mb-3">
-                      <MapPinIcon className="h-4 w-4" />
-                      {t('nextConcert.location')}
-                    </p>
+
+                    {loadingEvent ? (
+                      <div className="flex items-center justify-center py-4">
+                        <div className="animate-spin w-6 h-6 border-2 border-white border-t-transparent rounded-full"></div>
+                      </div>
+                    ) : nextEvent ? (
+                      <>
+                        <p className="text-blue-200 font-bold text-xl mb-1">
+                          {nextEvent.Title || nextEvent.title || nextEvent.attributes?.title || 'Prossimo Evento'}
+                        </p>
+                        <p className="text-white/90 font-medium mb-1">
+                          {(nextEvent.date || nextEvent.attributes?.date) ?
+                            new Date(nextEvent.date || nextEvent.attributes?.date).toLocaleDateString('it-IT', {
+                              weekday: 'long',
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            }) :
+                            'Data da definire'
+                          }
+                        </p>
+                        {(nextEvent.time || nextEvent.attributes?.time) && (
+                          <p className="text-white/80 text-sm mb-1">
+                            Ore {nextEvent.time || nextEvent.attributes?.time}
+                          </p>
+                        )}
+                        {(nextEvent.location || nextEvent.attributes?.location) ? (
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nextEvent.location || nextEvent.attributes?.location)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white/70 hover:text-blue-200 text-sm flex items-center justify-center gap-1 mb-3 transition-colors duration-200"
+                          >
+                            <MapPinIcon className="h-4 w-4" />
+                            {nextEvent.location || nextEvent.attributes?.location}
+                          </a>
+                        ) : (
+                          <p className="text-white/70 text-sm flex items-center justify-center gap-1 mb-3">
+                            <MapPinIcon className="h-4 w-4" />
+                            Luogo da definire
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <p className="text-white/70 text-center mb-3">
+                        Nessun evento in programma
+                      </p>
+                    )}
+
                     <Link href="/calendario" className="btn btn-primary btn-sm w-full">
-                      {t('nextConcert.bookNow')}
+                      {nextEvent ? t('nextConcert.bookNow') : 'Scopri tutti gli eventi'}
                     </Link>
                   </div>
                 </div>

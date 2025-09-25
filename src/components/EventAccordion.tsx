@@ -126,7 +126,14 @@ export default function EventAccordion({ event }: EventAccordionProps) {
               </div>
               <div className="flex items-center">
                 <MapPinIcon className="h-4 w-4 mr-1 text-primary" />
-                <span className="truncate">{event.location.name}</span>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${event.location.name}, ${event.location.street}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="truncate hover:text-primary transition-colors duration-200"
+                >
+                  {event.location.name}
+                </a>
               </div>
             </div>
           </div>
@@ -171,8 +178,15 @@ export default function EventAccordion({ event }: EventAccordionProps) {
                     Località
                   </h4>
                   <div className="text-sm text-neutral/70 ml-6">
-                    <div className="font-medium">{event.location.name}</div>
-                    <div>{event.location.street}</div>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${event.location.name}, ${event.location.street}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary transition-colors duration-200"
+                    >
+                      <div className="font-medium">{event.location.name}</div>
+                      <div>{event.location.street}</div>
+                    </a>
                   </div>
                 </div>
 

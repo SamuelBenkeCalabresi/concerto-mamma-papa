@@ -70,7 +70,7 @@ export default function NewsSection() {
             <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20">
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
+                  <div className="bg-emerald-600/80 backdrop-blur-sm p-3 rounded-xl">
                     <PlayIcon className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white">{t('tiritinlalla.title')}</h3>

@@ -95,7 +95,7 @@ export default function ContattiSection() {
                     <h4 className="font-semibold text-gray-800 mb-2">Email</h4>
                     <a
                       href="mailto:info@concertoconmammaepapa.it"
-                      className="text-emerald-600 hover:text-emerald-700 transition-colors font-medium"
+                      className="text-emerald-600 hover:text-emerald-700 transition-colors font-medium text-sm sm:text-base break-words"
                     >
                       info@concertoconmammaepapa.it
                     </a>

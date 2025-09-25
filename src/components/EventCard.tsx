@@ -91,7 +91,15 @@ export default function EventCard({ event, className = '' }: EventCardProps) {
           
           <div className="flex items-center text-neutral/70">
             <MapPinIcon className="h-4 w-4 mr-2 text-primary" />
-            <span className="truncate">{event.location}</span>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="truncate hover:text-primary transition-colors duration-200"
+              onClick={(e) => e.stopPropagation()} // Prevent card click when clicking location
+            >
+              {event.location}
+            </a>
           </div>
           
           <div className="flex items-center text-neutral/70">

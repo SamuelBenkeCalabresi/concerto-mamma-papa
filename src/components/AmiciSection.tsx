@@ -142,12 +142,12 @@ export default function AmiciSection() {
             con noi per promuovere l'educazione musicale per l'infanzia, contattaci!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn btn-primary bg-primary hover:bg-primary/80 border-primary">
+            <a href="mailto:info@concertoconmammaepapa.it" className="btn btn-primary bg-primary hover:bg-primary/80 border-primary">
               Proponi una Collaborazione
-            </button>
-            <button className="btn btn-outline btn-primary">
+            </a>
+            <a href="/prenota" className="btn btn-outline btn-primary">
               Scopri i Nostri Progetti
-            </button>
+            </a>
           </div>
         </div>
       </div>

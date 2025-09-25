@@ -143,7 +143,7 @@
     "quickLinks": "Link Rapidi",
     "contact": "Contatti",
     "followUs": "Seguici",
-    "address": "Via della Musica, 123\n00100 Roma, Italia",
+    "address": "",
     "email": "info@concertoconmammaepapa.it",
     "phone": "+39 342 3711750",
     "phone2": "+39 347 0960533",
@@ -365,6 +365,34 @@
       "success": "Messaggio inviato con successo! Ti contatteremo presto.",
       "error": "Errore nell'invio del messaggio. Riprova più tardi."
     }
+  },
+  "EventModal": {
+    "recommendedAge": "Età consigliata:",
+    "years": "anni",
+    "description": "Descrizione",
+    "location": "Luogo",
+    "viewOnGoogleMaps": "Visualizza su Google Maps",
+    "bookNowFooter": "Prenota ora per non perdere questo evento speciale!",
+    "close": "Chiudi",
+    "bookNow": "Prenota Ora",
+    "noDescription": "Nessuna descrizione disponibile"
+  },
+  "CalendarioSection": {
+    "title": "Calendario Eventi",
+    "description": "Scopri tutti i nostri concerti e attività musicali per famiglie con bambini dai 0 ai 5 anni",
+    "filterEvents": "Filtra Eventi",
+    "search": "Cerca",
+    "searchPlaceholder": "Cerca eventi...",
+    "age": "Età",
+    "allAges": "Tutte le età",
+    "availableSeatsOnly": "Solo posti disponibili",
+    "clearFilters": "Pulisci Filtri",
+    "loading": "Caricamento...",
+    "loadingEvents": "Caricamento eventi...",
+    "eventsFound": "Trovati {count} eventi",
+    "noEventsFound": "Nessun evento trovato con i filtri selezionati.",
+    "clickForDetails": "Clicca per vedere i dettagli →",
+    "dateToDefine": "Data da definire"
   },
   "NewsSection": {
     "tag": "News & Aggiornamenti",
