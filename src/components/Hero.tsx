@@ -45,7 +45,9 @@ export default function Hero() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
-                Di Concerto{' '}
+                <span className="bg-gradient-to-r from-green-300 to-blue-400 bg-clip-text text-transparent">
+                  Di Concerto
+                </span>{' '}
                 <span className="bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">
                   con Mamma
                 </span>{' '}

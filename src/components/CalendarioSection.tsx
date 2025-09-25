@@ -75,21 +75,22 @@ export default function CalendarioSection() {
       });
     }
 
+    // COMMENTED OUT - Price filtering temporarily disabled
     // Filter by price
-    if (selectedPrice) {
-      if (selectedPrice === 'free') {
-        filtered = filtered.filter(event => event.isFree || event.price === 0);
-      } else {
-        const [minPrice, maxPrice] = selectedPrice.split('-').map(Number);
-        filtered = filtered.filter(event => {
-          const price = event.price || 0;
-          return price >= minPrice && price <= maxPrice;
-        });
-      }
-    }
+    // if (selectedPrice) {
+    //   if (selectedPrice === 'free') {
+    //     filtered = filtered.filter(event => event.isFree || event.price === 0);
+    //   } else {
+    //     const [minPrice, maxPrice] = selectedPrice.split('-').map(Number);
+    //     filtered = filtered.filter(event => {
+    //       const price = event.price || 0;
+    //       return price >= minPrice && price <= maxPrice;
+    //     });
+    //   }
+    // }
 
     setFilteredEvents(filtered);
-  }, [events, searchTerm, selectedAge, selectedPrice, availableOnly]);
+  }, [events, searchTerm, selectedAge, /* selectedPrice, */ availableOnly]); // selectedPrice removed - price filtering disabled
 
   const getDescriptionText = (description: any) => {
     if (Array.isArray(description)) {
@@ -160,19 +161,7 @@ export default function CalendarioSection() {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Prezzo</label>
-                <select
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                  value={selectedPrice}
-                  onChange={(e) => setSelectedPrice(e.target.value)}
-                >
-                  <option value="">Tutti i prezzi</option>
-                  <option value="free">Gratuiti</option>
-                  <option value="0-15">0-15€</option>
-                  <option value="15-25">15-25€</option>
-                </select>
-              </div>
+              {/* Price filtering temporarily disabled - was here */}
 
               <div>
                 <label className="flex items-center">
@@ -191,7 +180,7 @@ export default function CalendarioSection() {
               onClick={() => {
                 setSearchTerm('');
                 setSelectedAge('');
-                setSelectedPrice('');
+                // setSelectedPrice(''); // COMMENTED OUT - Price filtering disabled
                 setAvailableOnly(true);
               }}
               className="w-full mt-6 px-4 py-2 text-sm text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
@@ -257,12 +246,7 @@ export default function CalendarioSection() {
                           <span className="truncate">{event.location}</span>
                         </div>
                       )}
-                      {event.price !== undefined && (
-                        <div className="flex items-center text-sm text-gray-500">
-                          <span className="w-4 h-4 mr-2 text-center">💰</span>
-                          <span>{event.isFree ? 'Gratuito' : `€${event.price}`}</span>
-                        </div>
-                      )}
+                      {/* Price preview temporarily disabled - was here */}
                     </div>
                     <div className="text-center">
                       <span className="text-emerald-600 text-sm font-medium group-hover:text-emerald-700">

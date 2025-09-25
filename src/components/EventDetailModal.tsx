@@ -8,7 +8,6 @@ import {
   ClockIcon,
   MapPinIcon,
   TicketIcon,
-  CurrencyEuroIcon,
   UserGroupIcon,
   DocumentTextIcon,
   LinkIcon
@@ -128,13 +127,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                     </div>
                   )}
 
-                  {event.price !== undefined && (
-                    <div className="flex items-center text-gray-700">
-                      <CurrencyEuroIcon className="w-5 h-5 mr-3 text-emerald-600 flex-shrink-0" />
-                      <span className="font-medium">Prezzo:</span>
-                      <span className="ml-2">{event.isFree ? 'Gratuito' : `€${event.price}`}</span>
-                    </div>
-                  )}
+                  {/* Price preview temporarily disabled */}
 
                   {event.availableSeats && (
                     <div className="flex items-center text-gray-700">

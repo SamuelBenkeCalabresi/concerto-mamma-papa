@@ -105,7 +105,8 @@ export default function EventCard({ event, className = '' }: EventCardProps) {
         <div className="divider my-4"></div>
         
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          {/* COMMENTED OUT - Price preview temporarily disabled */}
+          {/* <div className="flex items-center">
             {event.isFree ? (
               <span className="text-success font-bold text-lg">
                 Gratuito
@@ -116,8 +117,8 @@ export default function EventCard({ event, className = '' }: EventCardProps) {
                 <span className="font-bold text-lg">€{event.price}</span>
               </div>
             )}
-          </div>
-          
+          </div> */}
+
           <div className="text-right text-xs text-neutral/60">
             {isAvailable ? (
               <span>

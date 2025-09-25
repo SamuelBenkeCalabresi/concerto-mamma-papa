@@ -18,8 +18,7 @@ import {
   XMarkIcon,
   ClockIcon,
   MapPinIcon,
-  TicketIcon,
-  CurrencyEuroIcon
+  TicketIcon
 } from '@heroicons/react/24/outline';
 
 interface BookingFormProps {
@@ -663,13 +662,7 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
                       </div>
                     )}
 
-                    {selectedEventDetails.price !== undefined && (
-                      <div className="flex items-center text-gray-700">
-                        <CurrencyEuroIcon className="w-5 h-5 mr-3 text-emerald-600" />
-                        <span className="font-medium">Prezzo:</span>
-                        <span className="ml-2">{selectedEventDetails.isFree ? 'Gratuito' : `€${selectedEventDetails.price}`}</span>
-                      </div>
-                    )}
+                    {/* Price preview temporarily disabled */}
 
                     {selectedEventDetails.availableSeats && (
                       <div className="flex items-center text-gray-700">

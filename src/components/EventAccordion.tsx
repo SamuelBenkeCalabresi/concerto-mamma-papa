@@ -105,9 +105,7 @@ export default function EventAccordion({ event }: EventAccordionProps) {
               <span className={`badge ${getEventTypeBadgeClass(event.eventType)} text-xs`}>
                 {getEventTypeLabel(event.eventType)}
               </span>
-              {event.price === "EVENTO GRATUITO!" && (
-                <span className="badge badge-success text-xs">Gratuito</span>
-              )}
+              {/* Gratuito badge temporarily disabled */}
               {isSpecialEvent && (
                 <span className="badge badge-accent text-xs">Speciale</span>
               )}
@@ -247,20 +245,7 @@ export default function EventAccordion({ event }: EventAccordionProps) {
                   </div>
                 )}
 
-                {/* Price */}
-                {event.price && (
-                  <div>
-                    <h4 className="font-medium text-neutral mb-2 flex items-center">
-                      <TicketIcon className="h-4 w-4 mr-2 text-primary" />
-                      Costo
-                    </h4>
-                    <div className="text-sm text-neutral/70 ml-6">
-                      <span className={event.price.includes("GRATUITO") ? "text-success font-medium" : ""}>
-                        {event.price}
-                      </span>
-                    </div>
-                  </div>
-                )}
+                {/* Price preview temporarily disabled */}
               </div>
             </div>
 
