@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import { Link } from '@/i18n/routing';
 import { getOpenEvents } from '@/lib/strapi';
 import { MusicalNoteIcon, HeartIcon, UsersIcon, PlayIcon, CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import EventDetailModal from './EventDetailModal';
 
 export default function Hero() {
   const t = useTranslations('Hero');
   const locale = useLocale();
   const [nextEvent, setNextEvent] = useState<any>(null);
   const [loadingEvent, setLoadingEvent] = useState(true);
+  const [showEventModal, setShowEventModal] = useState(false);
 
   useEffect(() => {
     async function fetchNextEvent() {
@@ -279,9 +281,18 @@ export default function Hero() {
                       </p>
                     )}
 
-                    <Link href="/calendario" className="btn btn-primary btn-sm w-full">
-                      {nextEvent ? t('nextConcert.bookNow') : 'Scopri tutti gli eventi'}
-                    </Link>
+                    {nextEvent ? (
+                      <button
+                        onClick={() => setShowEventModal(true)}
+                        className="btn btn-primary btn-sm w-full"
+                      >
+                        {t('nextConcert.bookNow')}
+                      </button>
+                    ) : (
+                      <Link href="/calendario" className="btn btn-primary btn-sm w-full">
+                        Scopri tutti gli eventi
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -326,6 +337,13 @@ export default function Hero() {
           animation: float-delayed 3s ease-in-out infinite 1.5s;
         }
       `}</style>
+
+      {/* Event Detail Modal */}
+      <EventDetailModal
+        event={nextEvent}
+        isOpen={showEventModal}
+        onClose={() => setShowEventModal(false)}
+      />
     </section>
   );
 }
