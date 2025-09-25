@@ -54,8 +54,9 @@ async function loadEvents(locale: string): Promise<Event[]> {
   }
 }
 
-export default async function EventiPage({ params }: any) {
-  const events: Event[] = await loadEvents(params.locale);
+export default async function EventiPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const events: Event[] = await loadEvents(locale);
   const t = await getTranslations('EventsPage');
 
   return (
