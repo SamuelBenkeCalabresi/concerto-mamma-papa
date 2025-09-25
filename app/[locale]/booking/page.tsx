@@ -3,11 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BookingForm from '@/components/BookingForm';
 
-interface BookingPageProps {
-  searchParams: { eventId?: string };
-}
-
-export default async function BookingPage({ searchParams }: BookingPageProps) {
+export default async function BookingPage({ searchParams }: any) {
   const t = await getTranslations();
   
   return (
