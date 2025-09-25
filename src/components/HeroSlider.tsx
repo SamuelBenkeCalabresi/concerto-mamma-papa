@@ -51,6 +51,8 @@ export default function HeroSlider() {
       
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/30"></div>
+
+      {/* Change to gradient colors if better */}
       
       {/* Content */}
       <div className="absolute inset-0 flex items-center justify-center z-10 pt-16">
