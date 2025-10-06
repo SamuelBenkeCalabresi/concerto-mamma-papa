@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import StrapiBlocksRenderer from './StrapiBlocksRenderer';
 import {
   CalendarDaysIcon,
   UserIcon,
@@ -23,9 +24,13 @@ import {
 
 interface BookingFormProps {
   preSelectedEvent?: any;
+  preselectedEventId?: string;
+  availableTimes?: string[];
+  timesSoldOut?: string[];
+  isWaitlist?: boolean;
 }
 
-export default function BookingForm({ preSelectedEvent }: BookingFormProps = {}) {
+export default function BookingForm({ preSelectedEvent, preselectedEventId, availableTimes = [], timesSoldOut = [], isWaitlist = false }: BookingFormProps = {}) {
   const t = useTranslations('Booking');
   
   // Zod validation schema with translations
@@ -38,6 +43,7 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
   const bookingSchema = z.object({
     event: z.string().min(1, t('validation.eventRequired')),
     date: z.string().min(1, t('validation.dateRequired')),
+    time: isWaitlist ? z.string().optional() : z.string().min(1, 'Seleziona un orario'),
     name: z.string().min(2, t('validation.nameRequired')),
     numberOfKids: z.number().min(1, t('validation.kidsMin')).max(3, t('validation.kidsMax')),
     kids: z.array(kidSchema).min(1, t('validation.kidsDataRequired')).max(3, t('validation.kidsMax')),
@@ -45,10 +51,47 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
     email: z.string().email(t('validation.emailInvalid')),
     phone: z.string().min(10, t('validation.phoneInvalid')),
     howDidYouHear: z.string().optional(),
-    website: z.string().optional() // Honeypot field - should be empty
+    website: z.string().optional(), // Honeypot field - should be empty
+    needsReceipt: z.boolean().optional(),
+    codiceFiscale: z.string().optional(),
+    luogoNascita: z.string().optional(),
+    dataNascita: z.string().optional(),
+    indirizzoResidenza: z.string().optional()
   }).refine((data) => data.kids.length === data.numberOfKids, {
     message: t('validation.kidsCountMismatch'),
     path: ["numberOfKids"]
+  }).refine((data) => {
+    if (data.needsReceipt) {
+      return data.codiceFiscale && data.codiceFiscale.length === 16;
+    }
+    return true;
+  }, {
+    message: 'Il codice fiscale deve essere di 16 caratteri quando richiedi la ricevuta',
+    path: ["codiceFiscale"]
+  }).refine((data) => {
+    if (data.needsReceipt) {
+      return data.luogoNascita && data.luogoNascita.length >= 2;
+    }
+    return true;
+  }, {
+    message: 'Il luogo di nascita è obbligatorio quando richiedi la ricevuta',
+    path: ["luogoNascita"]
+  }).refine((data) => {
+    if (data.needsReceipt) {
+      return data.dataNascita && data.dataNascita.length > 0;
+    }
+    return true;
+  }, {
+    message: 'La data di nascita è obbligatoria quando richiedi la ricevuta',
+    path: ["dataNascita"]
+  }).refine((data) => {
+    if (data.needsReceipt) {
+      return data.indirizzoResidenza && data.indirizzoResidenza.length >= 5;
+    }
+    return true;
+  }, {
+    message: 'L\'indirizzo di residenza è obbligatorio quando richiedi la ricevuta',
+    path: ["indirizzoResidenza"]
   });
 
   type BookingFormData = z.infer<typeof bookingSchema>;
@@ -59,6 +102,7 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
   const [showModal, setShowModal] = useState(false);
   const [submittedData, setSubmittedData] = useState<any>(null);
   const [selectedEventDetails, setSelectedEventDetails] = useState<any>(null);
+  const [eventTimes, setEventTimes] = useState<string[]>(availableTimes);
 
   const { 
     register, 
@@ -72,6 +116,7 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
     resolver: zodResolver(bookingSchema),
     defaultValues: {
       event: '',
+      time: '',
       numberOfKids: 1,
       numberOfAdults: 2,
       kids: [{ name: '', birthDate: '', age: 0 }]
@@ -87,22 +132,41 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
 
   // Load available events or use pre-selected event
   React.useEffect(() => {
-    if (preSelectedEvent) {
-      // If we have a pre-selected event, use it and set the form values
-      setEvents([preSelectedEvent]);
-      setValue('event', preSelectedEvent.id.toString());
-      // Use createdAt as date since these events don't have a specific date field
-      setValue('date', new Date().toISOString().split('T')[0]); // Default to today's date
-      setLoadingEvents(false);
-      return;
-    }
-
     const loadEvents = async () => {
       try {
         const { getOpenEvents } = await import('@/lib/strapi');
         const response = await getOpenEvents();
-        
-        setEvents(response.data || []);
+        const fetchedEvents = response.data || [];
+
+        setEvents(fetchedEvents);
+
+        // If we have a preselectedEventId from URL params, set it
+        if (preselectedEventId) {
+          setValue('event', preselectedEventId);
+          // Find the event and set the date if it exists
+          const selectedEvent = fetchedEvents.find((e: any) => e.id.toString() === preselectedEventId);
+          if (selectedEvent) {
+            setSelectedEventDetails(selectedEvent);
+            if (selectedEvent.date) {
+              setValue('date', selectedEvent.date);
+            }
+            // Set available times if the event has them
+            if (selectedEvent.times && selectedEvent.times.length > 0) {
+              setEventTimes(selectedEvent.times);
+            }
+          }
+        } else if (preSelectedEvent) {
+          // If we have a pre-selected event object, use it
+          setValue('event', preSelectedEvent.id.toString());
+          setSelectedEventDetails(preSelectedEvent);
+          if (preSelectedEvent.date) {
+            setValue('date', preSelectedEvent.date);
+          }
+          // Set available times if the event has them
+          if (preSelectedEvent?.times && preSelectedEvent.times.length > 0) {
+            setEventTimes(preSelectedEvent.times);
+          }
+        }
       } catch (error) {
         console.error('Error loading events:', error);
         setEvents([]);
@@ -112,7 +176,7 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
     };
 
     loadEvents();
-  }, [preSelectedEvent, setValue]);
+  }, [preSelectedEvent, preselectedEventId, setValue]);
 
   // Adjust kids array when numberOfKids changes
   React.useEffect(() => {
@@ -151,7 +215,12 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
         phone: data.phone,
         howDidYouHear: data.howDidYouHear || null,
         website: data.website || null, // Honeypot field
-        status: 'pending'
+        status: 'pending',
+        needsReceipt: data.needsReceipt || false,
+        codiceFiscale: data.codiceFiscale || null,
+        luogoNascita: data.luogoNascita || null,
+        dataNascita: data.dataNascita || null,
+        indirizzoResidenza: data.indirizzoResidenza || null
       };
       
       console.log('=== SENDING TO STRAPI ===');
@@ -244,13 +313,14 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
     }, 3000);
   };
 
-  const getDescriptionText = (description: any) => {
+  const renderDescription = (description: any) => {
     if (Array.isArray(description)) {
-      return description.map(block =>
-        block.children?.map((child: any) => child.text).join('') || ''
-      ).join(' ');
+      return <StrapiBlocksRenderer content={description} />;
     }
-    return description || 'Nessuna descrizione disponibile';
+    if (typeof description === 'string') {
+      return <p>{description}</p>;
+    }
+    return <p>Nessuna descrizione disponibile</p>;
   };
 
   return (
@@ -300,16 +370,22 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
               </div>
             ) : (
               <select
-                {...register('event')}
-                disabled={!!preSelectedEvent}
+                {...register('event', {
+                  onChange: (e) => {
+                    const eventId = e.target.value;
+                    const selectedEvent = events.find((event) => event.id.toString() === eventId);
+                    setSelectedEventDetails(selectedEvent || null);
+                  }
+                })}
+                disabled={!!preSelectedEvent || !!preselectedEventId}
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
                   errors.event ? 'border-red-300' : 'border-gray-300'
-                } ${preSelectedEvent ? 'bg-gray-50 cursor-not-allowed' : ''}`}
+                } ${preSelectedEvent || preselectedEventId ? 'bg-gray-50 cursor-not-allowed' : ''}`}
               >
                 <option value="">{t('form.selectEventPlaceholder')}</option>
                 {events.map((event) => (
                   <option key={event.id} value={event.id}>
-                    {event.Title || 'Untitled Event'} - {new Date(event.createdAt).toLocaleDateString()}
+                    {event.Title || 'Untitled Event'} - {event.date ? new Date(event.date).toLocaleDateString('it-IT') : new Date(event.createdAt).toLocaleDateString('it-IT')}
                   </option>
                 ))}
               </select>
@@ -319,8 +395,8 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
             )}
           </div>
 
-          {/* Date Selection */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Date and Time Selection */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <CalendarDaysIcon className="w-4 h-4 inline mr-1" />
@@ -329,16 +405,50 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
               <input
                 type="date"
                 {...register('date')}
-                disabled={!!preSelectedEvent}
+                disabled={!!preSelectedEvent || !!preselectedEventId}
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
                   errors.date ? 'border-red-300' : 'border-gray-300'
-                } ${preSelectedEvent ? 'bg-gray-50 cursor-not-allowed' : ''}`}
+                } ${preSelectedEvent || preselectedEventId ? 'bg-gray-50 cursor-not-allowed' : ''}`}
                 min={new Date().toISOString().split('T')[0]}
               />
               {errors.date && (
                 <p className="mt-1 text-sm text-red-600">{errors.date.message}</p>
               )}
             </div>
+
+            {/* Time Selection */}
+            {!isWaitlist && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <ClockIcon className="w-4 h-4 inline mr-1" />
+                  Orario *
+                </label>
+                {timesSoldOut.length > 0 && (
+                  <div className="mb-2 p-2 bg-yellow-50 border border-yellow-300 rounded text-xs text-yellow-800">
+                    ⚠️ Alcuni orari sono esauriti
+                  </div>
+                )}
+                <select
+                  {...register('time')}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                    errors.time ? 'border-red-300' : 'border-gray-300'
+                  }`}
+                >
+                  <option value="">Seleziona un orario</option>
+                  {eventTimes.map((time, index) => {
+                    const isTimeSoldOut = timesSoldOut.includes(time);
+                    return (
+                      <option key={index} value={time} disabled={isTimeSoldOut}>
+                        {time} {isTimeSoldOut ? '(Esaurito)' : ''}
+                      </option>
+                    );
+                  })}
+                </select>
+                {errors.time && (
+                  <p className="mt-1 text-sm text-red-600">{errors.time.message}</p>
+                )}
+              </div>
+            )}
 
             {/* Name */}
             <div>
@@ -522,6 +632,101 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
             </div>
           </div>
 
+          {/* Receipt Checkbox - Only show if event has receiptAvailable */}
+          {selectedEventDetails?.receiptAvailable && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <label className="flex items-start cursor-pointer">
+                <input
+                  type="checkbox"
+                  {...register('needsReceipt')}
+                  className="mt-1 mr-3 h-5 w-5 text-primary border-gray-300 rounded focus:ring-primary"
+                />
+                <span className="text-sm font-medium text-gray-700">
+                  Desidero avere la ricevuta del pagamento al mio indirizzo email
+                </span>
+              </label>
+            </div>
+          )}
+
+          {/* Conditional Fiscal Fields */}
+          {watch('needsReceipt') && (
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 space-y-4">
+              <p className="text-sm font-medium text-amber-800 mb-4">
+                📋 I seguenti campi sono obbligatori per la ricevuta fiscale:
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Codice Fiscale *
+                  </label>
+                  <input
+                    type="text"
+                    {...register('codiceFiscale')}
+                    maxLength={16}
+                    placeholder="RSSMRA80A01H501U"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                      errors.codiceFiscale ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  />
+                  {errors.codiceFiscale && (
+                    <p className="mt-1 text-sm text-red-600">{errors.codiceFiscale.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Luogo di Nascita *
+                  </label>
+                  <input
+                    type="text"
+                    {...register('luogoNascita')}
+                    placeholder="Roma"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                      errors.luogoNascita ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  />
+                  {errors.luogoNascita && (
+                    <p className="mt-1 text-sm text-red-600">{errors.luogoNascita.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Data di Nascita *
+                  </label>
+                  <input
+                    type="date"
+                    {...register('dataNascita')}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                      errors.dataNascita ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  />
+                  {errors.dataNascita && (
+                    <p className="mt-1 text-sm text-red-600">{errors.dataNascita.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Indirizzo di Residenza *
+                  </label>
+                  <input
+                    type="text"
+                    {...register('indirizzoResidenza')}
+                    placeholder="Via Roma 123, Milano"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                      errors.indirizzoResidenza ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  />
+                  {errors.indirizzoResidenza && (
+                    <p className="mt-1 text-sm text-red-600">{errors.indirizzoResidenza.message}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* How did you hear */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -564,22 +769,26 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
               className={`w-full py-4 px-6 rounded-lg font-medium transition-all duration-200 shadow-lg ${
                 isSubmitting
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700 hover:transform hover:scale-[1.02] active:scale-[0.98]'
+                  : isWaitlist
+                    ? 'bg-yellow-600 hover:bg-yellow-700 hover:transform hover:scale-[1.02] active:scale-[0.98]'
+                    : 'bg-blue-600 hover:bg-blue-700 hover:transform hover:scale-[1.02] active:scale-[0.98]'
               } text-white focus:ring-4 focus:ring-blue-600/20`}
             >
               {isSubmitting ? (
                 <div className="flex items-center justify-center">
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                  {t('form.submitting')}
+                  {isWaitlist ? 'Invio in corso...' : t('form.submitting')}
                 </div>
               ) : (
-                t('form.submit')
+                isWaitlist ? 'Iscriviti alla Lista d\'Attesa' : t('form.submit')
               )}
             </button>
           </div>
 
           <div className="text-center text-sm text-gray-500 pt-4">
-            {t('form.confirmation')}
+            {isWaitlist
+              ? 'Riceverai una conferma via email. Ti contatteremo se si liberano posti.'
+              : t('form.confirmation')}
           </div>
         </form>
       </div>
@@ -676,9 +885,9 @@ export default function BookingForm({ preSelectedEvent }: BookingFormProps = {})
                   {selectedEventDetails.Description && (
                     <div className="mt-4">
                       <h5 className="font-semibold text-gray-900 mb-2">Descrizione:</h5>
-                      <p className="text-gray-700 leading-relaxed">
-                        {getDescriptionText(selectedEventDetails.Description)}
-                      </p>
+                      <div className="text-gray-700 leading-relaxed prose prose-sm max-w-none">
+                        {renderDescription(selectedEventDetails.Description)}
+                      </div>
                     </div>
                   )}
                 </div>

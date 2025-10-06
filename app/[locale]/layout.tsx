@@ -20,7 +20,7 @@ const msMadi = Ms_Madi({
 
 export const metadata: Metadata = {
   title: "di Concerto con Mamma e Papà",
-  description: "Musica classica per tutta la famiglia. Concerti pensati appositamente per famiglie con bambini dai 0 ai 6 anni.",
+  description: "Attività musicale interattiva per tutta la famiglia. Concerti pensati appositamente per famiglie con bambini dai 0 ai 5 anni.",
 };
 
 export default async function LocaleLayout({

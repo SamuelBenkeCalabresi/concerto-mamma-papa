@@ -125,7 +125,7 @@ export default async function AnnamariaPage() {
               <p>
               {locale === 'en' ? 
                 'In 2012 she founded Concerts with Mom and Dad, a musical initiative dedicated to children from zero to five years old collaborating with Organizations and Associations of Rome (Roma Capitale, Cultural Department of the Municipality of Campagnano, XV Municipality of Rome, Nota Bene Association, Musica Nova Association) and in Apulia (Cultural Department and Municipal Library of Monopoli).' :
-                'Nel 2012 ha fondato Di Concerto con Mamma e Papà, un\'iniziativa musicale dedicata ai bambini da zero a cinque anni collaborando con Enti e Associazioni di Roma (Roma Capitale, Assessorato alla Cultura del Comune di Campagnano, XV Municipio di Roma, Associazione Nota Bene, Associazione Musica Nova) e in Puglia (Assessorato alla Cultura e Biblioteca comunale di Monopoli).'
+                'Nel 2012 ha fondato di Concerto con Mamma e Papà ®, un\'iniziativa musicale dedicata ai bambini da zero a cinque anni collaborando con Enti e Associazioni di Roma (Roma Capitale, Assessorato alla Cultura del Comune di Campagnano, XV Municipio di Roma, Associazione Nota Bene, Associazione Musica Nova) e in Puglia (Assessorato alla Cultura e Biblioteca comunale di Monopoli).'
               }
               </p>
             </div>

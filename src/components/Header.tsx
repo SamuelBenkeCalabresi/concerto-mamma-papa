@@ -83,13 +83,13 @@ export default function Header() {
               <div className="relative h-22 w-22 hidden sm:block">
                 <Image
                   src="/images/logo_diconcerto.jpg"
-                  alt="Di Concerto con Mamma e Papà"
+                  alt="di Concerto con Mamma e Papà"
                   fill
                   className="object-contain rounded"
                 />
               </div>
               <span className="text-2xl sm:text-2xl font-bold text-primary" style={{ fontFamily: "var(--font-ms-madi), cursive" }}>
-                Di Concerto con Mamma e Papà
+                di Concerto con Mamma e Papà ®
               </span>
             </Link>
           </div>
@@ -137,13 +137,15 @@ export default function Header() {
                     </div>
                   </div>
                 ) : (
-                  <Link 
+                  <Link
                     key={item.name}
-                    href={item.href} 
+                    href={item.href}
                     className={`font-medium px-2 py-2 text-xs 2xl:text-sm rounded-lg transition-all duration-200 whitespace-nowrap ${
-                      isActive(item.href, item.anchor) 
-                        ? 'text-primary bg-primary/10 font-semibold' 
-                        : 'text-neutral hover:text-primary hover:bg-primary/5'
+                      item.href === '/prenota'
+                        ? 'bg-gradient-to-r from-emerald-600 to-blue-600 text-white hover:from-emerald-700 hover:to-blue-700 shadow-md hover:shadow-lg'
+                        : isActive(item.href, item.anchor)
+                          ? 'text-primary bg-primary/10 font-semibold'
+                          : 'text-neutral hover:text-primary hover:bg-primary/5'
                     }`}
                   >
                     {item.name}
@@ -220,9 +222,11 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={`block py-2 px-3 text-sm rounded-lg font-medium transition-colors duration-200 ${
-                      isActive(item.href, item.anchor)
-                        ? 'text-primary bg-primary/10 font-semibold'
-                        : 'text-neutral hover:text-primary hover:bg-primary/5'
+                      item.href === '/prenota'
+                        ? 'bg-gradient-to-r from-emerald-600 to-blue-600 text-white hover:from-emerald-700 hover:to-blue-700 shadow-md'
+                        : isActive(item.href, item.anchor)
+                          ? 'text-primary bg-primary/10 font-semibold'
+                          : 'text-neutral hover:text-primary hover:bg-primary/5'
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >

@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BookingForm from '@/components/BookingForm';
+import EventDetailModal from '@/components/EventDetailModal';
 import { getOpenEvents } from '@/lib/strapi';
-import { 
+import {
   CalendarDaysIcon,
   MusicalNoteIcon,
   UserGroupIcon,
@@ -17,6 +18,8 @@ import {
 export default function PrenotaPage() {
   const t = useTranslations('Booking');
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
+  const [showEventModal, setShowEventModal] = useState(false);
+  const [modalEvent, setModalEvent] = useState<any>(null);
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -45,6 +48,16 @@ export default function PrenotaPage() {
 
   const handleBackToEvents = () => {
     setSelectedEvent(null);
+  };
+
+  const handleEventClick = (event: any) => {
+    setModalEvent(event);
+    setShowEventModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowEventModal(false);
+    setModalEvent(null);
   };
   
   return (
@@ -203,9 +216,13 @@ export default function PrenotaPage() {
                     };
 
                     return (
-                      <div key={event.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
+                      <div
+                        key={event.id}
+                        className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 border border-gray-200 cursor-pointer group"
+                        onClick={() => handleEventClick(event)}
+                      >
                         <div className="p-6">
-                          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                          <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
                             {event.Title || 'Untitled Event'}
                           </h3>
                           <p className="text-gray-600 mb-4 line-clamp-3">
@@ -213,17 +230,15 @@ export default function PrenotaPage() {
                           </p>
                           <div className="space-y-2 mb-4">
                             <div className="flex items-center text-sm text-gray-500">
-                              <CalendarDaysIcon className="w-4 h-4 mr-2" />
-                              <span>{new Date(event.createdAt).toLocaleDateString()}</span>
+                              <CalendarDaysIcon className="w-4 h-4 mr-2 text-emerald-600" />
+                              <span>{event.date ? new Date(event.date).toLocaleDateString('it-IT') : 'Data da definire'}</span>
                             </div>
                           </div>
-                          <button 
-                            onClick={() => handleEventSelect(event)}
-                            className="inline-block w-full text-center bg-emerald-600 text-white px-4 py-3 rounded-md hover:bg-emerald-700 transition-colors font-medium"
-                          >
-                            {t('eventsSection.bookThisEvent')}
-
-                          </button>
+                          <div className="text-center">
+                            <span className="text-emerald-600 text-sm font-medium group-hover:text-emerald-700">
+                              Clicca per vedere i dettagli →
+                            </span>
+                          </div>
                         </div>
                       </div>
                     );
@@ -234,7 +249,14 @@ export default function PrenotaPage() {
           )}
         </div>
       </section>
-      
+
+      {/* Event Detail Modal */}
+      <EventDetailModal
+        event={modalEvent}
+        isOpen={showEventModal}
+        onClose={handleCloseModal}
+      />
+
       <Footer />
     </main>
   );

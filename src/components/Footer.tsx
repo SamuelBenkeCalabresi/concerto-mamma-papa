@@ -119,18 +119,10 @@ export default function Footer() {
               <div className="space-y-4">
                 <div className="flex items-start">
                   <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg mr-3 mt-0.5 flex-shrink-0">
-                    <MapPinIcon className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="text-white/80 text-sm whitespace-pre-line">
-                    {t('address')}
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg mr-3 mt-0.5 flex-shrink-0">
                     <EnvelopeIcon className="h-4 w-4 text-white" />
                   </div>
-                  <a 
-                    href={`mailto:${t('email')}`} 
+                  <a
+                    href={`mailto:${t('email')}`}
                     className="text-white/80 hover:text-white transition-colors text-sm break-all"
                   >
                     {t('email')}
@@ -140,8 +132,8 @@ export default function Footer() {
                   <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg mr-3 flex-shrink-0">
                     <PhoneIcon className="h-4 w-4 text-white" />
                   </div>
-                  <a 
-                    href={`tel:${t('phone')}`} 
+                  <a
+                    href={`tel:${t('phone')}`}
                     className="text-white/80 hover:text-white transition-colors text-sm"
                   >
                     {t('phone')}
@@ -151,8 +143,8 @@ export default function Footer() {
                   <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg mr-3 flex-shrink-0">
                     <PhoneIcon className="h-4 w-4 text-white" />
                   </div>
-                  <a 
-                    href={`tel:${t('phone')}`} 
+                  <a
+                    href={`tel:${t('phone')}`}
                     className="text-white/80 hover:text-white transition-colors text-sm"
                   >
                     {t('phone2')}

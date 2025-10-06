@@ -108,13 +108,13 @@ export default function Hero() {
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
                 <span className="bg-gradient-to-r from-green-300 to-blue-400 bg-clip-text text-transparent">
-                  Di Concerto
+                  di Concerto
                 </span>{' '}
                 <span className="bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">
                   con Mamma
                 </span>{' '}
                 <span className="bg-gradient-to-r from-teal-300 to-blue-300 bg-clip-text text-transparent">
-                  e Papà
+                  e Papà ®
                 </span>
               </h1>
 
@@ -227,56 +227,69 @@ export default function Hero() {
                 
                 {/* Next Concert Info */}
                 <div className="text-center">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-4">
-                    <h3 className="font-semibold text-white mb-3 flex items-center justify-center gap-2">
-                      <CalendarDaysIcon className="h-5 w-5" />
-                      {t('nextConcert.title')}
-                    </h3>
+                  <div className="bg-gradient-to-br from-emerald-500/20 via-teal-500/20 to-blue-500/20 backdrop-blur-md rounded-2xl p-6 mb-4 border-2 border-white/30 shadow-2xl">
+                    <div className="bg-gradient-to-r from-emerald-400 to-blue-400 rounded-lg p-1 mb-4">
+                      <div className="bg-white/10 backdrop-blur-sm rounded-lg py-2">
+                        <h3 className="font-bold text-white text-lg flex items-center justify-center gap-2">
+                          <CalendarDaysIcon className="h-6 w-6" />
+                          {t('nextConcert.title')}
+                        </h3>
+                      </div>
+                    </div>
 
                     {loadingEvent ? (
-                      <div className="flex items-center justify-center py-4">
-                        <div className="animate-spin w-6 h-6 border-2 border-white border-t-transparent rounded-full"></div>
+                      <div className="flex items-center justify-center py-8">
+                        <div className="animate-spin w-8 h-8 border-3 border-white border-t-transparent rounded-full"></div>
                       </div>
                     ) : nextEvent ? (
                       <>
-                        <p className="text-blue-200 font-bold text-xl mb-1">
+                        <p className="text-white font-bold text-2xl mb-3 leading-tight">
                           {nextEvent.Title || nextEvent.title || nextEvent.attributes?.title || 'Prossimo Evento'}
                         </p>
-                        <p className="text-white/90 font-medium mb-1">
-                          {(nextEvent.date || nextEvent.attributes?.date) ?
-                            new Date(nextEvent.date || nextEvent.attributes?.date).toLocaleDateString('it-IT', {
-                              weekday: 'long',
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric'
-                            }) :
-                            'Data da definire'
-                          }
-                        </p>
-                        {(nextEvent.time || nextEvent.attributes?.time) && (
-                          <p className="text-white/80 text-sm mb-1">
-                            Ore {nextEvent.time || nextEvent.attributes?.time}
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4 space-y-2">
+                          <p className="text-white font-semibold text-base">
+                            📅 {(nextEvent.date || nextEvent.attributes?.date) ?
+                              new Date(nextEvent.date || nextEvent.attributes?.date).toLocaleDateString('it-IT', {
+                                weekday: 'long',
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                              }) :
+                              'Data da definire'
+                            }
                           </p>
-                        )}
-                        {(nextEvent.location || nextEvent.attributes?.location) ? (
-                          <a
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nextEvent.location || nextEvent.attributes?.location)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-white/70 hover:text-blue-200 text-sm flex items-center justify-center gap-1 mb-3 transition-colors duration-200"
-                          >
-                            <MapPinIcon className="h-4 w-4" />
-                            {nextEvent.location || nextEvent.attributes?.location}
-                          </a>
-                        ) : (
-                          <p className="text-white/70 text-sm flex items-center justify-center gap-1 mb-3">
-                            <MapPinIcon className="h-4 w-4" />
-                            Luogo da definire
-                          </p>
-                        )}
+                          {((nextEvent.times && nextEvent.times.length > 0) || nextEvent.attributes?.times?.length > 0) && (
+                            <div className="text-white/90 font-medium">
+                              <p className="mb-1">🕒 Orari disponibili:</p>
+                              <div className="flex flex-wrap gap-2 justify-center">
+                                {(nextEvent.times || nextEvent.attributes?.times || []).map((time: string, index: number) => (
+                                  <span key={index} className="bg-white/20 px-2 py-1 rounded text-sm">
+                                    {time}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {(nextEvent.location || nextEvent.attributes?.location) ? (
+                            <a
+                              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nextEvent.location || nextEvent.attributes?.location)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-white/90 hover:text-white font-medium flex items-center justify-center gap-2 transition-colors duration-200"
+                            >
+                              <MapPinIcon className="h-5 w-5" />
+                              {nextEvent.location || nextEvent.attributes?.location}
+                            </a>
+                          ) : (
+                            <p className="text-white/80 font-medium flex items-center justify-center gap-2">
+                              <MapPinIcon className="h-5 w-5" />
+                              Luogo da definire
+                            </p>
+                          )}
+                        </div>
                       </>
                     ) : (
-                      <p className="text-white/70 text-center mb-3">
+                      <p className="text-white/90 text-center mb-4 py-6 text-lg">
                         Nessun evento in programma
                       </p>
                     )}
@@ -284,13 +297,13 @@ export default function Hero() {
                     {nextEvent ? (
                       <button
                         onClick={() => setShowEventModal(true)}
-                        className="btn btn-primary btn-sm w-full"
+                        className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base"
                       >
-                        {t('nextConcert.bookNow')}
+                        {t('nextConcert.bookNow')} →
                       </button>
                     ) : (
-                      <Link href="/calendario" className="btn btn-primary btn-sm w-full">
-                        Scopri tutti gli eventi
+                      <Link href="/calendario" className="block w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base">
+                        Scopri tutti gli eventi →
                       </Link>
                     )}
                   </div>

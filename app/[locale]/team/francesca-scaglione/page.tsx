@@ -178,7 +178,7 @@ export default async function FrancescaPage() {
               <p>
                 {locale === 'en' ?
                   'This experience leads her to develop a form even more congenial to her that in 2015 finds the right breath in "Concerts with Mom and Dad", the show group with which she currently carries out an intense musical activity.' :
-                  'Questa esperienza la porta a maturare una forma a lei ancora più congeniale che nel 2015 trova il giusto respiro in Di Concerto con mamma e papà, il gruppo spettacolo con il quale attualmente svolge una intensa attività musicale.'
+                  'Questa esperienza la porta a maturare una forma a lei ancora più congeniale che nel 2015 trova il giusto respiro in di Concerto con mamma e papà, il gruppo spettacolo con il quale attualmente svolge una intensa attività musicale.'
                 }
               </p>
               

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import StrapiBlocksRenderer from './StrapiBlocksRenderer';
 // import EventMap from './EventMap'; // Temporarily disabled
 import {
   XMarkIcon,
@@ -11,7 +12,8 @@ import {
   // TicketIcon, // Temporarily disabled
   UserGroupIcon,
   DocumentTextIcon,
-  LinkIcon
+  LinkIcon,
+  ExclamationTriangleIcon
 } from '@heroicons/react/24/outline';
 
 interface EventDetailModalProps {
@@ -33,13 +35,14 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
     };
   }, [isOpen]);
 
-  const getDescriptionText = (description: any) => {
+  const renderDescription = (description: any) => {
     if (Array.isArray(description)) {
-      return description.map(block =>
-        block.children?.map((child: any) => child.text).join('') || ''
-      ).join(' ');
+      return <StrapiBlocksRenderer content={description} />;
     }
-    return description || t('noDescription');
+    if (typeof description === 'string') {
+      return <p>{description}</p>;
+    }
+    return <p>{t('noDescription')}</p>;
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -49,6 +52,10 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
   };
 
   if (!isOpen || !event) return null;
+
+  // Check if event is sold out (global or all times sold out)
+  const isSoldOut = event.soldOut || (event.times && event.timesSoldOut && event.times.length > 0 && event.times.every((time: string) => event.timesSoldOut?.includes(time)));
+  const hasSoldOutTimes = event.timesSoldOut && event.timesSoldOut.length > 0;
 
   const handleLocandinaView = () => {
     if (event.locandina?.url) {
@@ -89,6 +96,28 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
 
         {/* Modal Content */}
         <div className="p-4 md:p-6 flex-1 overflow-y-auto">
+          {/* SoldOut Warning */}
+          {(isSoldOut || hasSoldOutTimes) && (
+            <div className={`mb-6 p-4 rounded-lg border-2 ${isSoldOut ? 'bg-red-50 border-red-300' : 'bg-yellow-50 border-yellow-300'}`}>
+              <div className="flex items-start">
+                <ExclamationTriangleIcon className={`w-6 h-6 mr-3 flex-shrink-0 ${isSoldOut ? 'text-red-600' : 'text-yellow-600'}`} />
+                <div>
+                  {isSoldOut ? (
+                    <>
+                      <h4 className="font-bold text-red-900 mb-1">Evento Esaurito</h4>
+                      <p className="text-red-800 text-sm">Tutti i posti per questo evento sono esauriti. Puoi iscriverti alla lista d'attesa.</p>
+                    </>
+                  ) : (
+                    <>
+                      <h4 className="font-bold text-yellow-900 mb-1">Alcuni Orari Esauriti</h4>
+                      <p className="text-yellow-800 text-sm">Alcuni orari per questo evento sono esauriti. Seleziona un orario disponibile.</p>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Column - Event Details */}
             <div className="space-y-6">
@@ -106,11 +135,29 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                     <span className="ml-2">{event.date ? new Date(event.date).toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Data da definire'}</span>
                   </div>
 
-                  {event.time && (
-                    <div className="flex items-center text-gray-700">
-                      <ClockIcon className="w-5 h-5 mr-3 text-emerald-600 flex-shrink-0" />
-                      <span className="font-medium">Orario:</span>
-                      <span className="ml-2">{event.time}</span>
+                  {(event.times && event.times.length > 0) && (
+                    <div className="flex items-start text-gray-700">
+                      <ClockIcon className="w-5 h-5 mr-3 text-emerald-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <span className="font-medium">Orari disponibili:</span>
+                        <div className="ml-2 flex flex-wrap gap-2 mt-1">
+                          {event.times.map((time: string, index: number) => {
+                            const isTimeSoldOut = event.timesSoldOut?.includes(time);
+                            return (
+                              <span
+                                key={index}
+                                className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                                  isTimeSoldOut
+                                    ? 'bg-red-100 text-red-800 line-through opacity-60'
+                                    : 'bg-emerald-100 text-emerald-800'
+                                }`}
+                              >
+                                {time} {isTimeSoldOut && '(Esaurito)'}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
                   )}
 
@@ -150,9 +197,9 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                     <DocumentTextIcon className="w-5 h-5 mr-2 text-emerald-600" />
                     {t('description')}
                   </h3>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                    {getDescriptionText(event.Description)}
-                  </p>
+                  <div className="text-gray-700 leading-relaxed prose prose-sm max-w-none">
+                    {renderDescription(event.Description)}
+                  </div>
                 </div>
               )}
 
@@ -238,12 +285,21 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
               >
                 {t('close')}
               </button>
-              <a
-                href="/prenota"
-                className="bg-emerald-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-emerald-700 transition-colors font-medium flex-1 md:flex-initial text-center"
-              >
-                {t('bookNow')}
-              </a>
+              {isSoldOut ? (
+                <a
+                  href={`/booking?eventId=${event.id}&eventTitle=${encodeURIComponent(event.Title || '')}&eventDate=${encodeURIComponent(event.date || '')}&eventLocation=${encodeURIComponent(event.location || '')}&eventTimes=${encodeURIComponent(JSON.stringify(event.times || []))}&waitlist=true&soldOut=true`}
+                  className="bg-yellow-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-yellow-700 transition-colors font-medium flex-1 md:flex-initial text-center"
+                >
+                  Lista d'Attesa
+                </a>
+              ) : (
+                <a
+                  href={`/booking?eventId=${event.id}&eventTitle=${encodeURIComponent(event.Title || '')}&eventDate=${encodeURIComponent(event.date || '')}&eventLocation=${encodeURIComponent(event.location || '')}&eventTimes=${encodeURIComponent(JSON.stringify(event.times || []))}&timesSoldOut=${encodeURIComponent(JSON.stringify(event.timesSoldOut || []))}`}
+                  className="bg-emerald-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-emerald-700 transition-colors font-medium flex-1 md:flex-initial text-center"
+                >
+                  {t('bookNow')}
+                </a>
+              )}
             </div>
           </div>
         </div>
