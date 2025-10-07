@@ -207,6 +207,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
       const bookingData = {
         event: parseInt(data.event),
         date: data.date,
+        selectedTime: data.time,
         parentName: data.name,
         numberOfKids: data.numberOfKids,
         kids: data.kids,
@@ -220,7 +221,8 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
         codiceFiscale: data.codiceFiscale || null,
         luogoNascita: data.luogoNascita || null,
         dataNascita: data.dataNascita || null,
-        indirizzoResidenza: data.indirizzoResidenza || null
+        indirizzoResidenza: data.indirizzoResidenza || null,
+        isWaitlist: isWaitlist
       };
       
       console.log('=== SENDING TO STRAPI ===');
@@ -798,15 +800,24 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
         <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50 p-0 md:p-4">
           <div className="bg-white w-full h-full md:w-auto md:h-auto md:rounded-2xl shadow-2xl md:max-w-4xl md:max-h-[95vh] overflow-y-auto flex flex-col modal-enter">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-emerald-600 to-blue-600 text-white p-6 md:rounded-t-2xl flex-shrink-0">
+            <div className={`bg-gradient-to-r ${isWaitlist ? 'from-orange-500 to-red-600' : 'from-emerald-600 to-blue-600'} text-white p-6 md:rounded-t-2xl flex-shrink-0`}>
               <div className="flex justify-between items-start">
                 <div className="flex-1 pr-4">
                   <div className="flex items-center mb-2">
-                    <CheckCircleIcon className="w-8 h-8 mr-3 flex-shrink-0" />
-                    <h2 className="text-xl md:text-2xl font-bold">Prenotazione Confermata!</h2>
+                    {isWaitlist ? (
+                      <ClockIcon className="w-8 h-8 mr-3 flex-shrink-0" />
+                    ) : (
+                      <CheckCircleIcon className="w-8 h-8 mr-3 flex-shrink-0" />
+                    )}
+                    <h2 className="text-xl md:text-2xl font-bold">
+                      {isWaitlist ? 'Iscrizione alla Lista d\'Attesa Confermata!' : 'Prenotazione Confermata!'}
+                    </h2>
                   </div>
-                  <p className="text-emerald-100 text-sm md:text-base">
-                    La tua prenotazione è stata inviata con successo. Riceverai una conferma via email.
+                  <p className={`${isWaitlist ? 'text-orange-100' : 'text-emerald-100'} text-sm md:text-base`}>
+                    {isWaitlist
+                      ? 'Sei stato iscritto alla lista d\'attesa. Ti contatteremo appena si liberano posti disponibili.'
+                      : 'La tua prenotazione è stata inviata con successo. Riceverai una conferma via email.'
+                    }
                   </p>
                 </div>
                 <button

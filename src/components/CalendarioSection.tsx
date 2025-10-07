@@ -24,8 +24,6 @@ export default function CalendarioSection() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [showEventModal, setShowEventModal] = useState(false);
-  const [searchByZone, setSearchByZone] = useState(true);
-  const [selectedZone, setSelectedZone] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
@@ -51,19 +49,11 @@ export default function CalendarioSection() {
   useEffect(() => {
     let filtered = [...events];
 
-    // Filter by search term (Comune or general search)
+    // Filter by search term (event name or location)
     if (searchTerm) {
       filtered = filtered.filter(event =>
         event.Title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        getDescriptionText(event.Description)?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    // Filter by zone
-    if (selectedZone) {
-      filtered = filtered.filter(event =>
-        event.location?.toLowerCase().includes(selectedZone.toLowerCase())
+        event.location?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -96,7 +86,7 @@ export default function CalendarioSection() {
     }
 
     setFilteredEvents(filtered);
-  }, [events, searchTerm, selectedZone, selectedDate, selectedAge, availableOnly]);
+  }, [events, searchTerm, selectedDate, selectedAge, availableOnly]);
 
   const getDescriptionText = (description: any) => {
     if (Array.isArray(description)) {
@@ -137,84 +127,20 @@ export default function CalendarioSection() {
               <h3 className="font-semibold text-lg text-gray-900">Filtra Eventi</h3>
             </div>
 
-            {/* Search Mode Toggle */}
+            {/* Search Input */}
             <div className="mb-6">
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                <button
-                  onClick={() => {
-                    setSearchByZone(true);
-                    setSearchTerm('');
-                  }}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
-                    searchByZone
-                      ? 'bg-emerald-600 text-white shadow-md'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                >
-                  Ricerca per Zona
-                </button>
-                <button
-                  onClick={() => {
-                    setSearchByZone(false);
-                    setSelectedZone('');
-                  }}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
-                    !searchByZone
-                      ? 'bg-emerald-600 text-white shadow-md'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                >
-                  Ricerca Libera
-                </button>
-              </div>
-
-              {/* Label and Toggle Link on Same Row */}
-              <div className="flex justify-between items-center mb-2">
-                <label className="text-sm font-medium text-gray-700">
-                  {searchByZone ? 'Zona di Ricerca' : 'Comune'}
-                </label>
-                <button
-                  onClick={() => {
-                    setSearchByZone(!searchByZone);
-                    setSearchTerm('');
-                    setSelectedZone('');
-                  }}
-                  className="text-xs text-emerald-600 hover:text-emerald-700 font-medium"
-                >
-                  {searchByZone ? 'Passa a Ricerca per Comune →' : '← Passa a Ricerca per Zona'}
-                </button>
-              </div>
-
-              {/* Search Fields with Same Size */}
-              <div className="grid grid-cols-1 gap-3">
-                {searchByZone ? (
-                  <div className="flex items-center px-4 py-3 bg-emerald-50 border-2 border-emerald-300 rounded-lg min-h-[48px]">
-                    <MapPinIcon className="w-5 h-5 mr-2 text-emerald-600 flex-shrink-0" />
-                    <select
-                      className="flex-1 bg-transparent border-none focus:ring-0 focus:outline-none text-gray-700 font-medium cursor-pointer"
-                      value={selectedZone}
-                      onChange={(e) => setSelectedZone(e.target.value)}
-                    >
-                      <option value="">Seleziona una zona</option>
-                      <option value="Milano">Milano</option>
-                      <option value="Monza">Monza</option>
-                      <option value="Brianza">Brianza</option>
-                      <option value="Como">Como</option>
-                      <option value="Lecco">Lecco</option>
-                    </select>
-                  </div>
-                ) : (
-                  <div className="relative min-h-[48px]">
-                    <MagnifyingGlassIcon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder="Cerca per comune..."
-                      className="w-full h-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                  </div>
-                )}
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Cerca Evento
+              </label>
+              <div className="relative">
+                <MagnifyingGlassIcon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Cerca per nome evento o luogo..."
+                  className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
               </div>
             </div>
 
@@ -262,7 +188,6 @@ export default function CalendarioSection() {
             <button
               onClick={() => {
                 setSearchTerm('');
-                setSelectedZone('');
                 setSelectedDate('');
                 setSelectedAge('');
                 setAvailableOnly(true);
