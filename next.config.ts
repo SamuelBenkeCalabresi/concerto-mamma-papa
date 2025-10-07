@@ -4,6 +4,8 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Add /web base path to maintain old website URLs
+  basePath: '/web',
   // Ignore TypeScript errors during build
   typescript: {
     ignoreBuildErrors: true,
