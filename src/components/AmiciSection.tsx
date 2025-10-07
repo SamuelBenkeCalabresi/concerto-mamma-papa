@@ -67,12 +67,12 @@ export default function AmiciSection() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-16">
+      {/* <div className="text-center mb-16">
         <h2 className="text-4xl font-bold text-neutral mb-4">
           I Nostri Amici
         </h2>
         <p className="text-lg text-neutral/70 max-w-3xl mx-auto">
-          Collaboriamo con istituzioni, scuole e realtà culturali del territorio per offrire 
+          Collaboriamo con istituzioni, scuole e realtà culturali del territorio per offrire
           esperienze musicali sempre più ricche e coinvolgenti per le famiglie.
         </p>
       </div>
@@ -84,7 +84,6 @@ export default function AmiciSection() {
             className="group cursor-pointer transform hover:scale-105 transition-all duration-300"
           >
             <div className="bg-gradient-to-br from-white to-primary/5 rounded-2xl shadow-lg hover:shadow-xl border border-primary/10 hover:border-primary/30 overflow-hidden transition-all duration-300">
-              {/* Logo Section */}
               <div className="relative h-40 overflow-hidden">
                 <div className={`w-full h-full bg-gradient-to-br ${getCategoryColor(partner.category)} flex items-center justify-center`}>
                   <div className="text-center text-primary">
@@ -97,7 +96,6 @@ export default function AmiciSection() {
                 </div>
               </div>
 
-              {/* Content Section */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-bold text-neutral group-hover:text-primary transition-colors duration-300">
@@ -115,10 +113,10 @@ export default function AmiciSection() {
                 {partner.website && (
                   <div className="flex items-center text-primary text-sm font-medium group-hover:text-primary/80 transition-colors duration-300">
                     Visita il sito
-                    <svg 
-                      className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
+                    <svg
+                      className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -129,7 +127,7 @@ export default function AmiciSection() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Partnership CTA */}
       <div className="text-center">
