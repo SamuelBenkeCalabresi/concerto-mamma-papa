@@ -30,7 +30,41 @@ export default function PrenotaPage() {
         setLoading(true);
         const data = await getOpenEvents();
         console.log('Events fetched in prenota:', data);
-        setEvents(data.data || []);
+        const allEvents = data.data || [];
+
+        // Filter out events that are not bookable or have passed
+        const bookableEvents = allEvents.filter((event: any) => {
+          // Check if booking is disabled
+          if (event.bookingEnabled === false) {
+            return false;
+          }
+
+          // Check if event date has passed
+          if (event.date) {
+            // Get today's date as a string in YYYY-MM-DD format
+            const today = new Date();
+            const todayStr = today.toISOString().split('T')[0];
+
+            // Get event date as string in YYYY-MM-DD format
+            const eventDateStr = event.date.split('T')[0];
+
+            // Compare date strings
+            if (eventDateStr < todayStr) {
+              return false;
+            }
+          }
+
+          return true;
+        });
+
+        // Sort events by date (closest to today first)
+        bookableEvents.sort((a: any, b: any) => {
+          const dateA = a.date ? new Date(a.date).getTime() : Infinity;
+          const dateB = b.date ? new Date(b.date).getTime() : Infinity;
+          return dateA - dateB;
+        });
+
+        setEvents(bookableEvents);
       } catch (err) {
         console.error('Failed to fetch events:', err);
         setError('Error loading events. Please try again later.');
@@ -38,7 +72,7 @@ export default function PrenotaPage() {
         setLoading(false);
       }
     }
-    
+
     fetchEvents();
   }, []);
 

@@ -32,7 +32,8 @@ interface BookingFormProps {
 
 export default function BookingForm({ preSelectedEvent, preselectedEventId, availableTimes = [], timesSoldOut = [], isWaitlist = false }: BookingFormProps = {}) {
   const t = useTranslations('Booking');
-  
+  const [selectedEventDetails, setSelectedEventDetails] = useState<any>(null);
+
   // Zod validation schema with translations
   const kidSchema = z.object({
     name: z.string().min(2, t('validation.nameMin')),
@@ -54,6 +55,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
     website: z.string().optional(), // Honeypot field - should be empty
     needsReceipt: z.boolean().optional(),
     codiceFiscale: z.string().optional(),
+    codiceFiscaleEvent: z.string().optional(),
     luogoNascita: z.string().optional(),
     dataNascita: z.string().optional(),
     indirizzoResidenza: z.string().optional()
@@ -92,6 +94,15 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
   }, {
     message: 'L\'indirizzo di residenza è obbligatorio quando richiedi la ricevuta',
     path: ["indirizzoResidenza"]
+  }).refine((data) => {
+    // Validate codiceFiscaleEvent if the event requires it
+    if (selectedEventDetails?.requireCodiceFiscale) {
+      return data.codiceFiscaleEvent && data.codiceFiscaleEvent.length === 16;
+    }
+    return true;
+  }, {
+    message: 'Il codice fiscale è obbligatorio per questo evento e deve essere di 16 caratteri',
+    path: ["codiceFiscaleEvent"]
   });
 
   type BookingFormData = z.infer<typeof bookingSchema>;
@@ -101,7 +112,6 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [submittedData, setSubmittedData] = useState<any>(null);
-  const [selectedEventDetails, setSelectedEventDetails] = useState<any>(null);
   const [eventTimes, setEventTimes] = useState<string[]>(availableTimes);
 
   const { 
@@ -218,7 +228,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
         website: data.website || null, // Honeypot field
         status: 'pending',
         needsReceipt: data.needsReceipt || false,
-        codiceFiscale: data.codiceFiscale || null,
+        codiceFiscale: data.codiceFiscaleEvent || data.codiceFiscale || null,
         luogoNascita: data.luogoNascita || null,
         dataNascita: data.dataNascita || null,
         indirizzoResidenza: data.indirizzoResidenza || null,
@@ -633,6 +643,27 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
               )}
             </div>
           </div>
+
+          {/* Codice Fiscale - Only show if event requires it */}
+          {selectedEventDetails?.requireCodiceFiscale && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Codice Fiscale *
+              </label>
+              <input
+                type="text"
+                {...register('codiceFiscaleEvent')}
+                maxLength={16}
+                placeholder="RSSMRA80A01H501U"
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                  errors.codiceFiscaleEvent ? 'border-red-300' : 'border-gray-300'
+                }`}
+              />
+              {errors.codiceFiscaleEvent && (
+                <p className="mt-1 text-sm text-red-600">{errors.codiceFiscaleEvent.message}</p>
+              )}
+            </div>
+          )}
 
           {/* Receipt Checkbox - Only show if event has receiptAvailable */}
           {selectedEventDetails?.receiptAvailable && (

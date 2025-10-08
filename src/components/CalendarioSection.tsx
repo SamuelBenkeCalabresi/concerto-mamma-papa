@@ -33,7 +33,7 @@ export default function CalendarioSection() {
         const data = await getOpenEvents();
         console.log('Events fetched in calendario:', data);
         setEvents(data.data || []);
-        setFilteredEvents(data.data || []);
+        // Don't set filteredEvents here - let the filter effect handle it
       } catch (err) {
         console.error('Failed to fetch events:', err);
         setError('Error loading events. Please try again later.');
@@ -48,6 +48,31 @@ export default function CalendarioSection() {
   // Filter events based on selected criteria
   useEffect(() => {
     let filtered = [...events];
+
+    // Filter out events that are not bookable or have passed
+    filtered = filtered.filter(event => {
+      // Check if booking is disabled
+      if (event.bookingEnabled === false) {
+        return false;
+      }
+
+      // Check if event date has passed
+      if (event.date) {
+        // Get today's date as a string in YYYY-MM-DD format
+        const today = new Date();
+        const todayStr = today.toISOString().split('T')[0];
+
+        // Get event date as string in YYYY-MM-DD format
+        const eventDateStr = event.date.split('T')[0];
+
+        // Compare date strings
+        if (eventDateStr < todayStr) {
+          return false;
+        }
+      }
+
+      return true;
+    });
 
     // Filter by search term (event name or location)
     if (searchTerm) {
@@ -84,6 +109,13 @@ export default function CalendarioSection() {
         }
       });
     }
+
+    // Sort events by date (closest to today first)
+    filtered.sort((a, b) => {
+      const dateA = a.date ? new Date(a.date).getTime() : Infinity;
+      const dateB = b.date ? new Date(b.date).getTime() : Infinity;
+      return dateA - dateB;
+    });
 
     setFilteredEvents(filtered);
   }, [events, searchTerm, selectedDate, selectedAge, availableOnly]);

@@ -17,4 +17,5 @@ export interface Event {
   image?: string;
   featured?: boolean;
   tags?: string[];
+  bookingEnabled?: boolean;
 }
