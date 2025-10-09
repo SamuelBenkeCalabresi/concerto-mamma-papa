@@ -24,12 +24,12 @@ export default function HeroSlider() {
     },
     {
       id: 2,
-      src: '/images/hero-slider-1.jpg',
+      src: '/images/slide_ensemble_2.jpg',
       alt: 'Concerto con Mamma e Papà 2'
     },
     {
       id: 3,
-      src: '/images/hero-slider-1.jpg',
+      src: '/images/galleria/7752b171-ff34-474b-942e-cd3c3f758b35.jpg',
       alt: 'Concerto con Mamma e Papà 3'
     }
   ];

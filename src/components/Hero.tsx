@@ -28,34 +28,43 @@ export default function Hero() {
           const now = new Date();
           console.log('📅 Current date:', now.toISOString());
 
-          // Process all events to understand the data structure
-          const processedEvents = events.map((event: any) => {
-            const eventDate = new Date(event.date || event.attributes?.date || event.createdAt || event.attributes?.createdAt);
-            console.log('🎭 Event:', {
-              title: event.title || event.attributes?.title || event.Title,
-              date: event.date || event.attributes?.date,
-              createdAt: event.createdAt || event.attributes?.createdAt,
-              processedDate: eventDate.toISOString()
-            });
-            return {
-              ...event,
-              eventDate
-            };
+          // Filter events by date and booking status
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          const bookableEvents = events.filter((event: any) => {
+            // Check if booking is enabled
+            if (event.bookingEnabled === false) {
+              return false;
+            }
+
+            // Check if event has a valid date
+            const eventDate = event.date || event.attributes?.date;
+            if (!eventDate) {
+              return false;
+            }
+
+            // Check if event date has not passed
+            const eventDateObj = new Date(eventDate);
+            eventDateObj.setHours(0, 0, 0, 0);
+
+            return eventDateObj >= today;
           });
 
-          // Sort all events by date (newest first)
-          const sortedEvents = processedEvents.sort((a: any, b: any) => b.eventDate.getTime() - a.eventDate.getTime());
+          console.log('📊 Bookable upcoming events:', bookableEvents.length);
 
-          // First try to find upcoming events
-          const upcomingEvents = sortedEvents.filter((event: any) => event.eventDate >= now);
+          if (bookableEvents.length > 0) {
+            // Sort by date ascending (closest event first)
+            bookableEvents.sort((a: any, b: any) => {
+              const dateA = new Date(a.date || a.attributes?.date).getTime();
+              const dateB = new Date(b.date || b.attributes?.date).getTime();
+              return dateA - dateB;
+            });
 
-          if (upcomingEvents.length > 0) {
-            console.log('✅ Found upcoming events:', upcomingEvents.length);
-            setNextEvent(upcomingEvents[0]);
+            console.log('✅ Next event:', bookableEvents[0].Title || bookableEvents[0].title);
+            setNextEvent(bookableEvents[0]);
           } else {
-            console.log('⚠️ No upcoming events, showing most recent event');
-            // If no upcoming events, show the most recent event
-            setNextEvent(sortedEvents[0]);
+            console.log('⚠️ No upcoming bookable events');
           }
         } else {
           console.log('❌ No events found in API response');
