@@ -29,7 +29,7 @@ export default function HeroSlider() {
     },
     {
       id: 3,
-      src: '/images/galleria/7752b171-ff34-474b-942e-cd3c3f758b35.jpg',
+      src: '/images/locandina-horizontal.png',
       alt: 'Concerto con Mamma e Papà 3'
     }
   ];

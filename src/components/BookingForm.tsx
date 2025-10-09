@@ -684,9 +684,14 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
           {/* Conditional Fiscal Fields */}
           {watch('needsReceipt') && (
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 space-y-4">
-              <p className="text-sm font-medium text-amber-800 mb-4">
-                📋 I seguenti campi sono obbligatori per la ricevuta fiscale:
-              </p>
+              <div className="mb-4">
+                <p className="text-sm font-medium text-amber-800 mb-2">
+                  📋 I seguenti campi sono obbligatori per la ricevuta fiscale:
+                </p>
+                <p className="text-sm font-semibold text-gray-700 bg-amber-100 px-3 py-2 rounded-md border border-amber-300">
+                  ℹ️ I dati richiesti sono relativi all'adulto che prenota
+                </p>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>

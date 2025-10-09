@@ -127,10 +127,18 @@ export default function Hero() {
                 </span>
               </h1>
 
-              <p className="text-base text-white/80 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-base text-white/80 mb-6 max-w-3xl leading-relaxed">
                 {t('description')}
               </p>
-              
+
+              {/* Quote */}
+              <blockquote className="border-l-4 border-emerald-300/50 pl-4 py-2 mb-10 max-w-3xl">
+                <p className="text-sm italic text-white/70 leading-relaxed">
+                  "Portate comodità, lasciate a casa l'idea che "deve stare fermo": qui si ascolta, si canta piano, si muove il corpo, si sta insieme. Sono quei minuti che restano. E, fidatevi, gli occhi dei piccoli quando la musica parte, parlano più di qualsiasi didascalia."
+                </p>
+                <footer className="text-xs text-white/60 mt-2">— S. Lombardo - Roma03</footer>
+              </blockquote>
+
               {/* Features */}
               <div className="grid grid-cols-3 gap-6 text-center lg:text-left">
                 <div className="flex flex-col items-center lg:items-start">
