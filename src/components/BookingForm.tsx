@@ -28,9 +28,10 @@ interface BookingFormProps {
   availableTimes?: string[];
   timesSoldOut?: string[];
   isWaitlist?: boolean;
+  isExpired?: boolean;
 }
 
-export default function BookingForm({ preSelectedEvent, preselectedEventId, availableTimes = [], timesSoldOut = [], isWaitlist = false }: BookingFormProps = {}) {
+export default function BookingForm({ preSelectedEvent, preselectedEventId, availableTimes = [], timesSoldOut = [], isWaitlist = false, isExpired = false }: BookingFormProps = {}) {
   const t = useTranslations('Booking');
   const locale = useLocale();
   const [selectedEventDetails, setSelectedEventDetails] = useState<any>(null);
@@ -345,7 +346,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
           </div>
         )}
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className={`space-y-6 ${isExpired ? 'opacity-75 pointer-events-none' : ''}`}>
           {/* Event Selection */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -664,9 +665,6 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
           {watch('needsReceipt') && (
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 space-y-4">
               <div className="mb-4">
-                <p className="text-sm font-medium text-amber-800 mb-2">
-                  📋 Campi per la ricevuta fiscale:
-                </p>
                 <p className="text-sm font-semibold text-gray-700 bg-amber-100 px-3 py-2 rounded-md border border-amber-300">
                   ℹ️ I dati seguenti sono relativi all’adulto di riferimento
                 </p>
@@ -845,17 +843,19 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
               </label>
             </div>
 
-            {/* Causale prominente */}
-            <div className="mt-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4">
-              <p className="text-sm font-bold text-yellow-900 mb-2">
-                ⚠️ {t('form.paymentMethod.importantNote')}
-              </p>
-              <div className="bg-white rounded-md p-3 border border-yellow-300">
-                <p className="text-base font-bold text-gray-900 text-center">
-                  "{t('form.paymentMethod.causale', { childName: watch('kids')?.[0]?.name || t('form.paymentMethod.causalePlaceholder') })}"
+            {/* Causale prominente - Only show if bonifico is selected */}
+            {watch('paymentMethod') === 'bonifico' && (
+              <div className="mt-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4">
+                <p className="text-sm font-bold text-yellow-900 mb-2">
+                  ⚠️ {t('form.paymentMethod.importantNote')}
                 </p>
+                <div className="bg-white rounded-md p-3 border border-yellow-300">
+                  <p className="text-base font-bold text-gray-900 text-center">
+                    "{t('form.paymentMethod.causale', { childName: watch('kids')?.[0]?.name || t('form.paymentMethod.causalePlaceholder') })}"
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* How did you hear */}
@@ -911,30 +911,41 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
 
           {/* Submit Button */}
           <div className="pt-6 border-t border-gray-200">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full py-4 px-6 rounded-lg font-medium transition-all duration-200 shadow-lg ${
-                isSubmitting
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : isWaitlist
-                    ? 'bg-yellow-600 hover:bg-yellow-700 hover:transform hover:scale-[1.02] active:scale-[0.98]'
-                    : 'bg-blue-600 hover:bg-blue-700 hover:transform hover:scale-[1.02] active:scale-[0.98]'
-              } text-white focus:ring-4 focus:ring-blue-600/20`}
-            >
-              {isSubmitting ? (
+            {isExpired ? (
+              <div className="w-full py-4 px-6 rounded-lg font-medium bg-gray-400 text-white text-center cursor-not-allowed opacity-75">
                 <div className="flex items-center justify-center">
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                  {isWaitlist ? 'Invio in corso...' : t('form.submitting')}
+                  <ExclamationTriangleIcon className="w-5 h-5 mr-2" />
+                  Evento Scaduto - Prenotazioni Chiuse
                 </div>
-              ) : (
-                isWaitlist ? 'Iscriviti alla Lista d\'Attesa' : t('form.submit')
-              )}
-            </button>
+              </div>
+            ) : (
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full py-4 px-6 rounded-lg font-medium transition-all duration-200 shadow-lg ${
+                  isSubmitting
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : isWaitlist
+                      ? 'bg-yellow-600 hover:bg-yellow-700 hover:transform hover:scale-[1.02] active:scale-[0.98]'
+                      : 'bg-blue-600 hover:bg-blue-700 hover:transform hover:scale-[1.02] active:scale-[0.98]'
+                } text-white focus:ring-4 focus:ring-blue-600/20`}
+              >
+                {isSubmitting ? (
+                  <div className="flex items-center justify-center">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                    {isWaitlist ? 'Invio in corso...' : t('form.submitting')}
+                  </div>
+                ) : (
+                  isWaitlist ? 'Iscriviti alla Lista d\'Attesa' : t('form.submit')
+                )}
+              </button>
+            )}
           </div>
 
           <div className="text-center text-sm text-gray-500 pt-4">
-            {isWaitlist
+            {isExpired
+              ? 'Questo evento è già passato. Per visualizzare gli eventi attuali, visita la sezione Calendario.'
+              : isWaitlist
               ? 'Riceverai una conferma via email. Ti contatteremo se si liberano posti.'
               : t('form.confirmation')}
           </div>

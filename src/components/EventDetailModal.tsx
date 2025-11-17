@@ -53,6 +53,9 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
 
   if (!isOpen || !event) return null;
 
+  // Check if event has expired
+  const isExpired = event.date && new Date(event.date).toISOString().split('T')[0] < new Date().toISOString().split('T')[0];
+
   // Check if event is sold out (global or all times sold out)
   const isSoldOut = event.soldOut || (event.times && event.timesSoldOut && event.times.length > 0 && event.times.every((time: string) => event.timesSoldOut?.includes(time)));
   const hasSoldOutTimes = event.timesSoldOut && event.timesSoldOut.length > 0;
@@ -96,8 +99,23 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
 
         {/* Modal Content */}
         <div className="p-4 md:p-6 flex-1 overflow-y-auto">
+          {/* Expired Warning */}
+          {isExpired && (
+            <div className="mb-6 bg-gray-100 border-l-4 border-gray-600 p-4 rounded-r-lg">
+              <div className="flex items-start">
+                <ExclamationTriangleIcon className="w-6 h-6 text-gray-600 mr-3 flex-shrink-0" />
+                <div>
+                  <h3 className="font-bold text-gray-800 mb-1">Evento Scaduto</h3>
+                  <p className="text-gray-700 text-sm">
+                    Questo evento è già passato e non è più possibile prenotare.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* SoldOut Warning */}
-          {(isSoldOut || hasSoldOutTimes) && (
+          {!isExpired && (isSoldOut || hasSoldOutTimes) && (
             <div className={`mb-6 p-4 rounded-lg border-2 ${isSoldOut ? 'bg-red-50 border-red-300' : 'bg-yellow-50 border-yellow-300'}`}>
               <div className="flex items-start">
                 <ExclamationTriangleIcon className={`w-6 h-6 mr-3 flex-shrink-0 ${isSoldOut ? 'text-red-600' : 'text-yellow-600'}`} />
@@ -276,7 +294,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
         <div className="bg-gray-50 px-4 md:px-6 py-4 md:rounded-b-2xl flex-shrink-0">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-600 text-center md:text-left">
-              {t('bookNowFooter')}
+              {isExpired ? 'Questo evento è già passato' : t('bookNowFooter')}
             </p>
             <div className="flex gap-3 w-full md:w-auto">
               <button
@@ -285,20 +303,22 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
               >
                 {t('close')}
               </button>
-              {isSoldOut ? (
-                <a
-                  href={`/booking?eventId=${event.id}&eventTitle=${encodeURIComponent(event.Title || '')}&eventDate=${encodeURIComponent(event.date || '')}&eventLocation=${encodeURIComponent(event.location || '')}&eventTimes=${encodeURIComponent(JSON.stringify(event.times || []))}&waitlist=true&soldOut=true`}
-                  className="bg-yellow-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-yellow-700 transition-colors font-medium flex-1 md:flex-initial text-center"
-                >
-                  Lista d'Attesa
-                </a>
-              ) : (
-                <a
-                  href={`/booking?eventId=${event.id}&eventTitle=${encodeURIComponent(event.Title || '')}&eventDate=${encodeURIComponent(event.date || '')}&eventLocation=${encodeURIComponent(event.location || '')}&eventTimes=${encodeURIComponent(JSON.stringify(event.times || []))}&timesSoldOut=${encodeURIComponent(JSON.stringify(event.timesSoldOut || []))}`}
-                  className="bg-emerald-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-emerald-700 transition-colors font-medium flex-1 md:flex-initial text-center"
-                >
-                  {t('bookNow')}
-                </a>
+              {!isExpired && (
+                isSoldOut ? (
+                  <a
+                    href={`/booking?eventId=${event.id}&eventTitle=${encodeURIComponent(event.Title || '')}&eventDate=${encodeURIComponent(event.date || '')}&eventLocation=${encodeURIComponent(event.location || '')}&eventTimes=${encodeURIComponent(JSON.stringify(event.times || []))}&waitlist=true&soldOut=true`}
+                    className="bg-yellow-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-yellow-700 transition-colors font-medium flex-1 md:flex-initial text-center"
+                  >
+                    Lista d'Attesa
+                  </a>
+                ) : (
+                  <a
+                    href={`/booking?eventId=${event.id}&eventTitle=${encodeURIComponent(event.Title || '')}&eventDate=${encodeURIComponent(event.date || '')}&eventLocation=${encodeURIComponent(event.location || '')}&eventTimes=${encodeURIComponent(JSON.stringify(event.times || []))}&timesSoldOut=${encodeURIComponent(JSON.stringify(event.timesSoldOut || []))}`}
+                    className="bg-emerald-600 text-white px-6 py-3 md:py-2 rounded-lg hover:bg-emerald-700 transition-colors font-medium flex-1 md:flex-initial text-center"
+                  >
+                    {t('bookNow')}
+                  </a>
+                )
               )}
             </div>
           </div>

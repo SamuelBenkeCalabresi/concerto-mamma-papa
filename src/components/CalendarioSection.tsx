@@ -49,28 +49,12 @@ export default function CalendarioSection() {
   useEffect(() => {
     let filtered = [...events];
 
-    // Filter out events that are not bookable or have passed
+    // Filter out events that have booking explicitly disabled
     filtered = filtered.filter(event => {
-      // Check if booking is disabled
+      // Only filter out if booking is explicitly disabled
       if (event.bookingEnabled === false) {
         return false;
       }
-
-      // Check if event date has passed
-      if (event.date) {
-        // Get today's date as a string in YYYY-MM-DD format
-        const today = new Date();
-        const todayStr = today.toISOString().split('T')[0];
-
-        // Get event date as string in YYYY-MM-DD format
-        const eventDateStr = event.date.split('T')[0];
-
-        // Compare date strings
-        if (eventDateStr < todayStr) {
-          return false;
-        }
-      }
-
       return true;
     });
 
@@ -268,10 +252,20 @@ export default function CalendarioSection() {
           {!loading && !error && filteredEvents.length > 0 && (
             <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
               {filteredEvents.map((event: any) => {
+                // Check if event has passed
+                const isExpired = event.date && new Date(event.date).toISOString().split('T')[0] < new Date().toISOString().split('T')[0];
                 const isSoldOut = event.soldOut || (event.times && event.timesSoldOut && event.times.length > 0 && event.times.every((time: string) => event.timesSoldOut?.includes(time)));
+
                 return (
-                  <div key={event.id} className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] border-2 ${isSoldOut ? 'border-red-300' : 'border-gray-200'} cursor-pointer group relative`}>
-                    {isSoldOut && (
+                  <div key={event.id} className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] border-2 ${isExpired ? 'border-gray-400 opacity-75' : isSoldOut ? 'border-red-300' : 'border-gray-200'} cursor-pointer group relative`}>
+                    {isExpired && (
+                      <div className="absolute top-4 right-4 z-10">
+                        <span className="bg-gray-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                          SCADUTO
+                        </span>
+                      </div>
+                    )}
+                    {!isExpired && isSoldOut && (
                       <div className="absolute top-4 right-4 z-10">
                         <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                           ESAURITO
@@ -279,27 +273,27 @@ export default function CalendarioSection() {
                       </div>
                     )}
                     <div className="p-8" onClick={() => handleEventClick(event)}>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors">
+                      <h3 className={`text-2xl font-bold mb-4 transition-colors ${isExpired ? 'text-gray-600' : 'text-gray-900 group-hover:text-emerald-600'}`}>
                         {event.Title || 'Untitled Event'}
                       </h3>
                       <p className="text-gray-600 mb-6 line-clamp-3 text-base leading-relaxed">
                         {getDescriptionText(event.Description)}
                       </p>
                       <div className="space-y-3 mb-6">
-                        <div className="flex items-center text-base text-gray-700 bg-emerald-50 p-3 rounded-lg">
-                          <CalendarDaysIcon className="w-5 h-5 mr-3 text-emerald-600 flex-shrink-0" />
+                        <div className={`flex items-center text-base p-3 rounded-lg ${isExpired ? 'text-gray-600 bg-gray-50' : 'text-gray-700 bg-emerald-50'}`}>
+                          <CalendarDaysIcon className={`w-5 h-5 mr-3 flex-shrink-0 ${isExpired ? 'text-gray-500' : 'text-emerald-600'}`} />
                           <span className="font-medium">{event.date ? new Date(event.date).toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Data da definire'}</span>
                         </div>
                         {event.location && (
-                          <div className="flex items-center text-base text-gray-700 bg-blue-50 p-3 rounded-lg">
-                            <MapPinIcon className="w-5 h-5 mr-3 text-blue-600 flex-shrink-0" />
+                          <div className={`flex items-center text-base p-3 rounded-lg ${isExpired ? 'text-gray-600 bg-gray-50' : 'text-gray-700 bg-blue-50'}`}>
+                            <MapPinIcon className={`w-5 h-5 mr-3 flex-shrink-0 ${isExpired ? 'text-gray-500' : 'text-blue-600'}`} />
                             <span className="font-medium">{event.location}</span>
                           </div>
                         )}
                       </div>
                       <div className="text-center pt-4 border-t border-gray-200">
-                        <span className={`text-base font-semibold inline-flex items-center gap-2 ${isSoldOut ? 'text-red-600' : 'text-emerald-600 group-hover:text-emerald-700'}`}>
-                          {isSoldOut ? 'Evento Esaurito - Lista d\'Attesa' : 'Clicca per vedere i dettagli'}
+                        <span className={`text-base font-semibold inline-flex items-center gap-2 ${isExpired ? 'text-gray-600' : isSoldOut ? 'text-red-600' : 'text-emerald-600 group-hover:text-emerald-700'}`}>
+                          {isExpired ? 'Evento Scaduto' : isSoldOut ? 'Evento Esaurito - Lista d\'Attesa' : 'Clicca per vedere i dettagli'}
                           <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                           </svg>
