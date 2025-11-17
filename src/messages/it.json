@@ -33,7 +33,7 @@
       }
     },
     "nextConcert": {
-      "title": "Prossimo Concerto",
+      "title": "Prossima Attività Musicale",
       "event": "Primavera Musicale",
       "date": "Sabato 15 Marzo 2024",
       "location": "Teatro Comunale - ore 16:00",
@@ -41,14 +41,14 @@
     },
     "video": {
       "watchTitle": "Guarda il Video",
-      "watchDescription": "Scopri la magia dei nostri concerti attraverso momenti reali delle nostre performance",
-      "liveExamples": "Esempi di concerti dal vivo",
+      "watchDescription": "Scopri la magia delle nostre attività musicali attraverso momenti reali delle nostre performance",
+      "liveExamples": "Esempi di attività musicali dal vivo",
       "notAvailable": "Video non disponibile",
       "browserNotSupported": "Il tuo browser non supporta i video HTML5."
     }
   },
   "Events": {
-    "title": "Prossimi Concerti",
+    "title": "Prossime Attività Musicali",
     "subtitle": "I nostri eventi dedicati alle famiglie",
     "bookNow": "Prenota",
     "soldOut": "Sold Out",
@@ -62,15 +62,15 @@
     "errorLoading": "Errore nel caricamento degli eventi. Riprova più tardi."
   },
   "Booking": {
-    "title": "Prenotazione Concerti",
-    "subtitle": "Prenota il Tuo Posto al Concerto",
+    "title": "Prenotazione Attività Musicali",
+    "subtitle": "Prenota il Tuo Posto all'Attività Musicale",
     "description": "Compila tutti i campi richiesti per garantire la tua partecipazione",
     "warning": "In caso di raggiungimento del limite massimo di prenotazioni non è possibile garantire la partecipazione per tutti e sarete tempestivamente avvisati della non disponibilità dei posti prenotati.",
     "requiredNote": "I campi contrassegnati con * sono obbligatori.",
     "features": {
       "chooseDate": "Scegli Data",
-      "addFamily": "Aggiungi Famiglia", 
-      "enjoyConcert": "Goditi il Concerto"
+      "addFamily": "Aggiungi Famiglia",
+      "enjoyConcert": "Goditi l'Attività Musicale"
     },
     "eventsSection": {
       "selectTitle": "Seleziona un Evento per Prenotare",
@@ -86,8 +86,8 @@
       "selectEvent": "Seleziona Evento *",
       "selectEventPlaceholder": "Scegli l'evento per cui prenotare",
       "date": "Scegli una data *",
-      "parentName": "Nome e Cognome *",
-      "parentNamePlaceholder": "Il tuo nome e cognome",
+      "parentName": "Aggiungi Nome e Cognome di un adulto accompagnatore *",
+      "parentNamePlaceholder": "Nome e Cognome di un adulto accompagnatore",
       "email": "Email *",
       "emailPlaceholder": "tua@email.com",
       "phone": "Telefono *",
@@ -104,6 +104,7 @@
       "howDidYouHear": "Come hai saputo dell'iniziativa?",
       "howDidYouHearOptions": {
         "select": "Seleziona un'opzione",
+        "coupon": "Ho ricevuto un Coupon Regalo",
         "facebook": "Facebook",
         "instagram": "Instagram",
         "friends": "Amici/Conoscenti",
@@ -114,7 +115,17 @@
       },
       "submit": "Invia Prenotazione",
       "submitting": "Invio in corso...",
-      "confirmation": "Riceverai una conferma via email entro 24 ore"
+      "confirmation": "Riceverai una conferma via email entro 24 ore",
+      "gdprNotice": "Inviando questo modulo, acconsenti al trattamento dei tuoi dati personali secondo la nostra",
+      "privacyPolicyLink": "Privacy Policy",
+      "paymentMethod": {
+        "title": "Modalità di Pagamento",
+        "cash": "Pagherò in contanti",
+        "bankTransfer": "Pagherò con bonifico",
+        "importantNote": "IMPORTANTE - Causale del bonifico:",
+        "causale": "di Concerto con mamma e papà + {childName}",
+        "causalePlaceholder": "[cognome e nome bambino/a]"
+      }
     },
     "validation": {
       "eventRequired": "Selezione evento è obbligatoria",
@@ -138,8 +149,8 @@
     }
   },
   "Footer": {
-    "brandTitle": "Concerti con Mamma e Papà",
-    "brandDescription": "Attività musicale interattiva per tutta la famiglia. Concerti pensati appositamente per famiglie con bambini dai 0 ai 5 anni.",
+    "brandTitle": "di Concerto con Mamma e Papà",
+    "brandDescription": "Attività musicale interattiva per tutta la famiglia. Attività musicali pensate appositamente per famiglie con bambini dai 0 ai 5 anni.",
     "quickLinks": "Link Rapidi",
     "contact": "Contatti",
     "followUs": "Seguici",
@@ -272,7 +283,7 @@
     "titleHighlight": "Coupon",
     "subtitle": "Come partecipare a \"di Concerto con Mamma e Papà\"",
     "features": [
-      "Concerti per famiglie con bambini 0-5 anni",
+      "Attività musicali per famiglie con bambini 0-5 anni",
       "Esperienze musicali interattive uniche",
       "Momenti speciali da condividere insieme"
     ],
@@ -323,7 +334,7 @@
     "tag": "I Nostri Momenti",
     "title": "Galleria",
     "titleHighlight": "Fotografica",
-    "description": "Scopri i momenti magici dei nostri concerti attraverso le immagini che catturano la gioia e la meraviglia di bambini e famiglie",
+    "description": "Scopri i momenti magici delle nostre attività musicali attraverso le immagini che catturano la gioia e la meraviglia di bambini e famiglie",
     "viewModes": {
       "carousel": "Carousel",
       "grid": "Griglia"
@@ -333,7 +344,7 @@
   "ContattiSection": {
     "title": "Contatta",
     "titleHighlight": "ci",
-    "description": "Mettiti in contatto con noi per informazioni sui concerti, corsi o per prenotare la tua partecipazione",
+    "description": "Mettiti in contatto con noi per informazioni sulle attività musicali, corsi o per prenotare la tua partecipazione",
     "formTitle": "Inviaci un Messaggio",
     "form": {
       "name": "Nome",
@@ -379,7 +390,7 @@
   },
   "CalendarioSection": {
     "title": "Calendario Eventi",
-    "description": "Scopri tutti i nostri concerti e attività musicali per famiglie con bambini dai 0 ai 5 anni",
+    "description": "Scopri tutte le nostre attività musicali per famiglie con bambini dai 0 ai 5 anni",
     "filterEvents": "Filtra Eventi",
     "search": "Cerca",
     "searchPlaceholder": "Cerca eventi...",
@@ -420,6 +431,109 @@
     "noEvents": {
       "title": "Nessun evento trovato",
       "description": "Non siamo riusciti a caricare gli eventi. Riprova più tardi."
+    }
+  },
+  "CookieConsent": {
+    "title": "Informativa sui Cookie",
+    "description": "Utilizziamo cookie e tecnologie simili per migliorare la tua esperienza sul nostro sito. Accettando, acconsenti all'uso di cookie per preferenze e analisi. Puoi saperne di più nella nostra",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "and": "e",
+    "accept": "Accetta",
+    "reject": "Rifiuta"
+  },
+  "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Ultimo aggiornamento: {date}",
+    "sections": {
+      "intro": {
+        "title": "Introduzione",
+        "content": "di Concerto con Mamma e Papà rispetta la tua privacy e si impegna a proteggere i tuoi dati personali. Questa Privacy Policy ti informa su come raccogliamo, utilizziamo e proteggiamo le tue informazioni quando utilizzi il nostro sito web e i nostri servizi."
+      },
+      "dataCollection": {
+        "title": "Dati che Raccogliamo",
+        "content": "Quando prenoti un'attività musicale tramite il nostro modulo di prenotazione, raccogliamo:",
+        "items": [
+          "Nome e cognome del genitore/accompagnatore",
+          "Email e numero di telefono",
+          "Dati dei bambini partecipanti (nome, data di nascita, età)",
+          "Numero di adulti accompagnatori",
+          "Dati fiscali (solo se richiedi la ricevuta): cognome, nome, codice fiscale, luogo e data di nascita, residenza, CAP, città"
+        ]
+      },
+      "dataUse": {
+        "title": "Come Utilizziamo i Tuoi Dati",
+        "content": "Utilizziamo i tuoi dati esclusivamente per:",
+        "items": [
+          "Gestire le prenotazioni per le attività musicali",
+          "Inviarti conferme e comunicazioni relative agli eventi prenotati",
+          "Emettere ricevute fiscali quando richieste",
+          "Migliorare i nostri servizi",
+          "Rispettare obblighi legali e fiscali"
+        ]
+      },
+      "dataStorage": {
+        "title": "Conservazione dei Dati",
+        "content": "I tuoi dati personali sono conservati in modo sicuro nel nostro database Strapi. Conserviamo i dati per il tempo necessario a fornire i nostri servizi e per rispettare gli obblighi di legge (ad esempio, conservazione dati fiscali per 10 anni)."
+      },
+      "userRights": {
+        "title": "I Tuoi Diritti",
+        "content": "Ai sensi del GDPR, hai diritto di:",
+        "items": [
+          "Accedere ai tuoi dati personali",
+          "Richiedere la correzione di dati inesatti",
+          "Richiedere la cancellazione dei tuoi dati",
+          "Opporti al trattamento dei tuoi dati",
+          "Richiedere la portabilità dei dati",
+          "Revocare il consenso in qualsiasi momento"
+        ]
+      },
+      "contact": {
+        "title": "Contattaci",
+        "content": "Per esercitare i tuoi diritti o per qualsiasi domanda sulla privacy, contattaci a: info@concertoconmammaepapa.it"
+      }
+    }
+  },
+  "CookiePolicy": {
+    "title": "Cookie Policy",
+    "lastUpdated": "Ultimo aggiornamento: {date}",
+    "sections": {
+      "intro": {
+        "title": "Cosa sono i Cookie",
+        "content": "I cookie sono piccoli file di testo che vengono memorizzati sul tuo dispositivo quando visiti un sito web. Vengono utilizzati per far funzionare i siti web in modo più efficiente e per fornire informazioni ai proprietari del sito."
+      },
+      "cookiesWeUse": {
+        "title": "Cookie che Utilizziamo",
+        "essential": {
+          "title": "Cookie Essenziali",
+          "description": "Questi cookie sono necessari per il funzionamento del sito:",
+          "items": [
+            "Cookie di sessione: per mantenere la tua sessione attiva",
+            "Cookie di preferenze lingua: per ricordare la lingua selezionata (it/en)",
+            "Cookie di consenso: per ricordare la tua scelta sui cookie"
+          ]
+        },
+        "functional": {
+          "title": "Cookie Funzionali",
+          "description": "Questi cookie migliorano l'esperienza dell'utente:",
+          "items": [
+            "SessionStorage per popup: ricorda se hai già visto il popup del voucher (solo durante la sessione)"
+          ]
+        }
+      },
+      "noCookies": {
+        "title": "Cosa NON Utilizziamo",
+        "content": "Attualmente NON utilizziamo:",
+        "items": [
+          "Cookie di tracciamento o analytics (Google Analytics, ecc.)",
+          "Cookie di marketing o pubblicitari",
+          "Cookie di terze parti per profilazione"
+        ]
+      },
+      "manageCookies": {
+        "title": "Come Gestire i Cookie",
+        "content": "Puoi controllare e/o eliminare i cookie come desideri. Puoi eliminare tutti i cookie già presenti sul tuo computer e puoi impostare la maggior parte dei browser per impedirne il posizionamento. Tuttavia, se lo fai, potresti dover regolare manualmente alcune preferenze ogni volta che visiti un sito e alcuni servizi e funzionalità potrebbero non funzionare."
+      }
     }
   }
 }

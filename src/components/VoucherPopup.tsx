@@ -15,8 +15,8 @@ export default function VoucherPopup({ onClose }: VoucherPopupProps) {
   }, []);
 
   const handleViewFullscreen = () => {
-    // Open in new browser tab
-    window.open('/images/LOCANDINA-PER-IL-COUPON.jpg', '_blank');
+    // Open in new browser tab with cache busting
+    window.open('/images/LOCANDINA-PER-IL-COUPON-NATALE.png?v=2', '_blank');
   };
 
 

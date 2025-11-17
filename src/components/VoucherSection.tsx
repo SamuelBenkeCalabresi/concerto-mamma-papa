@@ -7,7 +7,8 @@ export default function VoucherSection() {
   const t = useTranslations('VoucherSection');
   
   const handleViewFullscreen = () => {
-    window.open('/images/LOCANDINA-PER-IL-COUPON.jpg', '_blank');
+    // Cache busting to force browser to load new image
+    window.open('/images/LOCANDINA-PER-IL-COUPON-NATALE.png?v=2', '_blank');
   };
 
   return (

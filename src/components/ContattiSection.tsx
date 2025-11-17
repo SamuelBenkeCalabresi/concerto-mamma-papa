@@ -39,7 +39,7 @@ export default function ContattiSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 gap-12">
         {/* Contact Information */}
         <div>
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
@@ -107,7 +107,7 @@ export default function ContattiSection() {
         </div>
 
         {/* Newsletter Form */}
-        <div>
+      {/*   <div>
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
             <div className="mb-8 text-center">
               <div className="inline-flex items-center bg-emerald-100 text-emerald-800 rounded-full px-4 py-2 mb-4">
@@ -185,7 +185,7 @@ export default function ContattiSection() {
               </div>
             </form>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

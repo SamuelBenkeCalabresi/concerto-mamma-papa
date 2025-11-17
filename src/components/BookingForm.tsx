@@ -5,7 +5,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import StrapiBlocksRenderer from './StrapiBlocksRenderer';
 import {
   CalendarDaysIcon,
@@ -32,6 +32,7 @@ interface BookingFormProps {
 
 export default function BookingForm({ preSelectedEvent, preselectedEventId, availableTimes = [], timesSoldOut = [], isWaitlist = false }: BookingFormProps = {}) {
   const t = useTranslations('Booking');
+  const locale = useLocale();
   const [selectedEventDetails, setSelectedEventDetails] = useState<any>(null);
 
   // Zod validation schema with translations
@@ -53,47 +54,20 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
     phone: z.string().min(10, t('validation.phoneInvalid')),
     howDidYouHear: z.string().optional(),
     website: z.string().optional(), // Honeypot field - should be empty
+    paymentMethod: z.enum(['contanti', 'bonifico']).optional(),
     needsReceipt: z.boolean().optional(),
+    cognome: z.string().optional(),
+    nome: z.string().optional(),
     codiceFiscale: z.string().optional(),
     codiceFiscaleEvent: z.string().optional(),
     luogoNascita: z.string().optional(),
     dataNascita: z.string().optional(),
-    indirizzoResidenza: z.string().optional()
+    indirizzoResidenza: z.string().optional(),
+    cap: z.string().optional(),
+    citta: z.string().optional()
   }).refine((data) => data.kids.length === data.numberOfKids, {
     message: t('validation.kidsCountMismatch'),
     path: ["numberOfKids"]
-  }).refine((data) => {
-    if (data.needsReceipt) {
-      return data.codiceFiscale && data.codiceFiscale.length === 16;
-    }
-    return true;
-  }, {
-    message: 'Il codice fiscale deve essere di 16 caratteri quando richiedi la ricevuta',
-    path: ["codiceFiscale"]
-  }).refine((data) => {
-    if (data.needsReceipt) {
-      return data.luogoNascita && data.luogoNascita.length >= 2;
-    }
-    return true;
-  }, {
-    message: 'Il luogo di nascita è obbligatorio quando richiedi la ricevuta',
-    path: ["luogoNascita"]
-  }).refine((data) => {
-    if (data.needsReceipt) {
-      return data.dataNascita && data.dataNascita.length > 0;
-    }
-    return true;
-  }, {
-    message: 'La data di nascita è obbligatoria quando richiedi la ricevuta',
-    path: ["dataNascita"]
-  }).refine((data) => {
-    if (data.needsReceipt) {
-      return data.indirizzoResidenza && data.indirizzoResidenza.length >= 5;
-    }
-    return true;
-  }, {
-    message: 'L\'indirizzo di residenza è obbligatorio quando richiedi la ricevuta',
-    path: ["indirizzoResidenza"]
   }).refine((data) => {
     // Validate codiceFiscaleEvent if the event requires it
     if (selectedEventDetails?.requireCodiceFiscale) {
@@ -227,11 +201,16 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
         howDidYouHear: data.howDidYouHear || null,
         website: data.website || null, // Honeypot field
         status: 'pending',
+        paymentMethod: data.paymentMethod || null,
         needsReceipt: data.needsReceipt || false,
+        cognome: data.cognome || null,
+        nome: data.nome || null,
         codiceFiscale: data.codiceFiscaleEvent || data.codiceFiscale || null,
         luogoNascita: data.luogoNascita || null,
         dataNascita: data.dataNascita || null,
         indirizzoResidenza: data.indirizzoResidenza || null,
+        cap: data.cap || null,
+        citta: data.citta || null,
         isWaitlist: isWaitlist
       };
       
@@ -675,7 +654,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
                   className="mt-1 mr-3 h-5 w-5 text-primary border-gray-300 rounded focus:ring-primary"
                 />
                 <span className="text-sm font-medium text-gray-700">
-                  Desidero avere la ricevuta del pagamento al mio indirizzo email
+                  Dati per la ricevuta. Verrà inviata via e-mail
                 </span>
               </label>
             </div>
@@ -686,17 +665,51 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 space-y-4">
               <div className="mb-4">
                 <p className="text-sm font-medium text-amber-800 mb-2">
-                  📋 I seguenti campi sono obbligatori per la ricevuta fiscale:
+                  📋 Campi per la ricevuta fiscale:
                 </p>
                 <p className="text-sm font-semibold text-gray-700 bg-amber-100 px-3 py-2 rounded-md border border-amber-300">
-                  ℹ️ I dati richiesti sono relativi all'adulto che prenota
+                  ℹ️ I dati seguenti sono relativi all’adulto di riferimento
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Codice Fiscale *
+                    Cognome (adulto)
+                  </label>
+                  <input
+                    type="text"
+                    {...register('cognome')}
+                    placeholder="Rossi"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                      errors.cognome ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  />
+                  {errors.cognome && (
+                    <p className="mt-1 text-sm text-red-600">{errors.cognome.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Nome (adulto)
+                  </label>
+                  <input
+                    type="text"
+                    {...register('nome')}
+                    placeholder="Mario"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                      errors.nome ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  />
+                  {errors.nome && (
+                    <p className="mt-1 text-sm text-red-600">{errors.nome.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Codice Fiscale (adulto)
                   </label>
                   <input
                     type="text"
@@ -714,7 +727,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Luogo di Nascita *
+                    Luogo di Nascita (adulto)
                   </label>
                   <input
                     type="text"
@@ -731,7 +744,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Data di Nascita *
+                    Data di Nascita (adulto)
                   </label>
                   <input
                     type="date"
@@ -747,12 +760,12 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Indirizzo di Residenza *
+                    Indirizzo di Residenza (adulto)
                   </label>
                   <input
                     type="text"
                     {...register('indirizzoResidenza')}
-                    placeholder="Via Roma 123, Milano"
+                    placeholder="Via Roma 123"
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
                       errors.indirizzoResidenza ? 'border-red-300' : 'border-gray-300'
                     }`}
@@ -761,9 +774,89 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
                     <p className="mt-1 text-sm text-red-600">{errors.indirizzoResidenza.message}</p>
                   )}
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    CAP (adulto)
+                  </label>
+                  <input
+                    type="text"
+                    {...register('cap')}
+                    maxLength={5}
+                    placeholder="00100"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                      errors.cap ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  />
+                  {errors.cap && (
+                    <p className="mt-1 text-sm text-red-600">{errors.cap.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Città (adulto)
+                  </label>
+                  <input
+                    type="text"
+                    {...register('citta')}
+                    placeholder="Roma"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${
+                      errors.citta ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  />
+                  {errors.citta && (
+                    <p className="mt-1 text-sm text-red-600">{errors.citta.message}</p>
+                  )}
+                </div>
               </div>
             </div>
           )}
+
+          {/* Payment Method Section */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-lg p-6 space-y-4">
+            <h3 className="text-lg font-bold text-gray-800 mb-4">
+              💳 {t('form.paymentMethod.title')}
+            </h3>
+
+            <div className="space-y-3">
+              <label className="flex items-start cursor-pointer bg-white rounded-lg p-4 border-2 border-gray-300 hover:border-blue-400 transition-colors">
+                <input
+                  type="radio"
+                  {...register('paymentMethod')}
+                  value="contanti"
+                  className="mt-1 mr-3 h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                />
+                <div className="flex-1">
+                  <span className="text-base font-semibold text-gray-800">{t('form.paymentMethod.cash')}</span>
+                </div>
+              </label>
+
+              <label className="flex items-start cursor-pointer bg-white rounded-lg p-4 border-2 border-gray-300 hover:border-blue-400 transition-colors">
+                <input
+                  type="radio"
+                  {...register('paymentMethod')}
+                  value="bonifico"
+                  className="mt-1 mr-3 h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                />
+                <div className="flex-1">
+                  <span className="text-base font-semibold text-gray-800">{t('form.paymentMethod.bankTransfer')}</span>
+                </div>
+              </label>
+            </div>
+
+            {/* Causale prominente */}
+            <div className="mt-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4">
+              <p className="text-sm font-bold text-yellow-900 mb-2">
+                ⚠️ {t('form.paymentMethod.importantNote')}
+              </p>
+              <div className="bg-white rounded-md p-3 border border-yellow-300">
+                <p className="text-base font-bold text-gray-900 text-center">
+                  "{t('form.paymentMethod.causale', { childName: watch('kids')?.[0]?.name || t('form.paymentMethod.causalePlaceholder') })}"
+                </p>
+              </div>
+            </div>
+          </div>
 
           {/* How did you hear */}
           <div>
@@ -776,6 +869,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
             >
               <option value="">{t('form.howDidYouHearOptions.select')}</option>
+              <option value="facebook">{t('form.howDidYouHearOptions.coupon')}</option>
               <option value="facebook">{t('form.howDidYouHearOptions.facebook')}</option>
               <option value="instagram">{t('form.howDidYouHearOptions.instagram')}</option>
               <option value="amici">{t('form.howDidYouHearOptions.friends')}</option>
@@ -797,6 +891,22 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
               tabIndex={-1}
               autoComplete="off"
             />
+          </div>
+
+          {/* GDPR Notice */}
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <p className="text-xs text-gray-600 text-center">
+              {t('form.gdprNotice')}{' '}
+              <a
+                href={`/${locale}/privacy-policy`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary/80 underline font-medium"
+              >
+                {t('form.privacyPolicyLink')}
+              </a>
+              .
+            </p>
           </div>
 
           {/* Submit Button */}
