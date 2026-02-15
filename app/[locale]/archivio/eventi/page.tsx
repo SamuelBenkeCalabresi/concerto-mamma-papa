@@ -75,7 +75,7 @@ async function loadStrapiEvents(): Promise<Event[]> {
     const url = `${STRAPI_CONFIG.API_URL}/api/events?populate=*&pagination[pageSize]=100`;
     const res = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
-      cache: 'no-store',
+      next: { revalidate: 300 },
     });
 
     if (!res.ok) {

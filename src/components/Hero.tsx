@@ -3,7 +3,6 @@
 import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Link } from '@/i18n/routing';
-import { getOpenEvents } from '@/lib/strapi';
 import { MusicalNoteIcon, HeartIcon, UsersIcon, PlayIcon, CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import EventDetailModal from './EventDetailModal';
 
@@ -18,7 +17,9 @@ export default function Hero() {
     async function fetchNextEvent() {
       try {
         console.log('🔄 Fetching events for Hero component...');
-        const data = await getOpenEvents();
+        const res = await fetch('/api/events');
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const data = await res.json();
         const events = data.data || [];
 
         console.log('📋 Raw events from API:', events);

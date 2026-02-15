@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { getOpenEvents } from '@/lib/strapi';
 import EventDetailModal from './EventDetailModal';
 import {
   CalendarDaysIcon,
@@ -36,7 +35,9 @@ export default function CalendarioSection() {
       try {
         setLoading(true);
         setError('');
-        const data = await getOpenEvents();
+        const res = await fetch('/api/events');
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const data = await res.json();
         if (!cancelled) {
           setEvents(data.data || []);
           setLoading(false);
