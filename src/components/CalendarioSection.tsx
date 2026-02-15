@@ -27,23 +27,35 @@ export default function CalendarioSection() {
   const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
+    let retryTimeout: NodeJS.Timeout;
+    let retryCount = 0;
+    const maxRetries = 8;
+    let cancelled = false;
+
     async function fetchEvents() {
       try {
         setLoading(true);
+        setError('');
         const data = await getOpenEvents();
-        console.log('Events fetched in calendario:', data);
-        setEvents(data.data || []);
-        // Don't set filteredEvents here - let the filter effect handle it
+        if (!cancelled) {
+          setEvents(data.data || []);
+          setLoading(false);
+        }
       } catch (err) {
-        console.error('Failed to fetch events:', err);
-        setError('Error loading events. Please try again later.');
-      } finally {
-        setLoading(false);
+        console.error('Failed to fetch events (attempt ' + (retryCount + 1) + '):', err);
+        if (!cancelled && retryCount < maxRetries) {
+          retryCount++;
+          retryTimeout = setTimeout(fetchEvents, 15000);
+        } else if (!cancelled) {
+          setError(t('loading.error'));
+          setLoading(false);
+        }
       }
     }
 
     fetchEvents();
-  }, []);
+    return () => { cancelled = true; clearTimeout(retryTimeout); };
+  }, [t]);
 
   // Filter events based on selected criteria
   useEffect(() => {
@@ -219,7 +231,7 @@ export default function CalendarioSection() {
         <div className="flex-1">
           <div className="flex justify-between items-center mb-6">
             <p className="text-gray-600">
-              {loading ? 'Caricamento...' : `Trovati ${filteredEvents.length} eventi`}
+              {loading ? t('loading.short') : `Trovati ${filteredEvents.length} eventi`}
             </p>
           </div>
 
@@ -231,7 +243,8 @@ export default function CalendarioSection() {
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
               </div>
-              <p className="text-gray-600">Caricamento eventi...</p>
+              <p className="text-gray-700 font-medium text-lg mb-2">{t('loading.title')}</p>
+              <p className="text-gray-500 text-sm max-w-md mx-auto">{t('loading.description')}</p>
             </div>
           )}
 

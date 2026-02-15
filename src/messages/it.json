@@ -398,7 +398,12 @@
     "allAges": "Tutte le età",
     "availableSeatsOnly": "Solo posti disponibili",
     "clearFilters": "Pulisci Filtri",
-    "loading": "Caricamento...",
+    "loading": {
+      "short": "Caricamento...",
+      "title": "Caricamento eventi in corso...",
+      "description": "Il server si sta avviando. Gli eventi saranno disponibili tra pochi istanti. La pagina si aggiornerà automaticamente.",
+      "error": "Impossibile caricare gli eventi. Riprova tra qualche minuto."
+    },
     "loadingEvents": "Caricamento eventi...",
     "eventsFound": "Trovati {count} eventi",
     "noEventsFound": "Nessun evento trovato con i filtri selezionati.",

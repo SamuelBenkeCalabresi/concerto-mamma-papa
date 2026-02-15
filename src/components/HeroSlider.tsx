@@ -122,14 +122,16 @@ export default function HeroSlider() {
       {/* Content */}
       <div className="absolute inset-0 flex items-center justify-center z-10 pt-16">
         <div className="text-center text-white px-4 max-w-4xl">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
-            <span className="block">di Concerto</span>
-            <span className="block text-green-300">con Mamma</span>
-            <span className="block text-blue-300">e Papà ®</span>
-          </h1>
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light opacity-90 mb-8">
-            {t('subtitle')}
-          </h2>
+          <div className={`transition-opacity duration-1000 ${currentSlide === 2 ? 'opacity-0' : 'opacity-100'}`}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
+              <span className="block">di Concerto</span>
+              <span className="block text-green-300">con Mamma</span>
+              <span className="block text-blue-300">e Papà ®</span>
+            </h1>
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light opacity-90 mb-8">
+              {t('subtitle')}
+            </h2>
+          </div>
 
           {/* Scroll Down Arrow Button */}
           <button

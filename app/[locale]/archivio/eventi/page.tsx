@@ -2,11 +2,14 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import EventAccordion from '@/components/EventAccordion';
 import { getTranslations } from 'next-intl/server';
-import { 
+import { STRAPI_CONFIG } from '@/lib/strapi';
+import {
   CalendarDaysIcon,
   MusicalNoteIcon,
   MicrophoneIcon
 } from '@heroicons/react/24/outline';
+import eventsIt from '@/data/events.json';
+import eventsEn from '@/data/events-en.json';
 
 interface Event {
   title: string;
@@ -32,31 +35,75 @@ interface Event {
   covidRequirements?: string;
 }
 
-async function loadEvents(locale: string): Promise<Event[]> {
+function loadArchivedEvents(locale: string): Event[] {
+  const events = locale === 'en' ? eventsEn : eventsIt;
+  return events as Event[];
+}
+
+function getDescriptionText(description: any): string {
+  if (Array.isArray(description)) {
+    return description.map(block =>
+      block.children?.map((child: any) => child.text).join('') || ''
+    ).join(' ');
+  }
+  return description || '';
+}
+
+function transformStrapiEvent(strapiEvent: any): Event {
+  const times = Array.isArray(strapiEvent.times)
+    ? strapiEvent.times.join('; ')
+    : strapiEvent.times || '';
+
+  return {
+    title: strapiEvent.Title || '',
+    date: strapiEvent.date || '',
+    time: times,
+    location: {
+      name: strapiEvent.location || '',
+      street: '',
+    },
+    description: getDescriptionText(strapiEvent.Description),
+    ageGroups: [`${strapiEvent.ageMin || 0}-${strapiEvent.ageMax || 18} anni`],
+    prenotazione: strapiEvent.bookingEnabled ? 'prenotazione on line' : '',
+    eventType: 'regular',
+    price: strapiEvent.isFree ? 'Gratuito' : strapiEvent.price ? `€${strapiEvent.price}` : undefined,
+  };
+}
+
+async function loadStrapiEvents(): Promise<Event[]> {
   try {
-    const fs = await import('fs');
-    const path = await import('path');
-    
-    // Choose the appropriate events file based on locale
-    const eventsFileName = locale === 'en' ? 'events-en.json' : 'events.json';
-    const eventsPath = path.join(process.cwd(), 'public', 'json', 'events', eventsFileName);
-    
-    const eventsData = fs.readFileSync(eventsPath, 'utf8');
-    const allEvents = JSON.parse(eventsData);
-    
-    // Sort all events from most recent to oldest
-    return allEvents.sort((a: Event, b: Event) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    const url = `${STRAPI_CONFIG.API_URL}/api/events?populate=*&pagination[pageSize]=100`;
+    const res = await fetch(url, {
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
     });
+
+    if (!res.ok) {
+      console.error('Strapi API error:', res.status, res.statusText);
+      return [];
+    }
+
+    const data = await res.json();
+    const strapiEvents = data.data || [];
+    return strapiEvents.map(transformStrapiEvent);
   } catch (error) {
-    console.error('Error loading events:', error);
+    console.error('Error loading Strapi events:', error);
     return [];
   }
 }
 
 export default async function EventiPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const events: Event[] = await loadEvents(locale);
+  const [archivedEvents, strapiEvents] = await Promise.all([
+    loadArchivedEvents(locale),
+    loadStrapiEvents(),
+  ]);
+
+  // Merge and sort by date (most recent first)
+  const events: Event[] = [...strapiEvents, ...archivedEvents].sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
   const t = await getTranslations('EventsPage');
 
   return (

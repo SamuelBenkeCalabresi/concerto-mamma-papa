@@ -1,0 +1,498 @@
+[
+    {
+      "title": "Sabato 21 ottobre 2023 - Centro Ottava (Roma)",
+      "date": "2023-10-21",
+      "time": "ore 16:00; ore 17:00",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori. Special Guest: Fabio Mancano – sassofoni e flauti",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular",
+      "specialGuests": ["Fabio Mancano – sassofoni e flauti"]
+    },
+    {
+      "title": "Domenica 29 ottobre 2023 - Bioparco (Roma)",
+      "date": "2023-10-29",
+      "time": "ore 10:30; ore 11:30",
+      "location": {
+        "name": "Bioparco – Sala degli Elefanti",
+        "street": "Viale del Giardino Zoologico, 20 – Roma"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori. Sconto sull'ingresso al Bioparco per i partecipanti (€10,00)",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "specialOffer": "Sconto sull'ingresso al Bioparco!",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "phone": "3470960533"
+    },
+    {
+      "title": "Sabato 11 novembre 2023 - Centro Ottava (Roma)",
+      "date": "2023-11-11",
+      "time": "ore 16:00; ore 17:00",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 18 novembre 2023 - Associazione Musicale Eschilo - EUR (Roma)",
+      "date": "2023-11-18",
+      "time": "ore 16:00; ore 17:00",
+      "location": {
+        "name": "Associazione Musicale Eschilo – EUR",
+        "street": "Via dei Carpazi, 35 – Roma (EUR)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 25 novembre 2023 - Associazione Eschilo - AXA (Roma)",
+      "date": "2023-11-25",
+      "time": "ore 16:00; ore 17:00",
+      "location": {
+        "name": "Associazione Musicale Eschilo – AXA",
+        "street": "Via Eschilo 10 – Roma (EUR)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 16 dicembre 2023 - Asilo Nido ecopedagogico Bianconiglio (Roma)",
+      "date": "2023-12-16",
+      "time": "ore 10:30",
+      "location": {
+        "name": "Asilo Nido ecopedagogico Bianconiglio",
+        "street": "Via Anterivo, 31 (trav. via Torcegno – Infernetto)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "Evento privato",
+      "link": null,
+      "eventType": "private"
+    },
+    {
+      "title": "Domenica 28 gennaio 2024 - Bioparco (Roma)",
+      "date": "2024-01-28",
+      "time": "ore 10:30; ore 11:30",
+      "location": {
+        "name": "Bioparco – Sala degli Elefanti",
+        "street": "Viale del Giardino Zoologico, 20 – Roma"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori. Sconto sull'ingresso al Bioparco per i partecipanti (€10,00)",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "specialOffer": "Sconto sull'ingresso al Bioparco!",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "phone": "3470960533"
+    },
+    {
+      "title": "Domenica 10 marzo 2024 - Bioparco (Roma)",
+      "date": "2024-03-10",
+      "time": "ore 10:30; ore 11:30",
+      "location": {
+        "name": "Bioparco – Sala degli Elefanti",
+        "street": "Viale del Giardino Zoologico, 20 – Roma"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori. Sconto sull'ingresso al Bioparco per i partecipanti (€10,00)",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "specialOffer": "Sconto sull'ingresso al Bioparco!",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "phone": "3470960533"
+    },
+    {
+      "title": "Sabato 23 marzo 2024 - Centro Ottava (Roma)",
+      "date": "2024-03-23",
+      "time": "ore 16:00; ore 17:00",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 6 aprile 2024 - Associazione Musicale Eschilo - EUR (Roma)",
+      "date": "2024-04-06",
+      "time": "ore 16:00; ore 17:00",
+      "location": {
+        "name": "Associazione Musicale Eschilo – EUR",
+        "street": "Via dei Carpazi, 35 – Roma (EUR)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 24 settembre 2022 - Centro Ottava (Roma)",
+      "date": "2022-09-24",
+      "time": "ore 10:00",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "OPEN DAY - Primi passi cantando e Giochi in musica. Laboratori di educazione musicale ispirati alla Music Learning Theory del prof. E. Gordon. Docente: Monserrat Olavarria",
+      "ageGroups": ["0-3 anni", "3-6 anni"],
+      "prenotazione": "prenotazione obbligatoria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "openday",
+      "specialTitle": "OPEN DAY - Primi passi cantando e Giochi in musica",
+      "phone": "3423711750",
+      "teachers": ["Monserrat Olavarria"]
+    },
+    {
+      "title": "Sabato 1 ottobre 2022 - Centro Ottava (Roma)",
+      "date": "2022-10-01",
+      "time": "ore 10:15; ore 11:15",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 1 ottobre 2022 - La M.U.sica (Roma - Eur)",
+      "date": "2022-10-01",
+      "time": "ore 16:30; ore 17:45",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Roma (Eur)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line necessaria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 15 ottobre 2022 - Centro Ottava (Roma)",
+      "date": "2022-10-15",
+      "time": "ore 16:30; ore 17:30",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line necessaria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 12 novembre 2022 - Centro Ottava (Roma)",
+      "date": "2022-11-12",
+      "time": "ore 16:30; ore 17:30",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "L'ISOLA DI TIRITINLALLA' - Fiaba musicale per bambini da 0 a 5 anni accompagnati dai genitori. Annamaria Diroma, Francesca Scaglione, Monserrat Olavarria. Ospite speciale Ermanno Dodaro – contrabbasso, chitarra e ukulele",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione obbligatoria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "specialTitle": "L'ISOLA DI TIRITINLALLA' - Fiaba musicale",
+      "specialGuests": ["Ermanno Dodaro – contrabbasso, chitarra e ukulele"],
+      "performers": ["Annamaria Diroma", "Francesca Scaglione", "Monserrat Olavarria"]
+    },
+    {
+      "title": "Sabato 19 novembre 2022 - La M.U.sica (Roma - Eur)",
+      "date": "2022-11-19",
+      "time": "ore 16:30; ore 17:45",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Roma (Eur)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line necessaria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Domenica 20 novembre 2022 - Centro Ottava (Roma)",
+      "date": "2022-11-20",
+      "time": "ore 10:15; ore 11:15",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "YOGAMUSICA - Pratichiamo la felicità in musica! Yoga per famiglie con interventi di musica dal vivo",
+      "ageGroups": ["3-4 anni", "5-7 anni"],
+      "prenotazione": "prenotazione obbligatoria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "yoga",
+      "specialTitle": "YOGAMUSICA - Pratichiamo la felicità in musica!"
+    },
+    {
+      "title": "Sabato 10 dicembre 2022 - Centro Ottava (Roma)",
+      "date": "2022-12-10",
+      "time": "ore 16:30; ore 17:30",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "CONCERTO DI NATALE - Di concerto con Mamma e Papà e una sorpresa speciale…!",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "christmas",
+      "specialTitle": "CONCERTO DI NATALE"
+    },
+    {
+      "title": "Dicembre 2022 / Gennaio 2023 - Haifa (Israele)",
+      "date": "2022-12-15",
+      "time": "da definire",
+      "location": {
+        "name": "Haifa",
+        "street": "Israele"
+      },
+      "description": "Tour internazionale di Concerto con Mamma e Papà",
+      "ageGroups": ["0-5 anni"],
+      "prenotazione": "evento internazionale",
+      "link": null,
+      "eventType": "international"
+    },
+    {
+      "title": "Sabato 28 gennaio 2023 - Webinar Conservatorio Ottorino Respighi - Latina",
+      "date": "2023-01-28",
+      "time": "ore 15:00-18:30",
+      "location": {
+        "name": "Conservatorio Ottorino Respighi",
+        "street": "Latina"
+      },
+      "description": "MEDICINA NELL'ARTE – VII EDIZIONE - Neuroscienza e Musica nella prima infanzia - WEBINAR GRATUITO",
+      "ageGroups": ["adulti"],
+      "prenotazione": "webinar gratuito",
+      "link": null,
+      "eventType": "webinar",
+      "price": "WEBINAR GRATUITO"
+    },
+    {
+      "title": "Sabato 4 febbraio 2023 - La M.U.sica (Roma - Eur)",
+      "date": "2023-02-04",
+      "time": "ore 16:30; ore 17:45",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Roma (Eur)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line necessaria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 25 febbraio 2023 - Conservatorio Statale di Musica \"O. Respighi\" (Latina)",
+      "date": "2023-02-25",
+      "time": "ore 11:00",
+      "location": {
+        "name": "Conservatorio Statale di Musica \"O. Respighi\" - Aula Magna",
+        "street": "Via Ezio 32 – Latina"
+      },
+      "description": "Sabato Musicale Zerosei - Concerto con la partecipazione degli studenti del Corso \"Educare con la musica nello zerosei\" di Didattica della Musica",
+      "ageGroups": ["0-6 anni"],
+      "prenotazione": "prenotazione via email necessaria",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "EVENTO GRATUITO!"
+    },
+    {
+      "title": "Sabato 4 marzo 2023 - La M.U.sica (Roma - Eur)",
+      "date": "2023-03-04",
+      "time": "ore 16:30; ore 17:30",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Roma (Eur)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line necessaria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 18 marzo 2023 - Conservatorio Statale di Musica \"O. Respighi\" (Latina)",
+      "date": "2023-03-18",
+      "time": "ore 11:00",
+      "location": {
+        "name": "Conservatorio Statale di Musica \"O. Respighi\" - Aula Magna",
+        "street": "Via Ezio 32 – Latina"
+      },
+      "description": "Sabato Musicale Zerosei - Concerto con la partecipazione degli studenti del Corso \"Educare con la musica nello zerosei\" di Didattica della Musica",
+      "ageGroups": ["0-6 anni"],
+      "prenotazione": "prenotazione via email necessaria",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "EVENTO GRATUITO!"
+    },
+    {
+      "title": "Sabato 29 aprile 2023 - Conservatorio Statale di Musica \"O. Respighi\" (Latina)",
+      "date": "2023-04-29",
+      "time": "ore 11:00",
+      "location": {
+        "name": "Conservatorio Statale di Musica \"O. Respighi\" - Aula Magna",
+        "street": "Via Ezio 32 – Latina"
+      },
+      "description": "Sabato Musicale Zerosei - Concerto con la partecipazione degli studenti del Corso \"Educare con la musica nello zerosei\" di Didattica della Musica",
+      "ageGroups": ["0-6 anni"],
+      "prenotazione": "prenotazione via email necessaria",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "EVENTO GRATUITO!"
+    },
+    {
+      "title": "Sabato 6 maggio 2023 - Caffè letterario (Roma)",
+      "date": "2023-05-06",
+      "time": "ore 16:00; ore 17:00",
+      "location": {
+        "name": "Caffè letterario - Evento di beneficenza StudioPed.Lab",
+        "street": "Via Ostiense, 95 – Roma"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione necessaria via email",
+      "email": "studioped.lab@gmail.com",
+      "phone": "348 173 7323",
+      "link": null,
+      "eventType": "charity",
+      "price": "EVENTO DI BENEFICENZA!"
+    },
+    {
+      "title": "Sabato 13 maggio 2023 - Conservatorio Statale di Musica \"O. Respighi\" (Latina)",
+      "date": "2023-05-13",
+      "time": "ore 11:00",
+      "location": {
+        "name": "Conservatorio Statale di Musica \"O. Respighi\" - Aula Magna",
+        "street": "Via Ezio 32 – Latina"
+      },
+      "description": "Sabato Musicale Zerosei - Concerto con la partecipazione degli studenti del Corso \"Educare con la musica nello zerosei\" di Didattica della Musica",
+      "ageGroups": ["0-6 anni"],
+      "prenotazione": "prenotazione on line necessaria",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "EVENTO GRATUITO!"
+    },
+    {
+      "title": "Sabato 20 maggio 2023 - Centro Ottava (Roma)",
+      "date": "2023-05-20",
+      "time": "ore 16:30; ore 17:30",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26 – Roma (Metro Valle Aurelia)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-6 anni"],
+      "prenotazione": "prenotazione on line necessaria",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular"
+    },
+    {
+      "title": "Sabato 18 settembre 2021 - Conservatorio \"Ottorino Respighi\" (Latina)",
+      "date": "2021-09-18",
+      "time": "ore 11:00",
+      "location": {
+        "name": "Conservatorio Ottorino Respighi",
+        "street": "Via Ezio, 32 – 04100 Latina"
+      },
+      "description": "Nell'ambito del Seminario di formazione \"Crescere in ascolto\". Partecipazione gratuita. Posti limitati",
+      "ageGroups": ["0-3 anni"],
+      "prenotazione": "prenotazione e Greenpass per gli adulti necessaria",
+      "email": "damiani@conslatina.it",
+      "link": null,
+      "eventType": "educational",
+      "price": "Partecipazione gratuita"
+    },
+    {
+      "title": "Sabato 25 settembre 2021 - Centro Ottava (Roma - Valle Aurelia)",
+      "date": "2021-09-25",
+      "time": "ore 16:30; ore 17:45",
+      "location": {
+        "name": "Centro Ottava",
+        "street": "Via Francesco Dell'Anno, 26, 00136 (Roma – Valle Aurelia)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line e Greenpass per gli adulti necessari",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular",
+      "covidRequirements": "Greenpass per gli adulti necessario"
+    },
+    {
+      "title": "Sabato 9 ottobre 2021 - La M.U.sica (Roma - Eur)",
+      "date": "2021-10-09",
+      "time": "ore 16:30; ore 17:45",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Roma (Eur)"
+      },
+      "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+      "ageGroups": ["0-3 anni", "3-5 anni"],
+      "prenotazione": "prenotazione on line e Greenpass per gli adulti necessari",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "regular",
+      "covidRequirements": "Greenpass per gli adulti necessario"
+    },
+    {
+      "title": "Sabato 13 novembre 2021 - La M.U.sica (Roma - Eur)",
+      "date": "2021-11-13",
+      "time": "ore 16:30; ore 17:30",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Roma (Eur)"
+      },
+      "description": "Tiritinlallà, Fiaba musicale interattiva per bambini da 3 a 5 anni con un adulto",
+      "ageGroups": ["3-5 anni con un adulto"],
+      "prenotazione": "prenotazione on line e Greenpass per gli adulti necessari",
+      "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+      "eventType": "special",
+      "specialTitle": "Tiritinlallà - Fiaba musicale interattiva",
+      "covidRequirements": "Greenpass per gli adulti necessario"
+    },
+    {
+      "title": "Sabato 27 novembre 2021 - La M.U.sica (Roma - Eur)",
+      "date": "2021-11-27",
+      "time": "ore 16:30; ore 17:30",
+      "location": {
+        "name": "La M.U.sica",
+        "street": "Via Paolo di Dono 31 – Roma (Eur)"
+        },
+        "description": "di Concerto con Mamma e Papà ® Attività musicale interattiva per bambini da 0 a 5 anni con i genitori",
+        "ageGroups": ["0-3 anni", "3-5 anni"],
+        "prenotazione": "prenotazione on line e Greenpass per gli adulti necessari",
+        "link": "https://www.concertoconmammaepapa.it/web/prenotazione/",
+        "eventType": "regular",
+        "covidRequirements": "Greenpass per gli adulti necessario"
+    }
+]

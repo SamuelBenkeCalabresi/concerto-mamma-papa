@@ -205,7 +205,12 @@
     "allAges": "All ages",
     "availableSeatsOnly": "Available seats only",
     "clearFilters": "Clear Filters",
-    "loading": "Loading...",
+    "loading": {
+      "short": "Loading...",
+      "title": "Loading events...",
+      "description": "The server is starting up. Events will be available shortly. The page will refresh automatically.",
+      "error": "Unable to load events. Please try again in a few minutes."
+    },
     "loadingEvents": "Loading events...",
     "eventsFound": "Found {count} events",
     "noEventsFound": "No events found with selected filters.",
