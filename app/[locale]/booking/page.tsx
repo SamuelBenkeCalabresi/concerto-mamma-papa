@@ -9,8 +9,9 @@ import {
   UserGroupIcon
 } from '@heroicons/react/24/outline';
 
-export default async function BookingPage({ searchParams }: any) {
+export default async function BookingPage({ searchParams: searchParamsPromise }: any) {
   const t = await getTranslations();
+  const searchParams = await searchParamsPromise;
 
   // Extract event details from URL params
   const eventId = searchParams.eventId;

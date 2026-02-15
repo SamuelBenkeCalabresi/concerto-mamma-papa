@@ -288,7 +288,6 @@ export interface StrapiEvent {
     totalSeats: number;
     featured: boolean;
     bookingEnabled: boolean;
-    requireCodiceFiscale: boolean;
     tags: string[];
     image?: {
       data: {
