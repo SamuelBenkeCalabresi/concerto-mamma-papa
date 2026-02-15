@@ -99,10 +99,11 @@ export default async function EventiPage({ params }: { params: Promise<{ locale:
     loadStrapiEvents(),
   ]);
 
-  // Merge and sort by date (most recent first)
-  const events: Event[] = [...strapiEvents, ...archivedEvents].sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  // Merge, filter out future events, sort by date (most recent first)
+  const today = new Date().toISOString().split('T')[0];
+  const events: Event[] = [...strapiEvents, ...archivedEvents]
+    .filter((e) => e.date <= today)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const t = await getTranslations('EventsPage');
 
