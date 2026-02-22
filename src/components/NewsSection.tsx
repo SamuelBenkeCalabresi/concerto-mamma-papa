@@ -1,18 +1,33 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { 
-  MusicalNoteIcon, 
-  NewspaperIcon, 
+import {
+  MusicalNoteIcon,
+  NewspaperIcon,
   PlayIcon,
   ArrowTopRightOnSquareIcon,
-  HeartIcon
+  HeartIcon,
+  AcademicCapIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
+
+const convegniImages = [
+  '/images/future-convegni-seminari/IMG_1895.JPG',
+  '/images/future-convegni-seminari/IMG_1896.JPG',
+];
 
 export default function NewsSection() {
   const t = useTranslations('NewsSection');
-  
+  const [convegniSlide, setConvegniSlide] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const prevSlide = () => setConvegniSlide((i) => (i - 1 + convegniImages.length) % convegniImages.length);
+  const nextSlide = () => setConvegniSlide((i) => (i + 1) % convegniImages.length);
+
   return (
     <section className="relative overflow-hidden">
       {/* Hero-style Background */}
@@ -64,7 +79,7 @@ export default function NewsSection() {
           </div>
 
           {/* News Items Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             {/* L'isola di Tiritinlallà */}
             <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20">
@@ -105,6 +120,71 @@ export default function NewsSection() {
                   <HeartIcon className="h-4 w-4" />
                   <span className="text-sm">{t('tiritinlalla.tagline')}</span>
                 </div>
+              </div>
+            </div>
+
+            {/* Educare con la musica nello Zerosei */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20 flex flex-col">
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-blue-600/80 backdrop-blur-sm p-3 rounded-xl">
+                    <AcademicCapIcon className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">{t('convegni.title')}</h3>
+                </div>
+                <p className="text-white/80 leading-relaxed mb-6">
+                  {t('convegni.description')}
+                </p>
+              </div>
+
+              {/* Image Carousel */}
+              <div className="relative mb-6 rounded-2xl overflow-hidden">
+                <div className="relative w-full h-44">
+                  <Image
+                    src={convegniImages[convegniSlide]}
+                    alt={`Educare con la musica nello Zerosei - immagine ${convegniSlide + 1}`}
+                    fill
+                    className="object-cover rounded-2xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-2xl" />
+                </div>
+                {/* Prev / Next */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-1 transition-all"
+                  aria-label="Immagine precedente"
+                >
+                  <ChevronLeftIcon className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-1 transition-all"
+                  aria-label="Immagine successiva"
+                >
+                  <ChevronRightIcon className="h-5 w-5" />
+                </button>
+                {/* Dot indicators */}
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+                  {convegniImages.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setConvegniSlide(idx)}
+                      className={`w-2 h-2 rounded-full transition-all ${idx === convegniSlide ? 'bg-white' : 'bg-white/40'}`}
+                      aria-label={`Vai all'immagine ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div className="text-center mt-auto">
+                <button
+                  onClick={() => setModalOpen(true)}
+                  className="inline-flex items-center gap-2 bg-blue-600/70 hover:bg-blue-600/90 backdrop-blur-sm text-white px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105"
+                >
+                  <AcademicCapIcon className="h-5 w-5" />
+                  <span className="font-medium">{t('convegni.cta')}</span>
+                </button>
               </div>
             </div>
 
@@ -168,6 +248,85 @@ export default function NewsSection() {
         <div className="absolute -top-6 -left-6 w-40 h-40 bg-teal-400/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
         <div className="absolute top-1/2 -right-8 w-24 h-24 bg-blue-400/30 rounded-full blur-lg animate-bounce" style={{animationDuration: '4s'}}></div>
       </div>
+
+      {/* Convegni Modal */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={() => setModalOpen(false)}
+          />
+          {/* Sheet on mobile, card on desktop */}
+          <div className="relative w-full sm:max-w-2xl sm:mx-4 bg-gray-900 rounded-t-3xl sm:rounded-3xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[85vh]">
+            {/* Close */}
+            <button
+              onClick={() => setModalOpen(false)}
+              className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all"
+              aria-label="Chiudi"
+            >
+              <XMarkIcon className="h-5 w-5" />
+            </button>
+
+            {/* Drag handle (mobile only) */}
+            <div className="flex justify-center pt-3 pb-1 sm:hidden">
+              <div className="w-10 h-1 bg-white/30 rounded-full" />
+            </div>
+
+            {/* Large carousel */}
+            <div className="relative w-full h-64 sm:h-80 flex-shrink-0">
+              <Image
+                src={convegniImages[convegniSlide]}
+                alt={`Educare con la musica nello Zerosei - immagine ${convegniSlide + 1}`}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              {/* Prev / Next */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all"
+                aria-label="Immagine precedente"
+              >
+                <ChevronLeftIcon className="h-6 w-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all"
+                aria-label="Immagine successiva"
+              >
+                <ChevronRightIcon className="h-6 w-6" />
+              </button>
+              {/* Counter */}
+              <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
+                {convegniSlide + 1} / {convegniImages.length}
+              </div>
+              {/* Dots */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                {convegniImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setConvegniSlide(idx)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all ${idx === convegniSlide ? 'bg-white scale-110' : 'bg-white/40'}`}
+                    aria-label={`Vai all'immagine ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Text content */}
+            <div className="p-6 overflow-y-auto">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="bg-blue-600/80 p-2 rounded-xl">
+                  <AcademicCapIcon className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white">{t('convegni.title')}</h3>
+              </div>
+              <p className="text-white/70 leading-relaxed">{t('convegni.description')}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Custom animations */}
       <style jsx>{`
