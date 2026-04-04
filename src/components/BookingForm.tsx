@@ -663,6 +663,7 @@ export default function BookingForm({ preSelectedEvent, preselectedEventId, avai
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Codice Fiscale (adulto) *
                   </label>
+                
                   <input
                     type="text"
                     {...register('codiceFiscale')}
