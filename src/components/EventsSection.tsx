@@ -1,93 +1,59 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useLocale } from 'next-intl';
-import EventCard from './EventCard';
-import { mockEvents } from '@/data/mockEvents';
+import { useState } from 'react';
+import { MusicalNoteIcon, ArrowTopRightOnSquareIcon, ClipboardDocumentIcon, CheckIcon } from '@heroicons/react/24/outline';
+
+const FORM_URL = 'https://forms.gle/owDRvY5KQyGPrXHcA';
 
 export default function EventsSection() {
-  const t = useTranslations('Events');
-  const locale = useLocale();
-  
-  const featuredEvents = mockEvents.filter(event => event.featured).slice(0, 3);
-  const upcomingEvents = mockEvents.slice(0, 6);
+  const [copied, setCopied] = useState(false);
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(FORM_URL);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <section className="py-16 bg-base-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-neutral mb-4">
-            {t('title')}
-          </h2>
-          <p className="text-lg text-neutral/70 max-w-2xl mx-auto">
-            {t('subtitle')}
-          </p>
-        </div>
-
-        {/* Featured Events */}
-        {featuredEvents.length > 0 && (
-          <div className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-semibold text-neutral">
-                Eventi in Evidenza
-              </h3>
-              <Link 
-                href={`/${locale}/concerts`}
-                className="btn btn-ghost btn-sm text-primary hover:text-primary"
-              >
-                Vedi tutti →
-              </Link>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredEvents.map((event) => (
-                <EventCard 
-                  key={event.id} 
-                  event={event}
-                  className="animate-fade-in"
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* All Upcoming Events */}
-        <div>
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-semibold text-neutral">
-              Tutti i Prossimi Concerti
-            </h3>
-            <div className="flex gap-2">
-              <select className="select select-bordered select-sm">
-                <option>Tutti i mesi</option>
-                <option>Marzo 2024</option>
-                <option>Aprile 2024</option>
-                <option>Maggio 2024</option>
-              </select>
-              <select className="select select-bordered select-sm">
-                <option>Tutte le età</option>
-                <option>0-2 anni</option>
-                <option>3-4 anni</option>
-                <option>5-6 anni</option>
-              </select>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {upcomingEvents.map((event) => (
-              <EventCard 
-                key={event.id} 
-                event={event}
-              />
-            ))}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="flex justify-center mb-6">
+          <div className="bg-emerald-100 p-4 rounded-2xl">
+            <MusicalNoteIcon className="h-12 w-12 text-emerald-600" />
           </div>
         </div>
 
-        <div className="text-center mt-12">
-          <Link href={`/${locale}/concerts`} className="btn btn-primary btn-lg">
-            Vedi Tutti i Concerti
-          </Link>
+        <h2 className="text-3xl sm:text-4xl font-bold text-neutral mb-4">
+          Prossime Attività Musicali
+        </h2>
+
+        <p className="text-lg text-neutral/70 max-w-xl mx-auto mb-10">
+          Le prenotazioni online sono temporaneamente sospese. Per prenotare il tuo posto compila il form dedicato:
+        </p>
+
+        <a
+          href={FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg shadow-emerald-200 mb-8"
+        >
+          <span>Prenota con il Form Google</span>
+          <ArrowTopRightOnSquareIcon className="h-5 w-5" />
+        </a>
+
+        {/* Copyable link */}
+        <div className="mt-4">
+          <p className="text-sm text-neutral/50 mb-3">oppure copia il link:</p>
+          <div className="flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-3 max-w-md mx-auto shadow-sm">
+            <span className="text-sm text-neutral/70 truncate flex-1 text-left font-mono">{FORM_URL}</span>
+            <button
+              onClick={copyLink}
+              className="flex-shrink-0 flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-sm font-medium px-3 py-1.5 rounded-lg transition-all"
+            >
+              {copied ? <CheckIcon className="h-4 w-4" /> : <ClipboardDocumentIcon className="h-4 w-4" />}
+              {copied ? 'Copiato!' : 'Copia'}
+            </button>
+          </div>
         </div>
       </div>
     </section>
