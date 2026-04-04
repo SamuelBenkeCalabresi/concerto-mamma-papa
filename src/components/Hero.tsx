@@ -307,8 +307,8 @@ export default function Hero() {
                         </div>
                       </>
                     ) : (
-                      <p className="text-white/90 text-center mb-4 py-6 text-lg">
-                        Nessun evento in programma
+                      <p className="text-white/90 text-center mb-4 py-4 text-base leading-relaxed">
+                        Per prenotare la prossima attività musicale compila il form:
                       </p>
                     )}
 
@@ -320,9 +320,14 @@ export default function Hero() {
                         {t('nextConcert.bookNow')} →
                       </button>
                     ) : (
-                      <Link href="/calendario" className="block w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base">
-                        Scopri tutti gli eventi →
-                      </Link>
+                      <a
+                        href="https://forms.gle/owDRvY5KQyGPrXHcA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base text-center"
+                      >
+                        Prenota ora →
+                      </a>
                     )}
                   </div>
                 </div>
