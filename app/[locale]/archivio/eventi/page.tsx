@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import EventAccordion from '@/components/EventAccordion';
 import { getTranslations } from 'next-intl/server';
-import { STRAPI_CONFIG } from '@/lib/strapi';
+import { createServiceClient } from '@/lib/supabase';
 import {
   CalendarDaysIcon,
   MusicalNoteIcon,
@@ -40,69 +40,46 @@ function loadArchivedEvents(locale: string): Event[] {
   return events as Event[];
 }
 
-function getDescriptionText(description: any): string {
-  if (Array.isArray(description)) {
-    return description.map(block =>
-      block.children?.map((child: any) => child.text).join('') || ''
-    ).join(' ');
-  }
-  return description || '';
-}
-
-function transformStrapiEvent(strapiEvent: any): Event {
-  const times = Array.isArray(strapiEvent.times)
-    ? strapiEvent.times.join('; ')
-    : strapiEvent.times || '';
-
+function transformSupabaseEvent(e: any): Event {
   return {
-    title: strapiEvent.Title || '',
-    date: strapiEvent.date || '',
-    time: times,
-    location: {
-      name: strapiEvent.location || '',
-      street: '',
-    },
-    description: getDescriptionText(strapiEvent.Description),
-    ageGroups: [`${strapiEvent.ageMin || 0}-${strapiEvent.ageMax || 18} anni`],
-    prenotazione: strapiEvent.bookingEnabled ? 'prenotazione on line' : '',
+    title: e.title || '',
+    date: e.date || '',
+    time: Array.isArray(e.times) ? e.times.join('; ') : '',
+    location: { name: e.location || '', street: '' },
+    description: e.description || '',
+    ageGroups: [`${e.age_min ?? 0}–${e.age_max ?? 18} anni`],
+    prenotazione: '',
     eventType: 'regular',
-    price: strapiEvent.isFree ? 'Gratuito' : strapiEvent.price ? `€${strapiEvent.price}` : undefined,
+    price: e.is_free ? 'Gratuito' : e.price ? `€${e.price}` : undefined,
   };
 }
 
-async function loadStrapiEvents(): Promise<Event[]> {
+async function loadSupabaseEvents(): Promise<Event[]> {
   try {
-    const url = `${STRAPI_CONFIG.API_URL}/api/events?populate=*&pagination[pageSize]=100`;
-    const res = await fetch(url, {
-      headers: { 'Content-Type': 'application/json' },
-      next: { revalidate: 300 },
-    });
-
-    if (!res.ok) {
-      console.error('Strapi API error:', res.status, res.statusText);
-      return [];
-    }
-
-    const data = await res.json();
-    const strapiEvents = data.data || [];
-    return strapiEvents.map(transformStrapiEvent);
+    const db = createServiceClient();
+    const today = new Date().toISOString().split('T')[0];
+    const { data, error } = await db
+      .from('events')
+      .select('*')
+      .lt('date', today)
+      .order('date', { ascending: false });
+    if (error) { console.error('Supabase archive error:', error); return []; }
+    return (data ?? []).map(transformSupabaseEvent);
   } catch (error) {
-    console.error('Error loading Strapi events:', error);
+    console.error('Error loading Supabase events:', error);
     return [];
   }
 }
 
 export default async function EventiPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const [archivedEvents, strapiEvents] = await Promise.all([
+  const [archivedEvents, supabaseEvents] = await Promise.all([
     loadArchivedEvents(locale),
-    loadStrapiEvents(),
+    loadSupabaseEvents(),
   ]);
 
-  // Merge, filter out future events, sort by date (most recent first)
-  const today = new Date().toISOString().split('T')[0];
-  const events: Event[] = [...strapiEvents, ...archivedEvents]
-    .filter((e) => e.date <= today)
+  // Merge and sort by date (most recent first) — both sources are already past events
+  const events: Event[] = [...supabaseEvents, ...archivedEvents]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const t = await getTranslations('EventsPage');

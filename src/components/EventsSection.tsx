@@ -1,60 +1,117 @@
 'use client';
 
-import { useState } from 'react';
-import { MusicalNoteIcon, ArrowTopRightOnSquareIcon, ClipboardDocumentIcon, CheckIcon } from '@heroicons/react/24/outline';
-
-const FORM_URL = 'https://forms.gle/owDRvY5KQyGPrXHcA';
+import { useState, useEffect } from 'react';
+import { MusicalNoteIcon, MapPinIcon, TicketIcon } from '@heroicons/react/24/outline';
+import { useRouter } from '@/i18n/routing';
+import type { Event } from '@/lib/supabase';
 
 export default function EventsSection() {
-  const [copied, setCopied] = useState(false);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  const copyLink = () => {
-    navigator.clipboard.writeText(FORM_URL);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  useEffect(() => {
+    fetch('/api/events')
+      .then(r => r.json())
+      .then(json => { setEvents((json.data ?? []).slice(0, 3)); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-base-200">
+        <div className="flex justify-center">
+          <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+        </div>
+      </section>
+    );
+  }
+
+  if (events.length === 0) {
+    return (
+      <section className="py-16 bg-base-200">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <MusicalNoteIcon className="h-12 w-12 text-emerald-300 mx-auto mb-4" />
+          <h2 className="text-3xl font-bold text-neutral mb-2">Prossime Attività Musicali</h2>
+          <p className="text-neutral/60">Nessun evento in programma al momento. Torna presto!</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-base-200">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="flex justify-center mb-6">
-          <div className="bg-emerald-100 p-4 rounded-2xl">
-            <MusicalNoteIcon className="h-12 w-12 text-emerald-600" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center bg-emerald-100 p-4 rounded-2xl mb-4">
+            <MusicalNoteIcon className="h-10 w-10 text-emerald-600" />
           </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-neutral">Prossime Attività Musicali</h2>
+          <p className="text-neutral/60 mt-2">I prossimi concerti per famiglie</p>
         </div>
 
-        <h2 className="text-3xl sm:text-4xl font-bold text-neutral mb-4">
-          Prossime Attività Musicali
-        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {events.map((event) => (
+            <div key={event.id} className="bg-white rounded-2xl shadow border border-gray-100 overflow-hidden flex flex-col">
+              {/* Date strip */}
+              <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-3 flex items-center justify-between">
+                <span className="text-white font-bold">
+                  {new Date(event.date).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' })}
+                </span>
+                <span className="text-emerald-100 text-sm">
+                  {event.is_free ? 'Gratuito' : event.price > 0 ? `€${event.price}` : null}
+                </span>
+              </div>
 
-        <p className="text-lg text-neutral/70 max-w-xl mx-auto mb-10">
-          Le prenotazioni online sono temporaneamente sospese. Per prenotare il tuo posto compila il form dedicato:
-        </p>
+              <div className="p-5 flex-1 flex flex-col">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{event.title}</h3>
+                {event.description && (
+                  <p className="text-sm text-gray-500 line-clamp-3 mb-3 flex-1">{event.description}</p>
+                )}
 
-        <a
-          href={FORM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg shadow-emerald-200 mb-8"
-        >
-          <span>Prenota con il Form Google</span>
-          <ArrowTopRightOnSquareIcon className="h-5 w-5" />
-        </a>
+                <div className="flex flex-wrap gap-2 text-xs text-gray-500 mb-4">
+                  {event.location && (
+                    <span className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg">
+                      <MapPinIcon className="h-3.5 w-3.5" />{event.location}
+                    </span>
+                  )}
+                  {event.times && event.times.length > 0 && (
+                    <span className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg">
+                      🕒 {event.times[0]}{event.times.length > 1 ? ` +${event.times.length - 1}` : ''}
+                    </span>
+                  )}
+                  <span className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg">
+                    <TicketIcon className="h-3.5 w-3.5" />{event.available_seats} posti
+                  </span>
+                </div>
 
-        {/* Copyable link */}
-        <div className="mt-4">
-          <p className="text-sm text-neutral/50 mb-3">oppure copia il link:</p>
-          <div className="flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-3 max-w-md mx-auto shadow-sm">
-            <span className="text-sm text-neutral/70 truncate flex-1 text-left font-mono">{FORM_URL}</span>
+                {event.booking_enabled ? (
+                  <button
+                    onClick={() => router.push(`/eventi/${event.id}`)}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm transition"
+                  >
+                    Prenota ora →
+                  </button>
+                ) : (
+                  <div className="w-full text-center text-xs text-gray-400 bg-gray-100 py-2.5 rounded-xl">
+                    Prenotazioni chiuse
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {events.length > 0 && (
+          <div className="text-center mt-8">
             <button
-              onClick={copyLink}
-              className="flex-shrink-0 flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-sm font-medium px-3 py-1.5 rounded-lg transition-all"
+              onClick={() => router.push('/eventi')}
+              className="text-emerald-600 hover:text-emerald-700 font-semibold text-sm underline underline-offset-4"
             >
-              {copied ? <CheckIcon className="h-4 w-4" /> : <ClipboardDocumentIcon className="h-4 w-4" />}
-              {copied ? 'Copiato!' : 'Copia'}
+              Vedi tutti gli eventi →
             </button>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

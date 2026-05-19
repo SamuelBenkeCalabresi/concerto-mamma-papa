@@ -1,17 +1,15 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
 import { MusicalNoteIcon, HeartIcon, UsersIcon, PlayIcon, CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import EventDetailModal from './EventDetailModal';
 
 export default function Hero() {
   const t = useTranslations('Hero');
-  const locale = useLocale();
+  const router = useRouter();
   const [nextEvent, setNextEvent] = useState<any>(null);
   const [loadingEvent, setLoadingEvent] = useState(true);
-  const [showEventModal, setShowEventModal] = useState(false);
 
   useEffect(() => {
     async function fetchNextEvent() {
@@ -262,7 +260,7 @@ export default function Hero() {
                     ) : nextEvent ? (
                       <>
                         <p className="text-white font-bold text-2xl mb-3 leading-tight">
-                          {nextEvent.Title || nextEvent.title || nextEvent.attributes?.title || 'Prossimo Evento'}
+                          {nextEvent.title || 'Prossimo Evento'}
                         </p>
                         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4 space-y-2">
                           <p className="text-white font-semibold text-base">
@@ -308,26 +306,24 @@ export default function Hero() {
                       </>
                     ) : (
                       <p className="text-white/90 text-center mb-4 py-4 text-base leading-relaxed">
-                        Per prenotare la prossima attività musicale compila il form:
+                        Nessun evento in programma al momento. Torna presto!
                       </p>
                     )}
 
                     {nextEvent ? (
                       <button
-                        onClick={() => setShowEventModal(true)}
+                        onClick={() => router.push(`/eventi/${nextEvent.id}`)}
                         className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base"
                       >
                         {t('nextConcert.bookNow')} →
                       </button>
                     ) : (
-                      <a
-                        href="https://forms.gle/owDRvY5KQyGPrXHcA"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href="/eventi"
                         className="block w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base text-center"
                       >
-                        Prenota ora →
-                      </a>
+                        Vedi gli eventi →
+                      </Link>
                     )}
                   </div>
                 </div>
@@ -374,12 +370,6 @@ export default function Hero() {
         }
       `}</style>
 
-      {/* Event Detail Modal */}
-      <EventDetailModal
-        event={nextEvent}
-        isOpen={showEventModal}
-        onClose={() => setShowEventModal(false)}
-      />
     </section>
   );
 }

@@ -77,56 +77,52 @@ export default async function AnnamariaPage() {
             
             <div className="text-lg text-neutral/80 leading-relaxed space-y-6">
               <p>
-                <strong>Annamaria Diroma</strong>{locale === 'en' ? ', musician and educator, has been involved in musical propaedeutics for children since 1999.' : ', musicista e didatta, si occupa di propedeutica musicale per bambini dal 1999.'}
-              </p>
-              
-              <p>
-              {locale === 'en' ? 
-                'She earned her Diploma in Transverse Flute and Music Education at the Music Conservatory of Monopoli and her Degree in DAMS (Art, Music and Performance Studies) at the University of Bologna with a thesis in Musical Pedagogy titled "Musical Learning in Preschool Age according to Gordon\'s MLT" included in the Gordon Archive of the University of South Carolina.' :
-                'Consegue il Diploma di Flauto traverso e Didattica della Musica presso il Conservatorio di Musica di Monopoli e la Laurea in DAMS (Discipline dell\'Arte, della Musica e dello Spettacolo) presso l\'Università di Bologna con Tesi in Pedagogia Musicale dal titolo " L\'Apprendimento musicale in età prescolare secondo la MLT di Gordon" confluita nel Gordon Archive dell\'Università del South Caroline'
-              }
-              </p>
-              
-              <p>
-              {locale === 'en' ? 
-                'She specializes in Music Learning Theory by E. E. Gordon, acquiring the qualification of AIGAM Associate Teacher (Rome) and to enrich her musical background on the methodological level, she has also studied the Orff, Dalcroze and Kodaly teaching methods, developing her specific musical didactics for childhood.' :
-                'Si specializza in Music Learning Theory di E. E. Gordon acquisendo la qualifica di Insegnante Associato AIGAM (Roma) e per arricchire il suo bagaglio musicale sul piano metodologico musicale ha approfondito anche i metodi di insegnamento Orff, Dalcroize e Kodaly elaborando una sua specifica didattica musicale per l\'infanzia.'
-              }
-              </p>
-              
-              <p>
-              {locale === 'en' ? 
-                'At a very young age she began her teaching activity teaching in a state-recognized school in kindergarten and primary school and since 2000 she has been assiduously conducting music courses and projects at nurseries, kindergartens and elementary schools in Rome and province.' :
-                'Giovanissima si cimenta con l\'attività didattica insegnando in una scuola paritaria nella scuola dell\'Infanzia e nella scuola Primaria e dal 2000 svolge assiduamente corsi e progetti di musica presso gli asili nido, le scuole dell\'infanzia ed elementari di Roma e provincia.'
-              }
-              </p>
-              
-              <p>
-              {locale === 'en' ? 
-                'Currently she is a tenured professor of transverse flute at the Secondary School with Musical Orientation of Campagnano and conducts musical training courses for educators, teachers and leisure operators with recognition from the Ministry of Education for the Associations Musica Nova Roma, Uisp di Roma and for the Blind Society of Hebron in the West Bank. She holds a specialization seminar within the "Biennial Integrated Training Course Fatti di musica" for musical operators who approach didactics for early childhood.' :
-                'Attualmente è docente titolare della cattedra di flauto traverso presso la Scuola Secondaria a Indirizzo Musicale di Campagnano e conduce corsi di formazione musicale per educatori, insegnanti e operatori del tempo libero con riconoscimento del MIUR per le Associazioni Musica Nova Roma, Uisp di Roma e per la Blind Society di Hebron in Cisgiordania. Svolge un seminario di approfondimento all\'interno del "Corso biennale di Formazione integrato Fatti di musica" per operatori musicali che si affacciano alla didattica per la primissima infanzia.'
-              }
+                <strong>Annamaria Diroma</strong>
+                {locale === 'en'
+                  ? ', musician and educator, has worked for years in the field of education and training, interweaving the artistic and pedagogical dimensions.'
+                  : ', musicista e didatta, lavora da anni nel campo dell\'educazione e della formazione, intrecciando la dimensione artistica con quella pedagogica.'}
               </p>
 
               <p>
-              {locale === 'en' ? 
-                'As a concert flutist she has carried out intense concert activity in Italy and abroad (Portugal, Poland, Albania, Syria, Israel, France, Switzerland) both as a soloist and in chamber music formations.' :
-                'In qualità di flautista concertista ha svolto un\'intensa attività concertistica in Italia e all\'estero (Portogallo, Polonia, Albania, Siria, Israele, Francia, Svizzera) sia in qualità di solista sia in formazioni cameristiche.'
-              }
+                {locale === 'en'
+                  ? 'From a very young age she nurtured her passion for music, studying flute with Michel De Bost, Annamaria Morini and Maxence Larrieu, and gaining concert experience in Italy and abroad (Portugal, Syria, France, Switzerland, Poland, Albania, Israel) as well as in orchestral settings, including the Orchestra della Città Metropolitana di Bari and the Orchestra Fedele Fenaroli di Lanciano.'
+                  : 'Ha coltivato fin da giovanissima la passione per la musica, studiando flauto con Michel De Bost, Annamaria Morini e Maxence Larrieu e maturando esperienze concertistiche in Italia e all\'estero (Portogallo, Siria, Francia, Svizzera, Polonia, Albania, Israele) e in contesti orchestrali, tra cui l\'Orchestra della Città Metropolitana di Bari e l\'Orchestra Fedele Fenaroli di Lanciano.'}
               </p>
 
               <p>
-              {locale === 'en' ? 
-                'For nine editions she has held the position of artistic director of the National Competition Città di Campagnano which has seen a growing success of participation.' :
-                'Per nove edizioni ha svolto l\'incarico di direttore artistico del Concorso Nazionale Città di Campagnano che ha visto un crescente successo di partecipazione.'
-              }
+                {locale === 'en'
+                  ? 'Over time, her artistic sensibility became intertwined with her educational vocation. Holding a degree from DAMS at the University of Bologna in Music Pedagogy, after completing her teaching qualification she began her career as a teacher in nursery, primary and subsequently lower secondary schools, bringing to everyday teaching a perspective that combines creativity, reflection and care for learning processes.'
+                  : 'Nel tempo, la sua sensibilità artistica si è intrecciata con la vocazione educativa. Laureata al DAMS dell\'Università di Bologna in Pedagogia della Musica, dopo aver conseguito l\'abilitazione all\'insegnamento, ha intrapreso la professione di insegnante della scuola dell\'infanzia, primaria e successivamente nella scuola secondaria di primo grado portando nella quotidianità didattica uno sguardo che unisce creatività, riflessione e cura dei processi di apprendimento.'}
               </p>
 
               <p>
-              {locale === 'en' ? 
-                'In 2012 she founded Concerts with Mom and Dad, a musical initiative dedicated to children from zero to five years old collaborating with Organizations and Associations of Rome (Roma Capitale, Cultural Department of the Municipality of Campagnano, XV Municipality of Rome, Nota Bene Association, Musica Nova Association) and in Apulia (Cultural Department and Municipal Library of Monopoli).' :
-                'Nel 2012 ha fondato di Concerto con Mamma e Papà ®, un\'iniziativa musicale dedicata ai bambini da zero a cinque anni collaborando con Enti e Associazioni di Roma (Roma Capitale, Assessorato alla Cultura del Comune di Campagnano, XV Municipio di Roma, Associazione Nota Bene, Associazione Musica Nova) e in Puglia (Assessorato alla Cultura e Biblioteca comunale di Monopoli).'
-              }
+                {locale === 'en'
+                  ? 'Her professional commitment is grounded in a constant interest in active and genuinely inclusive teaching methodologies, with particular attention to Edwin Gordon\'s Music Learning Theory (MLT), which recognises music as a powerful tool for cognitive, emotional and relational development. This perspective has guided her choices and research, sustaining the idea of learning that arises from direct experience, from listening, and from the shared construction of meaning.'
+                  : 'Il suo impegno professionale si fonda su un costante interesse per le metodologie didattiche attive e necessariamente inclusive, con particolare attenzione alla Music Learning Theory di Edwin Gordon (MLT), che riconosce nella musica un potente strumento di sviluppo cognitivo, emotivo e relazionale. Questa prospettiva ha orientato le sue scelte e le sue ricerche, sostenendo l\'idea di un apprendimento che nasce dall\'esperienza diretta, dall\'ascolto e dalla costruzione di senso condiviso.'}
+              </p>
+
+              <p>
+                {locale === 'en'
+                  ? 'She has built solid experience in the training and mentoring of student teachers through participation in various innovation and pedagogical research projects. She collaborates regularly with the Conservatorio Ottorino Respighi in Latina, where she serves as Tutor Coordinator in the training programmes for future music teachers.'
+                  : 'Ha maturato una solida esperienza nella formazione e nell\'accompagnamento dei docenti in formazione partecipando a diversi progetti di innovazione e ricerca pedagogica. Collabora stabilmente con il Conservatorio Ottorino Respighi di Latina dove svolge il ruolo di Tutor Coordinatore nei percorsi di Formazione dei futuri docenti di musica.'}
+              </p>
+
+              <p>
+                {locale === 'en'
+                  ? 'In every context, she promotes an idea of musical learning as a space for personal and collective growth, founded on relationship, reflection and aesthetic sense.'
+                  : 'In ogni contesto, promuove un\'idea di apprendimento musicale come spazio di crescita personale e collettiva, fondato sulla relazione, sulla riflessione e sul senso estetico.'}
+              </p>
+
+              <p>
+                {locale === 'en'
+                  ? 'Among her professional interests are the early childhood teaching methodologies of Orff, Dalcroze, Kodály, Tomatis and Willems — approaches she considers complementary and in constant dialogue with the Gordonian perspective. From this reflection and from her encounter with Edwin E. Gordon, di Concerto con Mamma e Papà® was born in 2010, a project aimed at children from 0 to 5 years old that offers an experience of listening and active participation together with parents. Active for more than fifteen years, di Concerto con Mamma e Papà® has involved, to date, more than 1,000 families and is based on the importance of early exposure to music with particular attention to the development of Audiation, the exploratory dimension, sound play and children\'s musical behaviours. Over the years, the concerts have been received with great enthusiasm by participants in prestigious national and international settings, including Ghent University on the occasion of MERYC 2019, the Teatro Comunale di Bologna in 2018, the Auditorium Parco della Musica in 2023 and the Conservatorio Licinio Refice in 2026.'
+                  : 'Tra i suoi interessi professionali rientrano le metodologie di insegnamento per l\'infanzia di Orff, Dalcroze, Kodály, Tomatis e Willems, percorsi che considera complementari e in dialogo costante con la prospettiva gordoniana. Da questa riflessione e dall\'incontro con Edwin E. Gordon, nasce, nel 2010, di Concerto con Mamma e Papà®, un progetto rivolto alle bambine e ai bambini da 0 a 5 anni che propone un\'esperienza di ascolto e di partecipazione attiva insieme ai genitori. Attivo da oltre quindici anni, di Concerto con Mamma e Papà® ha coinvolto, fino ad oggi, più di 1000 famiglie e si basa sull\'importanza dell\'esposizione precoce alla musica con particolare attenzione allo sviluppo dell\'Audiation, alla dimensione esplorativa, al gioco sonoro e ai comportamenti musicali infantili. Nel corso degli anni, i concerti sono stati accolti con grande consenso dei partecipanti, in prestigiosi contesti nazionali e internazionali, tra cui la Gent University in occasione del MERYC 2019, il Teatro Comunale di Bologna nel 2018, l\'Auditorium Parco della Musica nel 2023 e il Conservatorio Licinio Refice nel 2026.'}
+              </p>
+
+              <p>
+                {locale === 'en'
+                  ? 'Throughout all her work, she continues to nurture the conviction that educating and making music share the same breath: both require deep listening, harmony between thought and emotion, and the capacity to generate beauty through encounter with the other.'
+                  : 'In tutto il suo lavoro, continua a coltivare la convinzione che educare e fare musica condividano lo stesso respiro: entrambi richiedono ascolto profondo, armonia tra pensiero ed emozione e la capacità di generare bellezza attraverso l\'incontro con l\'altro.'}
               </p>
             </div>
           </div>
