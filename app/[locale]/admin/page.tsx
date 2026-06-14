@@ -24,11 +24,17 @@ export default function AdminDashboard() {
 
   const loadEvents = useCallback(async () => {
     setLoading(true);
-    const res = await fetch('/api/admin/events');
-    if (res.status === 401) { router.push(`/${locale}/admin/login`); return; }
-    const json = await res.json();
-    setEvents(json.data ?? []);
-    setLoading(false);
+    try {
+      const res = await fetch('/api/admin/events');
+      if (res.status === 401) { router.push(`/${locale}/admin/login`); return; }
+      if (!res.ok) { console.error('Admin events error:', res.status, await res.text()); setLoading(false); return; }
+      const json = await res.json();
+      setEvents(json.data ?? []);
+    } catch (err) {
+      console.error('Failed to load events:', err);
+    } finally {
+      setLoading(false);
+    }
   }, [router, locale]);
 
   useEffect(() => { loadEvents(); }, [loadEvents]);

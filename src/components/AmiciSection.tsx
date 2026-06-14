@@ -27,6 +27,11 @@ export default function AmiciSection() {
       id: 'eschilo',
       name: 'Associazione Musicale Eschilo',
       url: 'https://www.associazionemusicaleeschilo.org/'
+    },
+    {
+      id: 'bdibisogni',
+      name: 'B di Bisogni',
+      url: 'https://www.facebook.com/people/BdiBisogni/61588945180410/'
     }
   ];
 

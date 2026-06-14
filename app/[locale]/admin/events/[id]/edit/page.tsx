@@ -123,6 +123,11 @@ export default function EditEventPage() {
             </Field>
           </div>
 
+          <Field label="Link prenotazione esterna (se non si usa il form del sito)">
+            <input value={form.booking_url ?? ''} onChange={e => setForm({ ...form, booking_url: e.target.value })}
+              className="input-field" placeholder="https://..." />
+          </Field>
+
           <div className="flex flex-wrap gap-6">
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={form.is_free ?? false} onChange={e => setForm({ ...form, is_free: e.target.checked })}

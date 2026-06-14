@@ -19,6 +19,7 @@ const defaultForm = {
   booking_enabled: true,
   active: true,
   show_in_calendar: false,
+  booking_url: '',
 };
 
 export default function NewEventPage() {
@@ -115,6 +116,11 @@ export default function NewEventPage() {
                 className="input-field" placeholder="0" />
             </Field>
           </div>
+
+          <Field label="Link prenotazione esterna (se non si usa il form del sito)">
+            <input value={form.booking_url} onChange={e => setForm({ ...form, booking_url: e.target.value })}
+              className="input-field" placeholder="https://..." />
+          </Field>
 
           <div className="flex flex-wrap gap-6">
             <label className="flex items-center gap-2 cursor-pointer">

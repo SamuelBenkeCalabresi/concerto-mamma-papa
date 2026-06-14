@@ -95,7 +95,16 @@ export default function CalendarioSection() {
               </div>
 
               {/* CTA */}
-              {!isPast && event.booking_enabled ? (
+              {!isPast && event.booking_url ? (
+                <a
+                  href={event.booking_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition"
+                >
+                  Prenota →
+                </a>
+              ) : !isPast && event.booking_enabled ? (
                 <button
                   onClick={() => router.push(`/eventi/${event.id}`)}
                   className="flex-shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition"

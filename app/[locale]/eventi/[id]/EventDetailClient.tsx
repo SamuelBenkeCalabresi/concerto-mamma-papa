@@ -56,7 +56,19 @@ export default function EventDetailClient({ event }: { event: Event }) {
         </div>
 
         {/* Booking form / state */}
-        {!event.booking_enabled && !isPast ? (
+        {event.booking_url && !isPast ? (
+          <div className="text-center py-8">
+            <p className="text-gray-600 mb-4">Le prenotazioni per questo evento si effettuano tramite link esterno.</p>
+            <a
+              href={event.booking_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl transition text-lg"
+            >
+              Prenota qui →
+            </a>
+          </div>
+        ) : !event.booking_enabled && !isPast ? (
           <div className="text-center py-8 text-gray-500 bg-gray-100 rounded-2xl">
             <p className="font-semibold">Prenotazioni chiuse per questo evento.</p>
           </div>

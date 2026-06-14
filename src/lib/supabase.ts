@@ -62,6 +62,7 @@ export type Event = {
   booking_enabled: boolean;
   active: boolean;
   show_in_calendar: boolean;
+  booking_url: string | null;
   created_at: string;
 };
 
