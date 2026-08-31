@@ -73,8 +73,7 @@ export default function CalendarioSection() {
                     </span>
                   )}
                 </div>
-                {event.description && <p className="text-sm text-gray-500 line-clamp-2 mb-2">{event.description}</p>}
-                <div className="flex flex-wrap gap-3 text-xs text-gray-500">
+                <div className="flex flex-wrap gap-3 text-xs text-gray-500 mt-2">
                   {event.location && (
                     <span className="flex items-center gap-1">
                       <MapPinIcon className="h-3.5 w-3.5" />

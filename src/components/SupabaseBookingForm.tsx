@@ -163,6 +163,9 @@ export default function SupabaseBookingForm({ event, disabled = false }: Props) 
             <span className="text-sm font-medium">Modulo di prenotazione</span>
           </div>
           <h2 className="text-2xl font-bold text-gray-800">{event.title}</h2>
+          {event.description && (
+            <p className="text-sm text-gray-500 mt-2 max-w-md mx-auto">{event.description}</p>
+          )}
         </div>
 
         {submitStatus === 'error' && (
