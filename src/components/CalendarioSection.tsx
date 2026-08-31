@@ -48,6 +48,9 @@ export default function CalendarioSection() {
       <div className="space-y-4">
         {events.map((event) => {
           const isPast = new Date(event.date) < new Date(new Date().toDateString());
+          const displayTitle = isPast && !/^di\s/i.test(event.title.trim())
+            ? `di ${event.title.trim()}`
+            : event.title;
           return (
             <div key={event.id} className={`bg-white rounded-2xl shadow border p-6 flex flex-col sm:flex-row sm:items-center gap-4 ${isPast ? 'border-amber-100 opacity-80' : 'border-gray-100'}`}>
               {/* Date badge */}
@@ -66,7 +69,7 @@ export default function CalendarioSection() {
               {/* Details */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-lg font-bold text-gray-900">{event.title}</h3>
+                  <h3 className="text-lg font-bold text-gray-900">{displayTitle}</h3>
                   {isPast && (
                     <span className="text-xs bg-amber-100 text-amber-700 font-medium px-2 py-0.5 rounded-full">
                       Stagione precedente
