@@ -13,6 +13,7 @@ import {
   ArrowRightOnRectangleIcon,
   CheckCircleIcon,
   XCircleIcon,
+  PhotoIcon,
 } from '@heroicons/react/24/outline';
 
 export default function AdminDashboard() {
@@ -69,13 +70,22 @@ export default function AdminDashboard() {
           <CalendarDaysIcon className="h-7 w-7 text-emerald-600" />
           <h1 className="text-xl font-bold text-gray-900">Gestione Eventi</h1>
         </div>
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 transition"
-        >
-          <ArrowRightOnRectangleIcon className="h-5 w-5" />
-          Esci
-        </button>
+        <div className="flex items-center gap-5">
+          <button
+            onClick={() => router.push(`/${locale}/admin/locandina`)}
+            className="flex items-center gap-2 text-sm text-emerald-700 hover:text-emerald-800 font-medium transition"
+          >
+            <PhotoIcon className="h-5 w-5" />
+            Locandina Coupon
+          </button>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 transition"
+          >
+            <ArrowRightOnRectangleIcon className="h-5 w-5" />
+            Esci
+          </button>
+        </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-8">

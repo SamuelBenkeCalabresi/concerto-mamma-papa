@@ -8,7 +8,7 @@ export default function VoucherSection() {
   
   const handleViewFullscreen = () => {
     // Cache busting to force browser to load new image
-    window.open('/images/LOCANDINA-PER-IL-COUPON-NATALE.png?v=2', '_blank');
+    window.open('/api/locandina', '_blank');
   };
 
   return (
